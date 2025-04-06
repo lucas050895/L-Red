@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(nav.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+:root{
+    --font-primary: 'Poppins';
+    --color-one: #3b7ddd;
+    --color-two: #FFF;
+    --color-three: #000;
+}
+body{
+    font-family: var(--font-primary);
+    font-size: 1em;
+}
+
+
+
+/*CONTENEDOR GENERAL DE CADA PAGIINA*/
+main{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    /* padding-top: 80px; */
+    background-color: var(--color-one) ;
+    color: var(--color-two);
+}
+
+
+
+/*TITULO DE CADA PAGINA*/
+main > .title{
+    width: 100%;
+    height: 120px;
+    /* padding-left: 70px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-two);
+}
+main > .title > i{
+    font-size: 3em;
+}
+main > .title > h2{
+    font-size: 2em;
+}
+
+
+/*FORMULARIO*/
+main form{
+    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/*CONTENEDOR DE DATOS*/
+main form fieldset{
+    padding: .5em;
+    margin: 1em auto;
+    border: 1px solid white;
+}
+/*TITULO: DATOS*/
+main form fieldset legend{
+    width: 50%;
+    margin: auto;
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--color-two);
+}
+/*CONTENEDOR DE CADA ITEMS*/
+main form fieldset > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em auto;
+}
+/*NOMBRE DE CADA ITEMS*/
+main form fieldset > div > label{
+    width: 50%;
+    height: 25px;
+    font-size: 1.2em;
+}
+/*INPUT Y SELECT DE CADA ITEMS*/
+main form fieldset > div > input,
+main form fieldset > div > select{
+    width: 50%;
+    height: 25px;
+    font-size: 1.2em;
+    background-color: var(--color-two);
+    border: 1px solid var(--color-three);
+    text-align: center;
+}
+main form fieldset > div > input[type="file"]{
+    background-color: transparent;
+
+}
+/*OBSERVACIONES*/
+main form fieldset > div > textarea{
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 200px;
+    max-height: 200px;
+    margin: auto;
+    padding: .5em;
+    border: 1px solid var(--color-three);
+    background-color: var(--color-two);
+}
+
+
+
+/*CONTENEDOR DE CAMPOS OBLIGATORIOS*/
+main > form > .container_field{
+    width: 80%;
+    margin: 2em 0;
+}
+/*PARRAFO OBLIGARIOS*/
+main > form > .container_field > p{
+    width: 100%;
+    font-style: italic;
+    display: inline-block;
+    color: var(--color-two);
+}
+
+
+
+/*CONTENEDOR DE BOTON*/
+main form > .container_button{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+/*BOTON*/
+main form > .container_button > input[type="submit"]{
+    width: 10rem;
+    height: 3rem;
+    background-color: var(--color-two);
+    border-radius: 3px;
+    border: 1px solid var(--color-three);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+/*EFECTO DEL BOTON*/
+main form > .container_button > input[type="submit"]:hover,
+main form > .container_button > input[type="submit"]:focus{
+    color: var(--color-two);
+    background-color: var(--color-three);
+    border: 1px solid var(--color-two);
+    transition: .2s all ease-in;
+}
