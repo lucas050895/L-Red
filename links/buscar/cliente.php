@@ -57,6 +57,7 @@
                 <p> <?php echo $fila[1]?> </p>
             </div>
 
+            <hr>
 
             <div>
                 <p>Apellido:</p>
@@ -127,7 +128,7 @@
 
             <div>
                 <p>Dirección:</p>
-                <p> <?php echo $fila[8]?> </p>
+         <p> <?php echo $fila[8]?> </p>
             </div>
 
             <hr>
