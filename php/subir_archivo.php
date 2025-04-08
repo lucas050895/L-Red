@@ -86,7 +86,7 @@
                 
                     // Insertar información del archivo en la base de datos
                     $sql = "INSERT INTO archivos_pdf (clientes_id, nombre, ruta)
-                                    VALUES ('{$clientes_id}', '{$nuevoNombreFile}.{$clientes_id}.pdf', '{$dirPdf}')";
+                                    VALUES ('{$clientes_id}', '{$nuevoNombreFile}_{$clientes_id}.pdf', '{$dirPdf}')";
                     mysqli_query($conexion, $sql);
                     
                 }
@@ -126,7 +126,7 @@
 
 
 
-        header("Location: ../links/archivo_subido.php");
+        header("Location: ../links/subir/archivo_subido.php");
 
     }
 ?>

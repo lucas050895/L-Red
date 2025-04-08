@@ -23,5 +23,5 @@
     mysqli_close($conexion);
 
     // Redirigir a la página de exitoso
-    header("Location: ../links/cliente_subido.php");
+    header("Location: ../links/subir/cliente_subido.php");
 ?>

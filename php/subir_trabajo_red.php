@@ -77,5 +77,5 @@
     mysqli_close($conexion);
 
     // Redirigir a la página de exitoso
-    header("Location: ../links/trabajo_subido.php");
+    header("Location: ../links/subir/trabajo_subido.php");
 ?>
