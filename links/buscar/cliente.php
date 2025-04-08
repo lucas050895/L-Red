@@ -39,10 +39,10 @@
                     $fila = mysqli_fetch_row($resultado);
 
                 }else{
-                    header("Location: ../cliente_subido.php");
+                    header("Location: ../subir/cliente_subido.php");
                 }
             }else{
-                header("Location: ../cliente_subido.php");
+                header("Location: ../subir/cliente_subido.php");
             }
         ?>
 
@@ -57,10 +57,13 @@
                 <p> <?php echo $fila[1]?> </p>
             </div>
 
+
             <div>
                 <p>Apellido:</p>
                 <p> <?php echo $fila[2]?> </p>
             </div>
+
+            <hr>
 
             <div>
                 <p>Razón Social:</p>
@@ -75,6 +78,8 @@
                 </p>
             </div>
 
+            <hr>
+
             <div>
                 <p>Cuil / Cuit:</p>
                 <p> 
@@ -88,10 +93,14 @@
                 </p>
             </div>
 
+            <hr>
+
             <div>
                 <p>Celular:</p>
                 <p> <?php echo $fila[5]?> </p>
             </div>
+
+            <hr>
 
             <div>
                 <p>Otro celular:</p>
@@ -107,15 +116,21 @@
 
             </div>
 
+            <hr>
+
             <div>
                 <p>Email:</p>
                 <p> <?php echo $fila[7];?> </p>
             </div>
 
+            <hr>
+
             <div>
                 <p>Dirección:</p>
                 <p> <?php echo $fila[8]?> </p>
             </div>
+
+            <hr>
 
             <div>
                 <p>Localidad:</p>
@@ -124,13 +139,24 @@
         </div>
 
         <?php
-            if(is_dir('../../files/'.$fila[0])){
+            if(is_dir('../../files/'.$fila[0].'/pdf/')){
                 ?>
                     <div id="container_doc">
-                        <iframe src = "../../files/<?php echo $fila[0]?>/<?php echo $fila[0]?>.pdf" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe>
+                        <?php
+                            $sql = "SELECT * FROM archivos_pdf WHERE clientes_id = ".$fila[0];
+                            $resultado = $conexion->query($sql);
+                            // Mostrar resultados
+                            if ($resultado->num_rows > 0) {
+                                while ($fila = $resultado->fetch_assoc()) {
+                                    ?>
+                                        <iframe src="../<?php echo $fila['ruta'] . $fila['nombre']; ?>" type="application/x-google-chrome-pdf" max-width="500px" max-height="400px">
+                                        </iframe>
+                                    <?php
+                                }
+                            }
+                        ?>  
                     </div>
                 <?php
-
             };
         ?>
 
