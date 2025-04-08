@@ -89,7 +89,7 @@
                     </div>
                     <div>
                         <label for="dvr_capacidad">Capacidad</label>
-                        <input type="number" name="dvr_capacidad" id="dvr_capacidad">
+                        <input type="number" name="dvr_capacidad" id="dvr_capacidad" min=0>
                     </div>
                     <div>
                         <label for="dvr_medida">Medida <span>(*)</span></label>
@@ -105,7 +105,7 @@
                 <legend>CÁMARAS</legend>
                     <div>
                         <label for="camaras_cantidad">Cantidad <span>(*)</span></label>
-                        <input type="number" name="camaras_cantidad" id="camaras_cantidad" required>
+                        <input type="number" name="camaras_cantidad" id="camaras_cantidad" min=0 required>
                     </div>
                     <div>
                         <label for="camaras_modelo">Modelo <span>(*)</span></label>
@@ -133,7 +133,7 @@
                     </div>
                     <div>
                         <label for="fichas_rj45">Fichas RJ45 <span>(*)</span></label>
-                        <input type="number" name="fichas_rj45" id="fichas_rj45" required>
+                        <input type="number" name="fichas_rj45" id="fichas_rj45" min=0 required>
                     </div>
             </fieldset>
 
@@ -141,7 +141,7 @@
                 <legend>CABLES</legend>
                     <div>
                         <label for="cables_utp">Metros UTP <span>(*)</span></label>
-                        <input type="number" name="cables_utp" id="cables_utp" required>
+                        <input type="number" name="cables_utp" id="cables_utp" min=0 required>
                     </div>
                     <div>
                         <label for="cables_patch">Cable Patch <span>(*)</span></label>
@@ -191,27 +191,27 @@
                 <legend>INSUMOS</legend>
                     <div>
                         <label for="insumos_tar6">Tarugos 6mm</label>
-                        <input type="number" name="insumos_tar6" id="insumos_tar6">
+                        <input type="number" name="insumos_tar6" id="insumos_tar6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor6">Tornillos 6mm</label>
-                        <input type="number" name="insumos_tor6" id="insumos_tor6">
+                        <input type="number" name="insumos_tor6" id="insumos_tor6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tar8">Tarugos 8mm</label>
-                        <input type="number" name="insumos_tar8" id="insumos_tar8">
+                        <input type="number" name="insumos_tar8" id="insumos_tar8" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor8">Tornillos 8mm</label>
-                        <input type="number" name="insumos_tor8" id="insumos_tor8">
+                        <input type="number" name="insumos_tor8" id="insumos_tor8" min=0>
                     </div>
                     <div>
                         <label for="insumos_gra8">Grampas 8mm</label>
-                        <input type="number" name="insumos_gra8" id="insumos_gra8">
+                        <input type="number" name="insumos_gra8" id="insumos_gra8" min=0>
                     </div>
                     <div>
                         <label for="insumos_prec">Precintos</label>
-                        <input type="number" name="insumos_prec" id="insumos_prec">
+                        <input type="number" name="insumos_prec" id="insumos_prec" min=0>
                     </div>
             </fieldset>
 

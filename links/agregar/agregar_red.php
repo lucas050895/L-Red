@@ -92,11 +92,11 @@
                 <legend>CABLES</legend>
                     <div>
                         <label for="cables_utp">Metros UTP <span>(*)</span></label>
-                        <input type="number" name="cables_utp" id="cables_utp" required>
+                        <input type="number" name="cables_utp" id="cables_utp" min=0 required>
                     </div>
                     <div>
                         <label for="cables_par">Metros PAR</label>
-                        <input type="number" name="cables_par" id="cables_par">
+                        <input type="number" name="cables_par" id="cables_par" min=0>
                     </div>
             </fieldset>
 
@@ -104,11 +104,11 @@
                 <legend>FICHAS</legend>
                     <div>
                         <label for="fichas_rj45">Fichas RJ45 <span>(*)</span></label>
-                        <input type="number" name="fichas_rj45" id="fichas_rj45" required>
+                        <input type="number" name="fichas_rj45" id="fichas_rj45" min=0 required>
                     </div>
                     <div>
                         <label for="fichas_empalme">Fichas Empalme</label>
-                        <input type="number" name="fichas_empalme" id="fichas_empalme">
+                        <input type="number" name="fichas_empalme" id="fichas_empalme" min=0>
                     </div>
             </fieldset>
 
@@ -129,27 +129,27 @@
                 <legend>INSUMOS</legend>
                     <div>
                         <label for="insumos_tar6">Tarugos 6mm</label>
-                        <input type="number" name="insumos_tar6" id="insumos_tar6">
+                        <input type="number" name="insumos_tar6" id="insumos_tar6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor6">Tornillos 6mm</label>
-                        <input type="number" name="insumos_tor6" id="insumos_tor6">
+                        <input type="number" name="insumos_tor6" id="insumos_tor6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tar8">Tarugos 8mm</label>
-                        <input type="number" name="insumos_tar8" id="insumos_tar8">
+                        <input type="number" name="insumos_tar8" id="insumos_tar8" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor8">Tornillos 8mm</label>
-                        <input type="number" name="insumos_tor8" id="insumos_tor8">
+                        <input type="number" name="insumos_tor8" id="insumos_tor8" min=0>
                     </div>
                     <div>
                         <label for="insumos_gra8">Grampas 8mm</label>
-                        <input type="number" name="insumos_gra8" id="insumos_gra8">
+                        <input type="number" name="insumos_gra8" id="insumos_gra8" min=0>
                     </div>
                     <div>
                         <label for="insumos_prec">Precintos</label>
-                        <input type="number" name="insumos_prec" id="insumos_prec">
+                        <input type="number" name="insumos_prec" id="insumos_prec" min=0>
                     </div>
             </fieldset>
 

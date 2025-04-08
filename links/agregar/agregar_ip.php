@@ -104,23 +104,23 @@
                 <legend>Puertos</legend>
                     <div>
                         <label for="puerto_01">Puerto N° 1 <span>(*)</span></label>
-                        <input type="number" name="puerto_01" id="puerto_01" required>
+                        <input type="number" name="puerto_01" id="puerto_01" min=0 required>
                     </div>
                     <div>
                         <label for="puerto_02">Puerto N° 2</label>
-                        <input type="number" name="puerto_02" id="puerto_02">
+                        <input type="number" name="puerto_02" id="puerto_02" min=0>
                     </div>
                     <div>
                         <label for="puerto_03">Puerto N° 3</label>
-                        <input type="number" name="puerto_03" id="puerto_03">
+                        <input type="number" name="puerto_03" id="puerto_03" min=0>
                     </div>
                     <div>
                         <label for="puerto_04">Puerto N° 4</label>
-                        <input type="number" name="puerto_04" id="puerto_04">
+                        <input type="number" name="puerto_04" id="puerto_04" min=0>
                     </div>
                     <div>
                         <label for="puerto_05">Puerto N° 5</label>
-                        <input type="number" name="puerto_05" id="puerto_05">
+                        <input type="number" name="puerto_05" id="puerto_05" min=0>
                     </div>
 
                     
@@ -130,11 +130,11 @@
                 <legend>FICHAS</legend>
                     <div>
                         <label for="fichas_rj45">Fichas RJ45 <span>(*)</span></label>
-                        <input type="number" name="fichas_rj45" id="fichas_rj45" required>
+                        <input type="number" name="fichas_rj45" id="fichas_rj45" min=0 required>
                     </div>
                     <div>
                         <label for="fichas_plug">Fichas Plug<span>(*)</span></label>
-                        <input type="number" name="fichas_plug" id="fichas_plug" required>
+                        <input type="number" name="fichas_plug" id="fichas_plug" min=0 required>
                     </div>
             </fieldset>
 
@@ -142,11 +142,11 @@
                 <legend>CABLES</legend>
                     <div>
                         <label for="cables_fuentes">Fuentes <span>(*)</span></label>
-                        <input type="number" name="cables_fuentes" id="cables_fuentes" required>
+                        <input type="number" name="cables_fuentes" id="cables_fuentes" min=0 required>
                     </div>
                     <div>
                         <label for="cables_utp">Metros UTP <span>(*)</span></label>
-                        <input type="number" name="cables_utp" id="cables_utp" required>
+                        <input type="number" name="cables_utp" id="cables_utp" min=0 required>
                     </div>
                     <div>
                         <label for="cables_zapatilla">Zapatilla <span>(*)</span></label>
@@ -163,27 +163,27 @@
                 <legend>INSUMOS</legend>
                     <div>
                         <label for="insumos_tar6">Tarugos 6mm</label>
-                        <input type="number" name="insumos_tar6" id="insumos_tar6">
+                        <input type="number" name="insumos_tar6" id="insumos_tar6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor6">Tornillos 6mm</label>
-                        <input type="number" name="insumos_tor6" id="insumos_tor6">
+                        <input type="number" name="insumos_tor6" id="insumos_tor6" min=0>
                     </div>
                     <div>
                         <label for="insumos_tar8">Tarugos 8mm</label>
-                        <input type="number" name="insumos_tar8" id="insumos_tar8">
+                        <input type="number" name="insumos_tar8" id="insumos_tar8" min=0>
                     </div>
                     <div>
                         <label for="insumos_tor8">Tornillos 8mm</label>
-                        <input type="number" name="insumos_tor8" id="insumos_tor8">
+                        <input type="number" name="insumos_tor8" id="insumos_tor8" min=0>
                     </div>
                     <div>
                         <label for="insumos_gra8">Grampas 8mm</label>
-                        <input type="number" name="insumos_gra8" id="insumos_gra8">
+                        <input type="number" name="insumos_gra8" id="insumos_gra8" min=0>
                     </div>
                     <div>
                         <label for="insumos_prec">Precintos</label>
-                        <input type="number" name="insumos_prec" id="insumos_prec">
+                        <input type="number" name="insumos_prec" id="insumos_prec" min=0>
                     </div>
             </fieldset>
 

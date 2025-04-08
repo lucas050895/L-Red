@@ -53,18 +53,18 @@
                     </div>
                     <div>
                         <label for="cuilcuit">Cuit/Cuil</label>
-                        <input type="number" name="cuilcuit" id="cuilcuit">
+                        <input type="number" name="cuilcuit" id="cuilcuit" min=0>
                     </div>
                     
                     <hr>
 
                     <div>
                         <label for="celular">Celular <span>(*)</span></label>
-                        <input type="number" name="celular" id="celular" required>
+                        <input type="number" name="celular" id="celular" min=0 required>
                     </div>
                     <div>
                         <label for="otro">Otro celular</label>
-                        <input type="number" name="otro" id="otro">
+                        <input type="number" name="otro" id="otro" min=0>
                     </div>
                     <div>
                         <label for="email">Email <span>(*)</span></label>
