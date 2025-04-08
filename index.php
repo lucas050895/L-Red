@@ -194,20 +194,20 @@
                           
                           <script>
                               document.addEventListener("DOMContentLoaded", () => {
-                                // function counter(id, start, end, duration) {
-                                //   let obj = document.getElementById(id),
-                                //   current = start,
-                                //   range = end - start,
-                                //   increment = end > start ? 1 : -1,
-                                //   step = Math.abs(Math.floor(duration / range)),
-                                //   timer = setInterval(() => {
-                                //     current += increment;
-                                //     obj.textContent = current;
-                                //     if (current == end) {
-                                //     clearInterval(timer);
-                                //     }
-                                //   }, step);
-                                // }
+                                function counter(id, start, end, duration) {
+                                  let obj = document.getElementById(id),
+                                  current = start,
+                                  range = end - start,
+                                  increment = end > start ? 1 : -1,
+                                  step = Math.abs(Math.floor(duration / range)),
+                                  timer = setInterval(() => {
+                                    current += increment;
+                                    obj.textContent = current;
+                                    if (current == end) {
+                                    clearInterval(timer);
+                                    }
+                                  }, step);
+                                }
                                 counter("count4", 0, <?php echo $cantidad ?>, 500);
                                 });
                           </script>
@@ -226,7 +226,14 @@
         </h2>
         <?php
           if($conexion) {
-              $consultation = "SELECT count(trabajos_cctv.id) +  count(trabajos_ip.id) + count(trabajos_red.id) as cantidad FROM trabajos_cctv INNER join trabajos_ip INNER JOIN trabajos_red";
+              $consultation = "SELECT SUM(count) AS cantidad
+                                FROM (SELECT  COUNT(*) as count
+                                    FROM trabajos_cctv UNION ALL
+                                  SELECT COUNT(*) as count 
+                                    FROM trabajos_ip UNION ALL
+                                  SELECT COUNT(*) AS count
+                                    FROM trabajos_red
+                                ) AS total";
               $resultado = mysqli_query($conexion,$consultation);
       
               if($resultado){
@@ -238,20 +245,20 @@
                         
                         <script>
                             document.addEventListener("DOMContentLoaded", () => {
-                              // function counter(id, start, end, duration) {
-                              //   let obj = document.getElementById(id),
-                              //   current = start,
-                              //   range = end - start,
-                              //   increment = end > start ? 1 : -1,
-                              //   step = Math.abs(Math.floor(duration / range)),
-                              //   timer = setInterval(() => {
-                              //     current += increment;
-                              //     obj.textContent = current;
-                              //     if (current == end) {
-                              //     clearInterval(timer);
-                              //     }
-                              //   }, step);
-                              // }
+                              function counter(id, start, end, duration) {
+                                let obj = document.getElementById(id),
+                                current = start,
+                                range = end - start,
+                                increment = end > start ? 1 : -1,
+                                step = Math.abs(Math.floor(duration / range)),
+                                timer = setInterval(() => {
+                                  current += increment;
+                                  obj.textContent = current;
+                                  if (current == end) {
+                                  clearInterval(timer);
+                                  }
+                                }, step);
+                              }
                               counter("count5", 0, <?php echo $cantidad ?>, 500);
                               });
                         </script>
