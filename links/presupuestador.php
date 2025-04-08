@@ -1,3 +1,7 @@
+<?php
+    include('../bd/conecxion.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head> 
@@ -12,24 +16,26 @@
     <!-- AUTHOR -->
     <meta name="author" content="Lucas Conde">
     <!-- TITTLE -->
-    <title>Error || L-Red</title>
+    <title>Presupuestador || L-Red</title>
     <!-- STYLES -->
-    <link rel="stylesheet" href="../css/subido.css">
+    <link rel="stylesheet" href="../css/presupuestador.css">
+
     <!-- BOXICONS  -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/439ee37b3b.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <?php
-        include("../layout/nav.php");
+        include("../layout/nav.php")
     ?>
 
     <main>
-        <section>
-            <h2 class="error">¡ERROR!<br>
-            No se ha subido el archivo.</h2>
-        </section>
+
     </main>
 
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
