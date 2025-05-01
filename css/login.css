@@ -1,0 +1,41 @@
+@import url(general.css);
+
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-one);
+}
+main > form {
+    text-align: center;
+    color: var(--color-three);
+}
+
+main > form > fieldset{
+    padding: 30px;
+    border: 2px solid var(--color-three);
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+main > form > fieldset > legend {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--color-three);
+}
+
+main > form > fieldset > div > label{
+    display: block;
+    margin: 10px 0;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+main > form input[type="submit"]{
+    width: 100px;
+    height: 40px;
+    border: 2px solid var(--color-three);
+    border-radius: 1px;
+    background-color: var(--color-two);
+}
