@@ -11,7 +11,7 @@
 
       <ul class="list-items">
         <li>
-          <a href="http://lucasconde.ddns.net/index.php">
+          <a href="http://lucasconde.ddns.net/L-Red/index.php">
             <i class='bx bxs-dashboard'></i>
             <span>Dashboard</span>
           </a>
@@ -24,27 +24,27 @@
           </div>
 
           <div class="accordion-body">
-            <a href="http://lucasconde.ddns.net/links/agregar/agregar_cliente.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/agregar/agregar_cliente.php">
               <i class='bx bxs-user-detail'></i>
               <span>Cliente</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/agregar/agregar_cctv.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/agregar/agregar_cctv.php">
               <i class='bx bxs-cctv'></i>
               <span>Cámaras CCTV</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/agregar/agregar_ip.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/agregar/agregar_ip.php">
               <i class='bx bxs-camera-home'></i>
               <span>Cámaras IP</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/agregar/agregar_red.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/agregar/agregar_red.php">
               <i class='bx bxs-network-chart'></i>
               <span>Trabajos de Red</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/agregar/agregar_archivos.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/agregar/agregar_archivos.php">
               <i class='bx bxs-cloud-upload'></i>
               <span>Subir Archivos</span>
             </a>
@@ -58,29 +58,29 @@
           </div>
 
           <div class="accordion-body">
-            <a href="http://lucasconde.ddns.net/links/buscar/buscar_cliente.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/buscar/buscar_cliente.php">
               <i class='bx bxs-contact'></i>
               <span>Cliente</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/buscar/buscar_cctv.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/buscar/buscar_cctv.php">
               <i class='bx bxs-cctv'></i>
               <span>Cámaras CCTV</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/buscar/buscar_ip.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/buscar/buscar_ip.php">
               <i class='bx bxs-camera-home'></i>
               <span>Cámaras IP</span>
             </a>
 
-            <a href="http://lucasconde.ddns.net/links/buscar/buscar_red.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/buscar/buscar_red.php">
               <i class='bx bxs-network-chart'></i>
               <span>Trabajos de Red</span>
           </div>
         </li>
 
         <li>
-          <a href="http://lucasconde.ddns.net/links/presupuestador.php">
+          <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador.php">
             <i class='bx bxs-dollar-circle'></i>
             <span>Presupuestador</span>
           </a>
