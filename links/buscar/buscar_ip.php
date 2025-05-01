@@ -37,32 +37,8 @@
             <fieldset>
                 <legend>Filtros</legend>
                 <div>
-                    <label for="id_clientes">Cliente <span>(*)</span></label>
-                    <select name="id_clientes" id="id_clientes" required>
-                        <option value="" selected disabled>Seleccionar Opción</option>
-                        <?php
-                            if($conexion) {
-                                $consultation = "SELECT clientes.id, clientes.nombre, clientes.apellido
-                                                    FROM clientes, trabajos_ip
-                                                    WHERE clientes.id = trabajos_ip.id_clientes";
-                                $resultado = mysqli_query($conexion,$consultation);
-                        
-                                if($resultado){
-                                    while($row = $resultado->fetch_array()){
-                                        $id       = $row['id'];
-                                        $nombre   = $row['nombre'];
-                                        $apellido = $row['apellido'];
-                        
-                                        ?>
-                                            <option value="<?php echo $id ?>">
-                                                <?php echo $nombre . " " . $apellido?>
-                                            </option>
-                                        <?php
-                                    }
-                                }
-                            }
-                        ?>
-                    </select>
+                    <label for="clientes_id">Cliente <span>(*)</span></label>
+                    <input type="text" id="clientes_id" name="clientes_id" placeholder="Nombre o Apellido">
                 </div>
 
                 <div>
@@ -86,7 +62,7 @@
                     $acceso_host  = $_GET['acceso_host']  ?? '';
 
                     // Construir la consulta SQL con filtros
-                    $sql = "SELECT * FROM trabajos_ip WHERE 1=1";
+                    $sql = "SELECT * FROM trabajos_ip GROUP BY clientes_id";
 
                     if (!empty($nombre)) {
                         $sql .= " AND nombre LIKE '%$nombre%'";

@@ -39,8 +39,8 @@
             <fieldset>
                 <legend>CLIENTE</legend>
                 <div>
-                    <label for="id_clientes">Cliente <span>(*)</span></label>
-                    <select name="id_clientes" id="id_clientes" required>
+                    <label for="clientes_id">Cliente <span>(*)</span></label>
+                    <select name="clientes_id" id="clientes_id" required>
                         <option value="" selected disabled>Seleccionar Opción</option>
                         <?php
                             if($conexion) {

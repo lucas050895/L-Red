@@ -1,7 +1,7 @@
 <?php
     include('../bd/conecxion.php');
 
-    $id_clientes        =   $_POST['id_clientes'];
+    $clientes_id        =   $_POST['clientes_id'];
     
     $camara_modelo      =   $_POST['camara_modelo'];
 
@@ -20,7 +20,7 @@
     $fichas_rj45        =   $_POST['fichas_rj45'];
     $fichas_plug        =   $_POST['fichas_plug'];
 
-    $cables_fuente      =   $_POST['cables_fuentes'];
+    $cables_fuentes     =   $_POST['cables_fuentes'];
     $cables_utp         =   $_POST['cables_utp'];
     $cables_zapatilla   =   $_POST['cables_zapatilla'];
 
@@ -39,7 +39,7 @@
 
     if(isset($_POST['submit'])){
         $sql = "INSERT INTO trabajos_ip(
-                                        id_clientes      ,
+                                        clientes_id      ,
 
                                         camara_modelo    ,
 
@@ -76,7 +76,7 @@
                                         observaciones 
                                     )
                             VALUES (
-                                        '{$id_clientes}'      ,
+                                        '{$clientes_id}'      ,
 
                                         '{$camara_modelo}'    ,
 
