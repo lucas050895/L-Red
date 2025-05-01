@@ -1,276 +1,112 @@
-<?php
-    include('bd/conecxion.php');
-?>
-
 <!DOCTYPE html>
 <html lang="es">
-<head> 
-  <!-- CHARSET -->
-  <meta charset="UTF-8">
-  <!-- IE-EDGE -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- VIEWPORT -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- DESCRIPTION -->
-  <meta name="description" content="L-Red">
-  <!-- AUTHOR -->
-  <meta name="author" content="Lucas Conde">
-  <!-- TITTLE -->
-  <title>Dashbord || L-Red</title>
-  <!-- STYLES -->
-  <link rel="stylesheet" href="css/index.css">
-
-  <!-- BOXICONS  -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
-  <!-- FONT AWESOME -->
-  <script src="https://kit.fontawesome.com/439ee37b3b.js" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio Técnico</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- FONT AWESOME -->   
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
-  <?php
-    include("layout/nav.php")
-  ?>
 
-  <main>
-    <section class="title">
-      <i class='bx bxs-dashboard'></i>
-      <h2>Dashbord</h2>
-    </section>
-
-    <div>
-      <section>
-        <a href="links/buscar/buscar_cliente.php">
-          <h2>
-            Clientes
-            <i class='bx bxs-user-detail'></i>
-          </h2>
-          <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) AS cantidad FROM clientes";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count1">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count1", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
-          ?>
+    <div id="home">
+        <i class="fas fa-users-cog"></i>
+        <h1>
+            SERVICIO TÉCNICO
+        </h1>
+        <a href="#jobs">
+            <i class="fas fa-chevron-down"></i>
         </a>
-      </section>
-
-      <section>
-        <a href="links/buscar/buscar_cctv.php">
-          <h2>
-            Cámaras CCTV
-            <i class='bx bxs-cctv'></i>
-          </h2>
-          <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_cctv";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count2">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count2", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
-          ?>
-        </a>
-      </section>
-
-      <section>
-        <a href="links/buscar/buscar_ip.php">
-          <h2>
-            Cámaras IP
-            <i class='bx bxs-camera-home'></i>
-          </h2>
-          <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_ip";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count3">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                step = Math.abs(Math.floor(duration / range)),
-                                timer = setInterval(() => {
-                                  current += increment;
-                                  obj.textContent = current;
-                                  if (current == end) {
-                                  clearInterval(timer);
-                                  }
-                                  }, step);
-                                  }
-                                counter("count3", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
-          ?>
-        </a>
-      </section>
-
-      <section>
-        <a href="links/buscar/buscar_red.php">
-          <h2>
-            Trabajos de Red
-            <i class='bx bxs-network-chart'></i>
-          </h2>
-          <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_red";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count4">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count4", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
-          ?>
-        </a>
-      </section>
-
-      <section>
-        <h2>
-          Total de trabajos
-          <i class='bx bx-line-chart'></i>
-        </h2>
-        <?php
-          if($conexion) {
-              $consultation = "SELECT SUM(count) AS cantidad
-                                FROM (SELECT  COUNT(*) as count
-                                    FROM trabajos_cctv UNION ALL
-                                  SELECT COUNT(*) as count 
-                                    FROM trabajos_ip UNION ALL
-                                  SELECT COUNT(*) AS count
-                                    FROM trabajos_red
-                                ) AS total";
-              $resultado = mysqli_query($conexion,$consultation);
-      
-              if($resultado){
-                  while($row = $resultado->fetch_array()){
-                      $cantidad  = $row['cantidad'];
-      
-                      ?>
-                        <span id="count5">0</span>
-                        
-                        <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-                              function counter(id, start, end, duration) {
-                                let obj = document.getElementById(id),
-                                current = start,
-                                range = end - start,
-                                increment = end > start ? 1 : -1,
-                                step = Math.abs(Math.floor(duration / range)),
-                                timer = setInterval(() => {
-                                  current += increment;
-                                  obj.textContent = current;
-                                  if (current == end) {
-                                  clearInterval(timer);
-                                  }
-                                }, step);
-                              }
-                              counter("count5", 0, <?php echo $cantidad ?>, 500);
-                              });
-                        </script>
-                      <?php
-                  }
-              }
-          }
-        ?>
-      </section>
     </div>
-  </main>
 
-  <script src="js/main.js"></script>
+    <div id="jobs">
+        <h2 class="title">Trabajos</h2>
+        <div class="container">
+            <div class="card">
+                <img src="#">
+                <div>
+                    <div class="name">
+                        Trabajo
+                    </div>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                    </div>
+                    
+                    <a href="#">Ver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="#">
+                <div>
+                    <div class="name">
+                        Trabajo
+                    </div>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                    </div>
+
+                    <a href="#">Ver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="#">
+                <div>
+                    <div class="name">
+                        Trabajo
+                    </div>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                    </div>
+                    
+                    <a href="#">Ver</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="contact">
+        <h2 class="title">Contacto</h2>
+            <div class="wrapper">
+                <form action="#">
+                    <h3>Consulta</h3>
+                    <div class="field">
+                        <input type="text" required>
+                        <label>Nombre completo</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="field">
+                        <input type="tel" required>
+                        <label>Celular</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" required>
+                        <label>Mensaje</label>
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+    </div>
+
+    <div id="redes">
+        <h3>Seguinos en: </h3>
+        <div>
+            <i class="fa-brands fa-whatsapp"></i>
+            <i class="fa-brands fa-facebook"></i>
+        </div>
+    </div>
+
+    <?php
+        include("layout/footer.php");
+    ?>
+
 </body>
 </html>

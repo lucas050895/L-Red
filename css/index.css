@@ -1,104 +1,326 @@
 @import url(general.css);
 
-main{
-    width: 100%;
-    color: var(--color-two);
-
-}
-main div{
-    width: 90%;
-    margin: auto;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5,120px) ;
+html{
+    scroll-behavior: smooth;
+    background-color: var(--color-three);
 }
 
-main div section{
-    width: 90%;
-    padding: 10px 20px;
-    margin: .5em auto;
-    border-bottom: 2px solid var(--color-three);
-    /* border-top: 1.5px solid var(--color-two); */
-    /* border:1.5px solid var(--color-two); */
-    background-color: var(--color-two);
-    border-radius: 8px;
-    text-transform: uppercase;
-    color: var(--color-three);
-}
 
-main div section:nth-child(1){
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-}
-main div section:nth-child(2){
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-}
-main div section:nth-child(3){
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-}
-main div section:nth-child(4){
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-}
-main div section:nth-child(5){
-    grid-column: 1 / 2;
-    grid-row: 5 / 6;
-}
 
-main div section a{
-    text-decoration: none;
-    color: var(--color-three);
-}
-
-main div section h2{
+/*      TITULOS DE CADA SECCION     */
+.title{
+    min-width: 350px;
+    height: 80px;
+    padding-top: 10px;
+    clip-path: polygon(0 0, 100% 0%, 100% 54%, 51% 100%, 0 52%);
     display: flex;
-    justify-content: space-between;
-    font-size: 1.5em;
+    justify-content: center;
+    align-items: start;
+    font-size: 2.5em;
+    background: var(--color-one);
 }
-main div section h2 i{
-    font-size: 1.5em;
-}
-main div section span{
+
+
+
+/*      INICIO      */
+#home{
     width: 100%;
-    display: inline-block;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*TITULO*/
+#home > h1{
+    width: 100%;
+    font-weight: 400;
+    font-size: 2.5em;
     text-align: center;
+    color: var(--color-one);
+    font-family: var(--font-two);
+    font-weight: 700;
+}
+#home > i:nth-child(1){
+    color: var(--color-one);
     font-size: 3em;
+    margin: 1em auto;
+}
+/*ICONO FLECHA*/
+#home > a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    animation: pulse 2s infinite;
+    color: var(--color-two);
+    text-decoration: none;
+}
+#home > a > i:nth-child(3){
+    width: 24px;
+    height: 24px;
+    font-size: 2em;
+    margin:3em auto;
+    display:block;
+    color: var(--color-three);
+    opacity: 0;
+}
+/*ANIMACION DEL ICONO FLECHA*/
+@keyframes pulse{
+    0% {
+        transform: translate(0, 0); 
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(0, 10px);
+        opacity: 0.99;
+    }
+    100% {
+        transform: translate(0, 0); 
+        opacity: 0;
+    }
 }
 
-@media screen and (min-width:768px) {
+
+
+/*      TRABAJOS REALIZADOS     */
+#jobs{
+    min-height: 100vh;
+    display: grid;
+}
+/*CONTENEDOR DE TARJETAS*/
+.container{
+    width: 100%;
+    margin: 2em auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/*CADA TARJETA*/
+.card{
+    max-width: 300px;
+    height: auto;
+    background: var(--color-two);
+    border-radius: 10px;
+    margin: 1em;
+    padding: .5em;
+}
+/*IMAGEN*/
+.card img{
+    width: 100%;
+    height: 170px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+/*CONTENEDOR DEL NOMBRE, TEXTO Y BOTON*/
+.card > div{
+    text-align: center;
+}
+/*NOMBRE*/
+.card > div > .name{
+    font-size: 2.5em;
+    font-weight: 600;
+    color: var(--color-one);
+}
+.card div .text{
+    font-size: 1.3em;
+}
+/*ENLACE BOTON*/
+.card > div > a{
+    width: 80px;
+    height: 30px;
+    margin: 1em;
+    border-radius: 3px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: #e74c3c;
+    color: #f2f2f2;
+}
+
+
+
+/*      CONTACTO        */
+#contact{
+    width: 100%;
+    margin: 5em auto 0;
+}
+/*CONTENEDOR DEL FORMULARIO*/
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em auto;
+    padding: 1em;
+}
+/*FORMULARIO*/
+form{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-one);
+    border: 1px solid var(--color-one);
+    border-radius: 8px;
+    padding: 30px;
+}
+/*CONTENEDOR DE CADA INPUT*/
+.field {
+    position: relative;
+    border-bottom: 2px solid var(--color-one);
+    margin: 15px 0;
+}
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: var(--color-one);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.15s ease;
+}
+/*INPUT*/
+.field input {
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--color-one);
+}
+/*EFECTO DEL INPUT-LABEL*/
+.field input:focus~label,
+.field input:valid~label {
+    font-size: 0.8rem;
+    top: 10px;
+    transform: translateY(-120%);
+}
+/*BOTON ENVIAR*/  
+button {
+    background: var(--color-two);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+}
+/*EFECTO BOTON*/
+button:hover {
+    color: var(--color-two);
+    border-color: var(--color-two);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+
+/*      REDES       */
+#redes{
+    width: 300px;
+    height: 80px;
+    margin: 0 auto 5em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid var(--color-one);
+}
+#redes > h3{
+    font-size: 1.5em;
+    color: var(--color-one);
+}
+#redes > div{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#redes > div > i{
+    font-size: 2em;
+    color: var(--color-three);
+}
+#redes > div > .fa-whatsapp{
+    color: #25D366;
+}
+#redes > div > .fa-facebook{
+    color: #3b5998;
+}
+
+
+
+/*      FOOTER      */
+#footer{
+    width: 100%;
+    margin: 2em auto 0;
+    padding: 10px;
+    background: var(--color-one);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#footer h3{
+    width: 100%;
+}
+#footer a{
+    width: 100%;
+    display: inline-flex;
+    color:#fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#footer > a > i{
+    margin: 0 1em;
+}
+
+
+
+/*      ADAPTACIONES        */
+@media screen and (min-width:700px) {
     *{
-        font-size: 15px;
-    }
-    main div{
-        max-width: 900px;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(3,140px) ;
+        font-size: 16px;
     }
 
-    main div section:nth-child(1){
-        /* max-width: 500px; */
-        width: 95%;
-        grid-column: 1 / 3;
-        grid-row: 1 / 2;
+    .title{
+        width: 80%;
+        max-width: 900px;
+        margin: auto;
     }
-    main div section:nth-child(2){
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
+
+    .container{
+        flex-direction: row;
+        justify-content: center;
     }
-    main div section:nth-child(3){
-        grid-column: 2 / 3;
-        grid-row: 2 / 3;
+    .card{
+        margin: 20px;
     }
-    main div section:nth-child(4){
-        grid-column: 1 / 2;
-        grid-row: 3 / 4;
+
+
+    .input-box input[type="submit"]{
+        width: 30%;
     }
-    main div section:nth-child(5){
-        grid-column: 2 / 3;
-        grid-row: 3 / 4;
+
+    form{
+        width: 60%;
+        max-width: 600px;
     }
-    
+
+    #redes{
+        max-width: 500px;
+    }
 }
+
+
+
