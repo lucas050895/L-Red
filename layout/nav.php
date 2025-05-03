@@ -11,7 +11,14 @@
 
       <ul class="list-items">
         <li>
-          <a href="http://lucasconde.ddns.net/L-Red/index.php">
+          <a href="http://lucasconde.ddns.net/L-Red/">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="http://lucasconde.ddns.net/L-Red/links/dashbord.php">
             <i class='bx bxs-dashboard'></i>
             <span>Dashboard</span>
           </a>
