@@ -1,5 +1,15 @@
 <?php
-    include('../../bd/conecxion.php');
+    include("../../bd/conexion.php");
+
+    // Inicia la sesión
+    session_start();
+
+    // Verifica si el usuario está logueado.
+    if (!isset($_SESSION['usuario'])) {
+        // Si no está logueado, redirige a la página de inicio de sesión.
+        header("Location: ../login.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>

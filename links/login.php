@@ -1,5 +1,5 @@
 <?php
-    include("../bd/conecxion.php");
+    include("../bd/conexion.php");
 
     if(isset($_POST['entrar'])){
         $usuario = $_POST['usuario'];
@@ -13,6 +13,7 @@
         if($usuario == "Lucas" || $usuario == "Leo" && $contraseña == "1234"){
             session_start();
             $_SESSION['usuario'] = $usuario;
+            $_SESSION['ultimoAcceso'] = date("Y-n-j H:i:s");
             header("Location: dashbord.php");
             exit();
         }else{
