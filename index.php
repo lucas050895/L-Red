@@ -32,7 +32,7 @@
                         Trabajo
                     </div>
                     <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     </div>
                     
                     <a href="#">Ver</a>
@@ -46,7 +46,7 @@
                         Trabajo
                     </div>
                     <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     </div>
 
                     <a href="#">Ver</a>
@@ -60,7 +60,21 @@
                         Trabajo
                     </div>
                     <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quaerat iusto adipisci reprehenderit quasi cum perspiciatis, minima reiciendis magni quam!
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                    </div>
+                    
+                    <a href="#">Ver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="#">
+                <div>
+                    <div class="name">
+                        Trabajo
+                    </div>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     </div>
                     
                     <a href="#">Ver</a>
@@ -73,25 +87,26 @@
     <div id="contact">
         <h2 class="title">Contacto</h2>
             <div class="wrapper">
-                <form action="#">
+                <form action="php/enviar_correo.php" method="POST">
                     <h3>Consulta</h3>
                     <div class="field">
-                        <input type="text" required>
-                        <label>Nombre completo</label>
+                        <input type="text" required id="nombre" name="nombre">
+                        <label for="nombre">Nombre completo (*)</label>
                     </div>
                     <div class="field">
-                        <input type="text" required>
-                        <label>Email</label>
+                        <input type="text" required id="correo" name="correo">
+                        <label for="correo">Email (*)</label>
                     </div>
                     <div class="field">
-                        <input type="tel" required>
-                        <label>Celular</label>
+                        <input type="tel" required id="celular" name="celular">
+                        <label for="celular">Celular (*)</label>
                     </div>
                     <div class="field">
-                        <input type="text" required>
-                        <label>Mensaje</label>
+                        <input type="text" required id="mensaje" name="mensaje">
+                        <label for="mensaje">Mensaje (*)</label>
                     </div>
                     <button type="submit">Enviar</button>
+                    <span> (*) Campos obligatorios</span>
                 </form>
             </div>
     </div>
@@ -99,8 +114,12 @@
     <div id="redes">
         <h3>Seguinos en: </h3>
         <div>
-            <i class="fa-brands fa-whatsapp"></i>
-            <i class="fa-brands fa-facebook"></i>
+            <a href="http://facebook.com" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://wa.me/5491176145568" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
         </div>
     </div>
 
