@@ -1,3 +1,6 @@
+<?php
+    include('bd/conexion.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,62 +28,87 @@
     <div id="jobs">
         <h2 class="title">Trabajos</h2>
         <div class="container">
-            <div class="card">
-                <img src="#">
-                <div>
-                    <div class="name">
-                        Trabajo
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    </div>
-                    
-                    <a href="#">Ver</a>
-                </div>
-            </div>
+            <?php
+                if($conexion) {
+                    $consultation = "SELECT clientes.nombre as NOMBRE,
+                                            trabajos_cctv.dvr_marca AS MARCA,
+                                            trabajos_cctv.dvr_modelo AS MODELO,
+                                            trabajos_cctv.dvr_disco AS DISCO,
+                                            trabajos_cctv.dvr_capacidad AS CAPACIDAD,
+                                            trabajos_cctv.dvr_medida AS MEDIDA
+                                        FROM clientes
+                                        INNER JOIN trabajos_cctv 
+                                        WHERE clientes.id = trabajos_cctv.clientes_id
+                                        LIMIT 3";
 
-            <div class="card">
-                <img src="#">
-                <div>
-                    <div class="name">
-                        Trabajo
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    </div>
+                    $resultado = mysqli_query($conexion,$consultation);
+            
+                    if($resultado){
+                        while($row = $resultado->fetch_array()){
+                            $NOMBRE  = $row['NOMBRE'];
+                            $MARCA  = $row['MARCA'];
+                            $MODELO  = $row['MODELO'];
+                            $DISCO  = $row['DISCO'];
+                            $CAPACIDAD  = $row['CAPACIDAD'];
+                            $MEDIDA  = $row['MEDIDA'];
+                            ?>
+                                <div class="card">
+                                    <img src="#">
+                                    <div>
+                                        <div class="name">
+                                            <?php echo $NOMBRE?>
+                                        </div>
+                                        <div class="text">
+                                            Se instalo un DVR <?php echo $MARCA?>, modelo <?php echo $MODELO?>, con un disco <?php echo $DISCO?> de <?php echo $CAPACIDAD.$MEDIDA?>
+                                            <?php ?>
+                                        </div>
+                                        
+                                        <a href="#">Ver</a>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    }
+                }
+            ?>
 
-                    <a href="#">Ver</a>
-                </div>
-            </div>
+            <?php
+                if($conexion) {
+                    $consultation = "SELECT clientes.nombre as NOMBRE,
+                                            trabajos_ip.camara_modelo AS CAMARA,
+                                            COUNT(ip_01) + COUNT(ip_02) + COUNT(ip_03) +COUNT(ip_04) +COUNT(ip_05) AS CANTIDAD
+                                        FROM clientes
+                                        INNER JOIN trabajos_ip
+                                        WHERE clientes.id = trabajos_ip.clientes_id
+                                        LIMIT 3";
 
-            <div class="card">
-                <img src="#">
-                <div>
-                    <div class="name">
-                        Trabajo
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    </div>
-                    
-                    <a href="#">Ver</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="#">
-                <div>
-                    <div class="name">
-                        Trabajo
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    </div>
-                    
-                    <a href="#">Ver</a>
-                </div>
-            </div>
-
+                    $resultado = mysqli_query($conexion,$consultation);
+            
+                    if($resultado){
+                        while($row = $resultado->fetch_array()){
+                            $NOMBRE  = $row['NOMBRE'];
+                            $CAMARA  = $row['CAMARA'];
+                            $CANTIDAD  = $row['CANTIDAD'];
+                            ?>
+                                <div class="card">
+                                    <img src="#">
+                                    <div>
+                                        <div class="name">
+                                            <?php echo $NOMBRE?>
+                                        </div>
+                                        <div class="text">
+                                            Se instalaron <?php echo $CANTIDAD ?> cámaras marca <?php echo $CAMARA?>
+                                            <?php ?>
+                                        </div>
+                                        
+                                        <a href="#">Ver</a>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    }
+                }
+            ?>
         </div>
     </div>
 
