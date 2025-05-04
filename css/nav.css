@@ -49,6 +49,7 @@
   overflow: hidden;
   left: -270px;
   transition: all 0.3s ease;
+  overflow-y: auto;
 }
 #btn:checked ~ #sidebar{
   left: 0;
@@ -62,18 +63,17 @@
   color: #f2f2f2;
   border-bottom: 1px solid #222;
 }
-#sidebar .list-items{
+#sidebar ul:nth-child(2){
+  width: 100%;
   position: relative;
   background: #404040;
-  width: 100%;
-  height: 100%;
   list-style: none;
 }
-#sidebar .list-items li{
+#sidebar ul:nth-child(2) li{
   margin: .5em auto;
   line-height: 50px;
 }
-#sidebar .list-items li a{
+#sidebar ul:nth-child(2) li a{
   padding-left: 40px;
   color: #f2f2f2;
   text-decoration: none;
@@ -83,7 +83,7 @@
   width: 100%;
   display: block;
 }
-#sidebar .list-items li a i{
+#sidebar > ul:nth-child(2) > li > a > i{
   margin-right: 20px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 
-#sidebar .list-items .accordion a{
+#sidebar ul:nth-child(2) .accordion a{
   padding: 0;
 }
 
@@ -128,4 +128,41 @@
   transition: max-height 2s ease-in-out;
   padding: 0 10px;
   opacity: 1;
+}
+
+
+
+#sidebar .nuevo{
+  width: 100%;
+  max-height: 50px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  background-color: #222;
+}
+#sidebar .nuevo li{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#sidebar .nuevo li > a:nth-child(1){
+  width: 80%;
+  display: inline-flex;
+  align-items: center;
+}
+#sidebar > ul:nth-child(2) > ul > li > a:nth-child(2){
+  max-width: 10%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+#sidebar > ul:nth-child(2) > ul > li > a:nth-child(2) > i{
+  font-size: 1.5em;
+  margin: auto;
+  color: red;
+}
+#sidebar > ul:nth-child(2) > ul > li > a > i{
+  margin-right: 20px;
 }

@@ -9,7 +9,7 @@
     <nav id="sidebar">
       <h1 class="title">L-Red</h1>
 
-      <ul class="list-items">
+      <ul>
         <li>
           <a href="http://lucasconde.ddns.net/L-Red/">
             <i class="fas fa-home"></i>
@@ -93,8 +93,24 @@
           </a>
         </li>
 
+        <ul class="nuevo">
+          <li>     
+            <a href="#">
+              <i class="fas fa-user"></i>
+              <span><?php echo $_SESSION['usuario'] ?></span>
+            </a>
+            
+            <a href="../links/logout.php">
+              <i class="fas fa-power-off"></i>
+            </a>
+          </li>
+        </ul>
+
       </ul>
+
+
     </nav>
+
 </div>
 
 
