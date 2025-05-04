@@ -8,9 +8,10 @@
         $sql = "SELECT *
                     FROM usuarios
                     WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
+
         $resultado = mysqli_query($conexion, $sql);
 
-        if($usuario == "Lucas" || $usuario == "Leo" && $contraseña == "1234"){
+        if($resultado->num_rows>0){
             session_start();
             $_SESSION['usuario'] = $usuario;
             $_SESSION['ultimoAcceso'] = date("Y-n-j H:i:s");
@@ -21,7 +22,6 @@
         }
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
