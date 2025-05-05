@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+        include("../layout/meta.php");
+    ?>
     <title>Servicio Técnico</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/index.css">
@@ -39,7 +40,8 @@
                                         FROM clientes
                                         INNER JOIN trabajos_cctv 
                                         WHERE clientes.id = trabajos_cctv.clientes_id
-                                        LIMIT 3";
+                                        ORDER BY NOMBRE
+                                        LIMIT 8";
 
                     $resultado = mysqli_query($conexion,$consultation);
             
