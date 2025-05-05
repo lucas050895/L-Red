@@ -15,16 +15,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head> 
-    <!-- CHARSET -->
-    <meta charset="UTF-8">
-    <!-- IE-EDGE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- VIEWPORT -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- DESCRIPTION -->
-    <meta name="description" content="L-Red">
-    <!-- AUTHOR -->
-    <meta name="author" content="Lucas Conde">
+    <?php
+        include("../layout/meta.php");
+    ?>
     <!-- TITTLE -->
     <title>Agregar Trabajo de Red || L-Red</title>
     <!-- STYLES -->
