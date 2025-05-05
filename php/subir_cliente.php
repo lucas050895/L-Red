@@ -1,5 +1,5 @@
 <?php
-    include('../bd/conecxion.php');
+    include('../bd/conexion.php');
 
     $nombre         =   $_POST['nombre']; 
     $apellido       =   $_POST['apellido'];

@@ -1,5 +1,5 @@
 <?php
-    include('../bd/conecxion.php');
+    include('../bd/conexion.php');
 
     $clientes_id  =   $_POST['clientes_id']; 
 
