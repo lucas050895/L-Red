@@ -35,8 +35,12 @@ html{
 /*TITULO*/
 #home > h1{
     width: 100%;
+    height: 300px;
     font-weight: 400;
-    font-size: 2.5em;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: var(--color-one);
     font-family: var(--font-two);
@@ -44,8 +48,8 @@ html{
 }
 #home > i:nth-child(1){
     color: var(--color-one);
-    font-size: 3em;
-    margin: 1em auto;
+    font-size: 5em;
+    margin: 1em auto 0;
 }
 /*ICONO FLECHA*/
 #home > a{
@@ -58,14 +62,9 @@ html{
     color: var(--color-two);
     text-decoration: none;
 }
-#home > a > i:nth-child(3){
-    width: 24px;
-    height: 24px;
-    font-size: 2em;
-    margin:3em auto;
-    display:block;
-    color: var(--color-three);
-    opacity: 0;
+#home > a > i{
+    font-size: 3em;
+    margin: 3em auto;
 }
 /*ANIMACION DEL ICONO FLECHA*/
 @keyframes pulse{
@@ -93,12 +92,12 @@ html{
 /*CONTENEDOR DE TARJETAS*/
 .container{
     width: 100%;
+    max-width: 900px;
     margin: 2em auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    /* flex-direction: column; */
 }
 /*CADA TARJETA*/
 .card{
