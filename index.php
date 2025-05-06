@@ -5,7 +5,7 @@
 <html lang="es">
 <head>
     <?php
-        include("../layout/meta.php");
+        include("layout/meta.php");
     ?>
     <title>Servicio Técnico</title>
     <!-- CSS -->
@@ -55,7 +55,7 @@
                             $MEDIDA  = $row['MEDIDA'];
                             ?>
                                 <div class="card">
-                                    <img src="#">
+                                    <img src="assets/img/example.jpg">
                                     <div>
                                         <div class="name">
                                             <?php echo $NOMBRE?>
@@ -93,13 +93,13 @@
                             $CANTIDAD  = $row['CANTIDAD'];
                             ?>
                                 <div class="card">
-                                    <img src="#">
+                                    <img src="assets/img/example.jpg">
                                     <div>
                                         <div class="name">
                                             <?php echo $NOMBRE?>
                                         </div>
                                         <div class="text">
-                                            Se instalaron <?php echo $CANTIDAD ?> cámaras marca <?php echo $CAMARA?>
+                                            Se instalaron <?php echo $CANTIDAD ?> cámaras IP marca <?php echo $CAMARA?>
                                             <?php ?>
                                         </div>
                                         
