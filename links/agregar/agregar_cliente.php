@@ -16,7 +16,7 @@
 <html lang="es">
 <head> 
     <?php
-        include("../layout/meta.php");
+        include("../../layout/meta.php");
     ?>
     <!-- TITTLE -->
     <title>Agregar Cliente || L-Red</title>

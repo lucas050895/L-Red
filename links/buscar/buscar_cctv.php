@@ -15,7 +15,7 @@
 <html lang="en">
 <head> 
     <?php
-        include("../layout/meta.php");
+        include("../../layout/meta.php");
     ?>
     <!-- TITTLE -->
     <title>Buscar Trabajos CCTV || L-Red</title>
