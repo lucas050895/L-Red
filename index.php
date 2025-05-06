@@ -7,12 +7,15 @@
     <?php
         include("layout/meta.php");
     ?>
+    
     <title>Servicio Técnico</title>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- FONT AWESOME -->   
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <?php
+        include("../../layout/iconos.php");
+    ?>
 </head>
 <body>
 
@@ -55,7 +58,7 @@
                             $MEDIDA  = $row['MEDIDA'];
                             ?>
                                 <div class="card">
-                                    <img src="assets/img/example.jpg">
+                                    <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
                                     <div>
                                         <div class="name">
                                             <?php echo $NOMBRE?>
@@ -93,7 +96,7 @@
                             $CANTIDAD  = $row['CANTIDAD'];
                             ?>
                                 <div class="card">
-                                    <img src="assets/img/example.jpg">
+                                    <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
                                     <div>
                                         <div class="name">
                                             <?php echo $NOMBRE?>
