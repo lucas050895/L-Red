@@ -18,16 +18,16 @@
     <?php
         include("../../layout/meta.php");
     ?>
+    
     <!-- TITTLE -->
     <title>Cliente || L-Red</title>
+
     <!-- STYLES -->
     <link rel="stylesheet" href="../../css/cliente.css">
 
-    <!-- BOXICONS  -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    <!-- FONT AWESOME -->
-    <script src="https://kit.fontawesome.com/439ee37b3b.js" crossorigin="anonymous"></script>
+    <?php
+        include("../../layout/iconos.php");
+    ?>
 </head>
 <body>
     <main>

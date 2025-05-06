@@ -17,12 +17,16 @@
     <?php
         include("../layout/meta.php");
     ?>
+    
     <!-- TITTLE -->
     <title>Error || L-Red</title>
+
     <!-- STYLES -->
     <link rel="stylesheet" href="../../css/subido.css">
-    <!-- BOXICONS  -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <?php
+        include("../../layout/iconos.php");
+    ?>
 </head>
 <body>
     <?php
