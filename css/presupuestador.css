@@ -27,14 +27,22 @@ main > form > table > thead > tr > td:nth-child(1){
 /*CONTENIDO PRODUCTO*/
 main > form > table > tbody > tr > td:nth-child(1){
     width: 100%;
-    padding-left: 10px;
     display: flex;
     align-items: center;
-    justify-content: start;
 }
-main > form > table > tbody > tr > td:nth-child(1)> select{
-    min-width: 150px;
-    max-width: 400px;
+main > form > table > tbody > tr > td:nth-child(1) > div{
+    width: 100%;
+    height: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+main > form > table > tbody > tr > td:nth-child(1) > div > label{
+    display: none;
+}
+main > form > table > tbody > tr > td:nth-child(1) > div > select{
+    width: 150px;
     background: white;
 }
 
@@ -46,19 +54,23 @@ main > form > table > thead > tr > td:nth-child(2){
 }
 /*CONTENIDO CANTIDAD*/
 main > form > table > tbody > tr > td:nth-child(2){
+    height: 40px;
     text-align: center;
 }
-main > form > table > tbody > tr > td:nth-child(2) > input{
-    max-width: 50px;
+main > form > table > tbody > tr > td:nth-child(2) > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main > form > table > tbody > tr > td:nth-child(2) > div > input{
+    max-width: 40px;
     border: none;
     text-align: center;
     background: white;
 }
-main > form > table > tbody > tr > td:nth-child(2) > input[type="number"] {
-    -webkit-appearance: none; /* Para Safari y Chrome */
-    -moz-appearance: none;    /* Para Firefox */
-    appearance: none !important;        /* Para navegadores modernos */
-}
+
 
 
 
@@ -96,8 +108,6 @@ main > form > table > tbody > tr > td:nth-child(4){
 /*CONTENIDOS TODOS*/
 main > form > table > tbody > tr{
     border-bottom: 1px solid black;
-}
-main > form > table > tbody > tr > td{
     height: 40px;
 }
 
@@ -109,3 +119,17 @@ main > form > button{
     margin: 1em auto;
 }
 
+
+/*ADPTACIONES*/
+@media screen and (min-width:700px) {
+    *{
+        font-size: 16px;
+    }
+    main > form > table > tbody > tr > td:nth-child(1) {
+        justify-content: space-between;
+    }
+
+    main > form > table > tbody > tr > td:nth-child(1) > div > label{
+        display: inline-block;
+    }
+}
