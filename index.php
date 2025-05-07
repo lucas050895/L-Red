@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/index.css">
 
     <?php
-        include("../../layout/iconos.php");
+        include("layout/iconos.php");
     ?>
 </head>
 <body>
