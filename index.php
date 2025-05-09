@@ -34,7 +34,9 @@
         <div class="container">
             <?php
                 if($conexion) {
-                    $consultation = "SELECT clientes.nombre as NOMBRE,
+                    $consultation = "SELECT clientes.id AS ID,
+                                            clientes.nombre As NOMBRE,
+                                            clientes.razon AS RAZON,
                                             trabajos_cctv.dvr_marca AS MARCA,
                                             trabajos_cctv.dvr_modelo AS MODELO,
                                             trabajos_cctv.dvr_disco AS DISCO,
@@ -43,14 +45,16 @@
                                         FROM clientes
                                         INNER JOIN trabajos_cctv 
                                         WHERE clientes.id = trabajos_cctv.clientes_id
-                                        ORDER BY NOMBRE
+                                        ORDER BY NOMBRE OR RAZON
                                         LIMIT 8";
 
                     $resultado = mysqli_query($conexion,$consultation);
             
                     if($resultado){
                         while($row = $resultado->fetch_array()){
+                            $ID  = $row['ID'];
                             $NOMBRE  = $row['NOMBRE'];
+                            $RAZON  = $row['RAZON'];
                             $MARCA  = $row['MARCA'];
                             $MODELO  = $row['MODELO'];
                             $DISCO  = $row['DISCO'];
@@ -61,14 +65,20 @@
                                     <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
                                     <div>
                                         <div class="name">
-                                            <?php echo $NOMBRE?>
+                                            <?php 
+                                                if (is_string($RAZON)){
+                                                    echo $RAZON;
+                                                }else{
+                                                    echo $NOMBRE;
+                                                }
+                                            ?>
                                         </div>
                                         <div class="text">
                                             Se instalo un DVR <?php echo $MARCA?>, modelo <?php echo $MODELO?>, con un disco <?php echo $DISCO?> de <?php echo $CAPACIDAD.$MEDIDA?>
                                             <?php ?>
                                         </div>
                                         
-                                        <a href="#">Ver</a>
+                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $ID ?>">Ver</a>
                                     </div>
                                 </div>
                             <?php
@@ -79,7 +89,9 @@
 
             <?php
                 if($conexion) {
-                    $consultation = "SELECT clientes.nombre as NOMBRE,
+                    $consultation = "SELECT clientes.id AS ID,
+                                            clientes.nombre as NOMBRE,
+                                            clientes.razon as RAZON,
                                             trabajos_ip.camara_modelo AS CAMARA,
                                             COUNT(ip_01) + COUNT(ip_02) + COUNT(ip_03) +COUNT(ip_04) +COUNT(ip_05) AS CANTIDAD
                                         FROM clientes
@@ -91,7 +103,9 @@
             
                     if($resultado){
                         while($row = $resultado->fetch_array()){
+                            $ID  = $row['ID'];
                             $NOMBRE  = $row['NOMBRE'];
+                            $RAZON  = $row['RAZON'];
                             $CAMARA  = $row['CAMARA'];
                             $CANTIDAD  = $row['CANTIDAD'];
                             ?>
@@ -99,14 +113,20 @@
                                     <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
                                     <div>
                                         <div class="name">
-                                            <?php echo $NOMBRE?>
+                                            <?php 
+                                                if (is_string($RAZON)){
+                                                     echo $RAZON;
+                                                }else{
+                                                    echo $NOMBRE;
+                                                }
+                                            ?>
                                         </div>
                                         <div class="text">
                                             Se instalaron <?php echo $CANTIDAD ?> cámaras IP marca <?php echo $CAMARA?>
                                             <?php ?>
                                         </div>
                                         
-                                        <a href="#">Ver</a>
+                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $ID ?>">Ver</a>
                                     </div>
                                 </div>
                             <?php
