@@ -1,0 +1,29 @@
+@import url(general.css);
+
+
+/*SECCION DE CADA ITEMS DE INFORMACIÓN*/
+form > fieldset > section{
+    width: 60%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 1em auto;
+    background: black;
+}
+form > fieldset > section > h2{
+    width: 200px;
+    text-transform: uppercase;
+}
+
+form > fieldset > section > div{
+    width: 150px;
+}
+form > fieldset > section > i{
+    color: red;
+}
+
+
+form > fieldset:nth-child(2) > div:nth-child(5) > input{
+    margin: auto;
+}
