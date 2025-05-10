@@ -3,11 +3,11 @@
 
     if(isset($_POST['entrar'])){
         $usuario = $_POST['usuario'];
-        $contraseña = $_POST['contraseña'];
+        $password = $_POST['password'];
 
         $sql = "SELECT *
                     FROM usuarios
-                    WHERE usuario = '$usuario' AND contraseña = '$contraseña'";
+                    WHERE usuario = '$usuario' AND password = '$password'";
 
         $resultado = mysqli_query($conexion, $sql);
 
@@ -18,7 +18,7 @@
             header("Location: dashbord.php");
             exit();
         }else{
-            echo "<script>alert('Usuario o contraseña incorrectos');</script>";
+            echo "<script>alert('Usuario o password incorrectos');</script>";
         }
     }
 ?>
@@ -43,8 +43,8 @@
                 </div>
 
                 <div>
-                    <label for="contraseña">Contraseña</label>
-                    <input type="text" id="contraseña" name="contraseña" required placeholder="1234">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="1234">
                 </div>
             </fieldset>
             <input type="submit" id="entrar" name="entrar" value="Entrar"> 
