@@ -95,7 +95,7 @@
 
         <ul class="nuevo">
           <li>     
-            <a href="#">
+            <a href="usuario.php">
               <i class="fas fa-user"></i>
               <span><?php echo $_SESSION['usuario'] ?></span>
             </a>
