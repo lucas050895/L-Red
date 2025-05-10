@@ -100,7 +100,7 @@
               <span><?php echo $_SESSION['usuario'] ?></span>
             </a>
             
-            <a href="../links/logout.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/logout.php">
               <i class="fas fa-power-off"></i>
             </a>
           </li>
