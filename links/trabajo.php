@@ -1,5 +1,16 @@
 <?php
     include('../bd/conexion.php');
+
+    if(isset($_GET['id'])){
+        $resultado = $conexion -> query ("SELECT * FROM clientes WHERE id=" . $_GET['id'])or die($conexion -> error);
+        if(mysqli_num_rows($resultado) > 0){
+            $fila = mysqli_fetch_row($resultado);
+        }else{
+            header("Location: ../index.php");
+        }
+    }else{
+        header("Location: ../index.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -89,94 +100,121 @@
                 <legend>Trabajo</legend>
 
                 <?php if (is_string($fila[5])) {?>
-                        <h3>Se realizo:</h3>
-                        <p>La instalacion de un DVR marca <?php echo $fila[6]?> modelo <?php echo $fila[7]?>, con un disco <?php echo $fila[8]?> de <?php echo $fila[9].$fila[10]?>,
-                        con <?php echo $fila[11]?> cámaras modelo <?php echo $fila[12]?>.<br>
-                        Con sus respectivas cajas estancas y sus fichas balun. Para ésta instalación se utilizo <?php echo $fila[13]?> metros de CABLE UTP.</p>
+
+                <h3>Se realizo:</h3>
+                <p>La instalacion de un DVR marca <?php echo $fila[6]?> modelo <?php echo $fila[7]?>, con un disco <?php echo $fila[8]?> de <?php echo $fila[9].$fila[10]?>,
+                con <?php echo $fila[11]?> cámaras modelo <?php echo $fila[12]?>.<br>
+                Con sus respectivas cajas estancas y sus fichas balun. Para ésta instalación se utilizo <?php echo $fila[13]?> metros de CABLE UTP.</p>
 
             </fieldset>
                     
-<div>
-  <div class="carousel">
-    <ul class="slides">
-      <input type="radio" name="radio-buttons" id="img-1" checked />
-      <li class="slide-container">
-        <div class="slide-image">
-          <img src="../assets/img/example.jpg">
-        </div>
-        <div class="carousel-controls">
-          <label for="img-3" class="prev-slide">
-            <span>&lsaquo;</span>
-          </label>
-          <label for="img-2" class="next-slide">
-            <span>&rsaquo;</span>
-          </label>
-        </div>
-      </li>
-      <input type="radio" name="radio-buttons" id="img-2" />
-      <li class="slide-container">
-        <div class="slide-image">
-          <img src="../assets/img/example.jpg">
-        </div>
-        <div class="carousel-controls">
-          <label for="img-1" class="prev-slide">
-            <span>&lsaquo;</span>
-          </label>
-          <label for="img-3" class="next-slide">
-            <span>&rsaquo;</span>
-          </label>
-        </div>
-      </li>
-      <input type="radio" name="radio-buttons" id="img-3" />
-      <li class="slide-container">
-        <div class="slide-image">
-          <img src="../assets/img/example.jpg">
-        </div>
-        <div class="carousel-controls">
-          <label for="img-2" class="prev-slide">
-            <span>&lsaquo;</span>
-          </label>
-          <label for="img-1" class="next-slide">
-            <span>&rsaquo;</span>
-          </label>
-        </div>
-      </li>
-      <div class="carousel-dots">
-        <label for="img-1" class="carousel-dot" id="img-dot-1"></label>
-        <label for="img-2" class="carousel-dot" id="img-dot-2"></label>
-        <label for="img-3" class="carousel-dot" id="img-dot-3"></label>
-      </div>
-    </ul>
-  </div>
-</div>
-            
-            
-            
-            
-            
-            
-            
+            <section>
+                <div class="scroll-arrow" id="scroll-left">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+
+                <ul id="imgList">
+                  <?php
+                    $resultado = $conexion->query("SELECT *
+                                                        FROM archivos_fotos
+                                                        WHERE clientes_id=" . $_GET['id'])or die($conexion->error);
+
+
+                    while($row = mysqli_fetch_array($resultado)){ ?>
+                        <li>
+                            <!-- <img src="../files/<?php echo $row['clientes_id'] ?>/img/<?php echo $row['nombre']?>"/> -->
+                            <img src="../assets/img/example.jpg"/>
+                            <img src="../assets/img/example.jpg"/>
+                            <img src="../assets/img/example.jpg"/>
+                            <img src="../assets/img/example.jpg"/>
+                            <img src="../assets/img/example.jpg"/>
+                        </li>
+                    <?php }
+                  ?>
+                </ul>
+
+                <div class="scroll-arrow" id="scroll-right" onclick="scrollRight()">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+
+            </section>
+
+            <?php }
+
+                if (is_string($fila[14])){?>
+                <h3>Se realizo:</h3>
+                <p>La instalación <?php echo $fila[15] ?> cámaras IP marca <?php echo $fila[16]?> en distintos periodos, ya que el trabajo fue se cubrian las necesidades del cliente.<br>
+                Se utilizaron 400 metros de cable UTP en total, y además se utilizaron un switch 24 puertos y otro de 8 puertos, para las dichas cámaras y ademas se realizo trabajo estructurado de red para computadoras de escritorio, servidor e impresoras.</p>
+            </fieldset>
+                    
+            <section>
+                <div class="scroll-arrow" id="scroll-left">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+
+                <ul id="imgList">
+                  <?php
+                    $resultado = $conexion->query("SELECT *
+                                                        FROM archivos_fotos
+                                                        WHERE clientes_id=" . $_GET['id'])or die($conexion->error);
+
+
+                    while($row = mysqli_fetch_array($resultado)){ ?>
+                        <li>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                        </li>
+                    <?php }
+                  ?>
+                </ul>
+
+                <div class="scroll-arrow" id="scroll-right" onclick="scrollRight()">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+
+            </section>
             
             <?php }
 
-                        if (is_string($fila[14])){?>
-                            <h3>Se realizo:</h3>
-                            <p>La instalación <?php echo $fila[15] ?> cámaras IP marca <?php echo $fila[16]?> en distintos periodos, ya que el trabajo fue se cubrian las necesidades del cliente.<br>
-                        Se utilizaron 400 metros de cable UTP en total, y además se utilizaron un switch 24 puertos y otro de 8 puertos, para las dichas cámaras y ademas se realizo trabajo estructurado de red para computadoras de escritorio, servidor e impresoras.</p>
-            </fieldset>
-                    
-            <div>
-                <img src="../assets/img/example.jpg" alt="<?php $fila[5] ?>">
-            </div><?php }
-
-                        if (is_string($fila[17])){?>
-                            <h3>Se realizo:</h3>
-                            <p><?php echo $fila[18] ?></p>
+            if (is_string($fila[17])){?>
+                <h3>Se realizo:</h3>
+                <p><?php echo $fila[18] ?></p>
             </fieldset>
 
-             <div>
-                <img src="../assets/img/example.jpg" alt="<?php $fila[5] ?>">
-            </div><?php }?>
+            <section>
+                <div class="scroll-arrow" id="scroll-left">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+
+                <ul id="imgList">
+                  <?php
+                    $resultado = $conexion->query("SELECT *
+                                                        FROM archivos_fotos
+                                                        WHERE clientes_id=" . $_GET['id'])or die($conexion->error);
+
+
+                    while($row = mysqli_fetch_array($resultado)){ ?>
+                        <li>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
+                        </li>
+                    <?php }
+                  ?>
+                </ul>
+
+                <div class="scroll-arrow" id="scroll-right" onclick="scrollRight()">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+
+            </section>
+
+            <?php }?>
             
         </section>
 
@@ -184,5 +222,21 @@
 
 	<!-- FOOTER -->
     <?php include('../layout/footer.php');?>
+
+    <script>
+        var imgList = document.getElementById('imgList');
+        var scrollRight = document.getElementById('scroll-right');
+        var scrollLeft = document.getElementById('scroll-left');
+
+      // When a user clicks on the right arrow, the ul will scroll 750px to the right
+        scrollRight.addEventListener('click', (event) => {
+          imgList.scrollBy(265, 0);
+      });
+
+      // When a user clicks on the left arrow, the ul will scroll 750px to the left
+        scrollLeft.addEventListener('click', (event) => {
+          imgList.scrollBy(-265, 0);
+      });
+    </script>
 </body>
 </html>
