@@ -45,33 +45,8 @@
                 <legend>Filtros</legend>
 
                 <div>
-                    <label for="clientes_id">Cliente</label>
-                    <select name="clientes_id" id="clientes_id" >
-                        <option value="" selected disabled>Seleccionar Opción</option>
-                        <?php
-                            if($conexion) {
-                                $consultation = "SELECT *
-                                                    FROM clientes, trabajos_cctv
-                                                    WHERE clientes.id = trabajos_cctv.clientes_id
-                                                    ORDER BY nombre;";
-                                $resultado = mysqli_query($conexion,$consultation);
-                        
-                                if($resultado){
-                                    while($row = $resultado->fetch_array()){
-                                        $clientes_id        = $row['clientes_id'];
-                                        $nombre             = $row['nombre'];
-                                        $apellido           = $row['apellido'];
-                        
-                                        ?>
-                                            <option value="<?php echo $clientes_id ?>">
-                                                <?php echo $nombre . " " . $apellido?>
-                                            </option>
-                                        <?php
-                                    }
-                                }
-                            }
-                        ?>
-                    </select>
+                    <label for="nombre">Cliente</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
                 </div>
 
                 <div>
@@ -94,12 +69,12 @@
             <?php
                 // Verifica si el formulario fue enviado
                 if ($_SERVER['REQUEST_METHOD'] == 'GET' && 
-                        isset($_GET['clientes_id']) || 
+                        isset($_GET['nombre']) || 
                         isset($_GET['dvr_marca']) ||
                         isset($_GET['camaras_modelo'])) {
 
                     // Recoger los filtros del formulario
-                    $clientes_id     = $_GET['clientes_id']     ?? '';
+                    $nombre     = $_GET['nombre']     ?? '';
                     $dvr_marca       = $_GET['dvr_marca']       ?? '';
                     $camaras_modelo  = $_GET['camaras_modelo']  ?? '';
 
@@ -109,8 +84,8 @@
                                 WHERE clientes.id = trabajos_cctv.clientes_id
                                 AND 1 = 1";
 
-                    if (!empty($clientes_id)) {
-                        $sql .= " AND clientes_id = $clientes_id";
+                    if (!empty($nombre)) {
+                        $sql .= " AND nombre LIKE '%$nombre%' ";
                     }
 
                     if (!empty($dvr_marca)) {
@@ -128,9 +103,9 @@
                     if ($resultado->num_rows > 0) {
                         while ($fila = $resultado->fetch_assoc()) {
                             ?>
-                                <a href="#" class="items">
+                                <a href="cliente.php?id=<?php echo $fila['clientes_id']; ?>" class="items">
                                     <?php
-                                        echo $fila['nombre']
+                                        echo $fila['nombre'] . " " . $fila['apellido']
                                     ?>
                                 </a>
                             <?php

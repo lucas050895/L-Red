@@ -44,33 +44,8 @@
                 <legend>Filtros</legend>
 
                 <div>
-                    <label for="clientes_id">Cliente</label>
-                    <select name="clientes_id" id="clientes_id" >
-                        <option value="" selected disabled>Seleccionar Opción</option>
-                        <?php
-                            if($conexion) {
-                                $consultation = "SELECT *
-                                                    FROM clientes, trabajos_red
-                                                    WHERE clientes.id = trabajos_red.clientes_id
-                                                    ORDER BY nombre;";
-                                $resultado = mysqli_query($conexion,$consultation);
-                        
-                                if($resultado){
-                                    while($row = $resultado->fetch_array()){
-                                        $clientes_id        = $row['clientes_id'];
-                                        $nombre             = $row['nombre'];
-                                        $apellido           = $row['apellido'];
-                        
-                                        ?>
-                                            <option value="<?php echo $clientes_id ?>">
-                                                <?php echo $nombre . " " . $apellido?>
-                                            </option>
-                                        <?php
-                                    }
-                                }
-                            }
-                        ?>
-                    </select>
+                    <label for="nombre">Cliente</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
                 </div>
 
             </fieldset>
@@ -83,10 +58,11 @@
         <div class="container_items">
             <?php
                 // Verifica si el formulario fue enviado
-                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['clientes_id']) ) {
+                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['nombre']) ) {
 
                     // Recoger los filtros del formulario
-                    $clientes_id       = $_GET['clientes_id']    ?? '';
+                    $nombre       = $_GET['nombre']    ?? '';
+                    $apellido       = $_GET['apellido']    ?? '';
 
                     // Construir la consulta SQL con filtros
                     $sql = "SELECT *
@@ -95,7 +71,7 @@
                                 AND 1 = 1";
 
                     if (!empty($nombre)) {
-                        $sql .= " AND clientes_id = $clientes_id";
+                        $sql .= " AND nombre LIKE '%$nombre%' ";
                     }
 
                     $resultado = $conexion->query($sql);

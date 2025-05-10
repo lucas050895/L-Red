@@ -61,22 +61,28 @@
         <div class="container_items">
             <?php
                 // Verifica si el formulario fue enviado
-                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['nombre']) || isset($_GET['acceso_host'])) {
+                if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
+                        isset($_GET['nombre']) ||
+                        isset($_GET['acceso_host'])) {
 
                     // Recoger los filtros del formulario
-                    $nombre       = $_GET['nombre']    ?? '';
+                    $nombre       = $_GET['nombre']       ?? '';
                     $acceso_host  = $_GET['acceso_host']  ?? '';
 
                     // Construir la consulta SQL con filtros
-                    $sql = "SELECT * FROM trabajos_ip GROUP BY clientes_id";
+                    $sql = "SELECT *
+                                FROM clientes, trabajos_ip
+                                WHERE clientes.id = trabajos_ip.clientes_id
+                                AND 1 = 1
+                                GROUP BY clientes_id";
 
                     if (!empty($nombre)) {
-                        $sql .= " AND nombre LIKE '%$nombre%'";
+                        $sql .= "AND nombre LIKE '%$nombre%'";
                     }
 
-                    if (!empty($acceso_host)) {
-                        $sql .= " AND acceso_host LIKE '%$acceso_host%'";
-                    }
+                    // if (!empty($acceso_host)) {
+                    //     $sql .= "acceso_host LIKE '%$acceso_host%'";
+                    // }
 
                     $resultado = $conexion->query($sql);
 
