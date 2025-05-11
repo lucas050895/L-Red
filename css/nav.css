@@ -1,6 +1,6 @@
 .wrapper{
   height: 100%;
-  width: 300px;
+  width: 350px;
   position: relative;
 }
 .wrapper .menu-btn{
@@ -51,6 +51,13 @@
   transition: all 0.3s ease;
   overflow-y: auto;
 }
+#sidebar::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    display: none ;  /* Ocultar scroll */
+}
+
+
 #btn:checked ~ #sidebar{
   left: 0;
 }
