@@ -39,12 +39,12 @@
                 <legend>login</legend>
                 <div>
                     <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" name="usuario" required placeholder="Lucas || Leo">
+                    <input type="text" id="usuario" name="usuario" required placeholder="Usuario">
                 </div>
 
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="1234">
+                    <input type="password" id="password" name="password" required placeholder="Password">
                 </div>
             </fieldset>
             <input type="submit" id="entrar" name="entrar" value="Entrar"> 
