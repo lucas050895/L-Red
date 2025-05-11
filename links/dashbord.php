@@ -1,5 +1,5 @@
 <?php
-    include('../bd/conexion.php');
+    include("../bd/conexion.php");
     // Inicia la sesión
     session_start();
 
@@ -9,10 +9,6 @@
         header("Location: login.php");
         // exit();
     }else {
-
-      // CONVIRTIENDO TODO EL USUARIO A MAYUSCULA Y DESPUES A CAPITALICE
-      $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
-      
       //sino, calculamos el tiempo transcurrido
       $fechaGuardada = $_SESSION["ultimoAcceso"];
 
@@ -20,7 +16,7 @@
       $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
   
       //comparamos el tiempo transcurrido
-       if($tiempo_transcurrido >= 150) {
+       if($tiempo_transcurrido >= 60) {
        //si pasaron 10 minutos o más
         session_destroy(); // destruyo la sesión
         header("Location: login.php"); //envío al usuario a la pag. de autenticación
@@ -29,6 +25,8 @@
       $_SESSION["ultimoAcceso"] = $ahora;
      }
   }
+
+    $arregloUsuario = $_SESSION['usuario']; 
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +41,7 @@
   <!-- STYLES -->
   <link rel="stylesheet" href="../css/dashbord.css">
 
-  <!-- BOXICONS  -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
-  <!-- FONT AWESOME -->
-  <script src="https://kit.fontawesome.com/439ee37b3b.js" crossorigin="anonymous"></script>
+  <?php include("../layout/iconos.php")?>
 </head>
 
 <body>
