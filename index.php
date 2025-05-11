@@ -34,102 +34,101 @@
         <div class="container">
             <?php
                 if($conexion) {
-                    $consultation = "SELECT clientes.id AS ID,
-                                            clientes.nombre As NOMBRE,
-                                            clientes.razon AS RAZON,
-                                            trabajos_cctv.dvr_marca AS MARCA,
-                                            trabajos_cctv.dvr_modelo AS MODELO,
-                                            trabajos_cctv.dvr_disco AS DISCO,
-                                            trabajos_cctv.dvr_capacidad AS CAPACIDAD,
-                                            trabajos_cctv.dvr_medida AS MEDIDA
-                                        FROM clientes
-                                        INNER JOIN trabajos_cctv 
-                                        WHERE clientes.id = trabajos_cctv.clientes_id
-                                        ORDER BY NOMBRE OR RAZON
-                                        LIMIT 8";
+                    $consultation = "SELECT clientes.id AS clientesID,
+                                            clientes.nombre AS clientesNOMBRE,
+                                            clientes.razon AS clientesRAZON,
+                                            
+                                            trabajos_cctv.id AS cctvID,
+                                            trabajos_cctv.dvr_marca AS cctvMARCA,
+                                            trabajos_cctv.dvr_modelo AS cctvMODELO,
+                                            trabajos_cctv.dvr_disco AS cctvDISCO,
+                                            trabajos_cctv.dvr_capacidad AS cctvCAPACIDAD,
+                                            trabajos_cctv.dvr_medida AS cctvMEDIDA,
+                                            
+                                            trabajos_ip.id AS ipID,
+                                            trabajos_ip.camara_modelo AS ipCAMARA,
+                                            COUNT(ip_01) + COUNT(ip_02) + COUNT(ip_03) + COUNT(ip_04) + COUNT(ip_05) AS ipCANTIDAD
+                                            
+                                    FROM clientes
+                                    LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
+                                    LEFT JOIN trabajos_ip ON clientes.id = trabajos_ip.clientes_id
+                                    -- PARA AGREGAR IF DE RED
+                                    LEFT JOIN trabajos_red ON clientes.id = trabajos_red.clientes_id
+                                    GROUP BY nombre
+                                    LIMIT 8";
 
                     $resultado = mysqli_query($conexion,$consultation);
             
                     if($resultado){
                         while($row = $resultado->fetch_array()){
-                            $ID  = $row['ID'];
-                            $NOMBRE  = $row['NOMBRE'];
-                            $RAZON  = $row['RAZON'];
-                            $MARCA  = $row['MARCA'];
-                            $MODELO  = $row['MODELO'];
-                            $DISCO  = $row['DISCO'];
-                            $CAPACIDAD  = $row['CAPACIDAD'];
-                            $MEDIDA  = $row['MEDIDA'];
-                            ?>
+                            $clientesID         = $row['clientesID'];
+                            $clientesNOMBRE     = $row['clientesNOMBRE'];
+                            $clientesRAZON      = $row['clientesRAZON'];
+
+                            $cctvID             = $row['cctvID'];
+                            $cctvMARCA          = $row['cctvMARCA'];
+                            $cctvMODELO         = $row['cctvMODELO'];
+                            $cctvDISCO          = $row['cctvDISCO'];
+                            $cctvCAPACIDAD      = $row['cctvCAPACIDAD'];
+                            $cctvMEDIDA         = $row['cctvMEDIDA'];
+
+                            $ipID               = $row['ipID'];
+                            $ipCAMARA           = $row['ipCAMARA'];
+                            $ipCANTIDAD         = $row['ipCANTIDAD'];
+
+
+
+
+                            if (is_string($cctvID)){ ?>
                                 <div class="card">
-                                    <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
+                                    <div>
+                                        <img src="assets/img/example.jpg" alt="<?php echo $clientesNOMBRE?>">
+                                    </div>
                                     <div>
                                         <div class="name">
                                             <?php 
-                                                if (is_string($RAZON)){
-                                                    echo $RAZON;
+                                                if (is_string($clientesRAZON)){
+                                                    echo $clientesRAZON;
                                                 }else{
-                                                    echo $NOMBRE;
+                                                    echo $clientesNOMBRE;
                                                 }
                                             ?>
                                         </div>
                                         <div class="text">
-                                            Se instalo un DVR <?php echo $MARCA?>, modelo <?php echo $MODELO?>, con un disco <?php echo $DISCO?> de <?php echo $CAPACIDAD.$MEDIDA?>
+                                            Se instalo un DVR <?php echo $cctvMARCA?>, modelo <?php echo $cctvMODELO?>, con un disco <?php echo $cctvDISCO?> de <?php echo $cctvCAPACIDAD.$cctvMEDIDA?>
                                             <?php ?>
                                         </div>
                                         
-                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $ID ?>">Ver</a>
+                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $clientesID ?>">Ver</a>
                                     </div>
                                 </div>
-                            <?php
-                        }
-                    }
-                }
-            ?>
+                            <?php }
 
-            <?php
-                if($conexion) {
-                    $consultation = "SELECT clientes.id AS ID,
-                                            clientes.nombre as NOMBRE,
-                                            clientes.razon as RAZON,
-                                            trabajos_ip.camara_modelo AS CAMARA,
-                                            COUNT(ip_01) + COUNT(ip_02) + COUNT(ip_03) +COUNT(ip_04) +COUNT(ip_05) AS CANTIDAD
-                                        FROM clientes
-                                        INNER JOIN trabajos_ip
-                                        WHERE clientes.id = trabajos_ip.clientes_id
-                                        LIMIT 3";
 
-                    $resultado = mysqli_query($conexion,$consultation);
-            
-                    if($resultado){
-                        while($row = $resultado->fetch_array()){
-                            $ID  = $row['ID'];
-                            $NOMBRE  = $row['NOMBRE'];
-                            $RAZON  = $row['RAZON'];
-                            $CAMARA  = $row['CAMARA'];
-                            $CANTIDAD  = $row['CANTIDAD'];
-                            ?>
+                            if (is_string($ipID)){ ?>
                                 <div class="card">
-                                    <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
+                                    <div>
+                                        <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
+                                    </div>
                                     <div>
                                         <div class="name">
                                             <?php 
-                                                if (is_string($RAZON)){
-                                                     echo $RAZON;
+                                                if (is_string($clientesRAZON)){
+                                                    echo $clientesRAZON;
                                                 }else{
-                                                    echo $NOMBRE;
+                                                    echo $clientesNOMBRE;
                                                 }
                                             ?>
                                         </div>
                                         <div class="text">
-                                            Se instalaron <?php echo $CANTIDAD ?> cámaras IP marca <?php echo $CAMARA?>
+                                            Se instalaron <?php echo $ipCANTIDAD ?> cámaras IP marca <?php echo $ipCAMARA?>
                                             <?php ?>
                                         </div>
                                         
-                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $ID ?>">Ver</a>
+                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $clientesID ?>">Ver</a>
                                     </div>
                                 </div>
-                            <?php
+                            <?php }
                         }
                     }
                 }
