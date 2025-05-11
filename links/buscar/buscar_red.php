@@ -7,8 +7,27 @@
     // Verifica si el usuario está logueado.
     if (!isset($_SESSION['usuario'])) {
         // Si no está logueado, redirige a la página de inicio de sesión.
-        header("Location: ../login.php");
-        exit();
+        header("Location: login.php");
+        // exit();
+    }else {
+
+        $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
+
+        //sino, calculamos el tiempo transcurrido
+        $fechaGuardada = $_SESSION["ultimoAcceso"];
+
+        $ahora = date("Y-n-j H:i:s");
+        $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
+    
+        //comparamos el tiempo transcurrido
+        if($tiempo_transcurrido >= 60000) {
+        //si pasaron 10 minutos o más
+        session_destroy(); // destruyo la sesión
+        header("Location: login.php"); //envío al usuario a la pag. de autenticación
+        //sino, actualizo la fecha de la sesión
+        }else {
+        $_SESSION["ultimoAcceso"] = $ahora;
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -65,10 +84,9 @@
                     $apellido       = $_GET['apellido']    ?? '';
 
                     // Construir la consulta SQL con filtros
-                    $sql = "SELECT *
-                                FROM clientes, trabajos_red
-                                WHERE clientes.id = trabajos_red.clientes_id
-                                AND 1 = 1";
+                    $sql = "SELECT clientes.nombre, clientes.apellido, trabajos_red.clientes_id
+                                FROM clientes
+                                INNER JOIN trabajos_red ON clientes.id = trabajos_red.clientes_id";
 
                     if (!empty($nombre)) {
                         $sql .= " AND nombre LIKE '%$nombre%' ";
@@ -80,7 +98,7 @@
                     if ($resultado->num_rows > 0) {
                         while ($fila = $resultado->fetch_assoc()) {
                             ?>
-                                <a href="#" class="items">
+                                <a href="cliente.php?id=<?php echo $fila['clientes_id']; ?>" class="items">
                                     <?php
                                         echo $fila['nombre'] . " " . $fila['apellido']
                                     ?>

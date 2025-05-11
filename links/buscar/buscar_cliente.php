@@ -7,8 +7,27 @@
     // Verifica si el usuario está logueado.
     if (!isset($_SESSION['usuario'])) {
         // Si no está logueado, redirige a la página de inicio de sesión.
-        header("Location: ../login.php");
-        exit();
+        header("Location: login.php");
+        // exit();
+    }else {
+
+        $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
+
+        //sino, calculamos el tiempo transcurrido
+        $fechaGuardada = $_SESSION["ultimoAcceso"];
+
+        $ahora = date("Y-n-j H:i:s");
+        $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
+    
+        //comparamos el tiempo transcurrido
+        if($tiempo_transcurrido >= 60000) {
+        //si pasaron 10 minutos o más
+        session_destroy(); // destruyo la sesión
+        header("Location: login.php"); //envío al usuario a la pag. de autenticación
+        //sino, actualizo la fecha de la sesión
+        }else {
+        $_SESSION["ultimoAcceso"] = $ahora;
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -45,22 +64,22 @@
 
                 <div>
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
                 </div>
 
                 <div>
                     <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido">
+                    <input type="text" id="apellido" name="apellido" placeholder="Apellido">
                 </div>
 
                 <div>
                     <label for="razon">Razón Social</label>
-                    <input type="text" id="razon" name="razon">
+                    <input type="text" id="razon" name="razon" placeholder="Razón Social">
                 </div>
 
                 <div>
                     <label for="celular">Celular</label>
-                    <input type="number" id="celular" name="celular">
+                    <input type="number" id="celular" name="celular" placeholder="Celular">
                 </div>
             </fieldset>
 

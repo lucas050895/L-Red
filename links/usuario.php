@@ -10,6 +10,9 @@
         header("Location: login.php");
         // exit();
     }else {
+        
+        $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
+
         //sino, calculamos el tiempo transcurrido
         $fechaGuardada = $_SESSION["ultimoAcceso"];
 
