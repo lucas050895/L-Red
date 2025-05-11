@@ -97,7 +97,7 @@
           <li>     
             <a href="usuario.php">
               <i class="fas fa-user"></i>
-              <span><?php echo $_SESSION['usuario'] ?></span>
+              <span><?php echo $convertirUsuario; ?></span>
             </a>
             
             <a href="http://lucasconde.ddns.net/L-Red/links/logout.php">
