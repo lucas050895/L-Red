@@ -7,9 +7,11 @@ form > fieldset > section{
     max-width: 500px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     padding: 5px;
     margin: 1em auto;
     background: black;
+
 }
 form > fieldset > section > h2{
     width: 200px;
@@ -18,8 +20,12 @@ form > fieldset > section > h2{
 
 form > fieldset > section > div{
     width: 150px;
+    text-align: center;
 }
-form > fieldset > section > i{
+form > fieldset > section > div:nth-child(3){
+    text-align: right;
+}
+form > fieldset > section > div > a i{
     color: red;
 }
 

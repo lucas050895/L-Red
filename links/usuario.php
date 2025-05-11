@@ -1,8 +1,7 @@
 <?php
     include("../bd/conexion.php");
-
+    // Inicia la sesión
     session_start();
-
 
     // Verifica si el usuario está logueado.
     if (!isset($_SESSION['usuario'])) {
@@ -10,29 +9,26 @@
         header("Location: login.php");
         // exit();
     }else {
-        
-        $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
+      //sino, calculamos el tiempo transcurrido
+      $fechaGuardada = $_SESSION["ultimoAcceso"];
 
-        //sino, calculamos el tiempo transcurrido
-        $fechaGuardada = $_SESSION["ultimoAcceso"];
-
-        $user = $_SESSION['usuario'];
-
-        $ahora = date("Y-n-j H:i:s");
-        $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
-    
-        //comparamos el tiempo transcurrido
-        if($tiempo_transcurrido >= 60000) {
-        //si pasaron 10 minutos o más
+      $ahora = date("Y-n-j H:i:s");
+      $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
+  
+      //comparamos el tiempo transcurrido
+       if($tiempo_transcurrido >= 60) {
+       //si pasaron 10 minutos o más
         session_destroy(); // destruyo la sesión
         header("Location: login.php"); //envío al usuario a la pag. de autenticación
         //sino, actualizo la fecha de la sesión
+      }else {
+      $_SESSION["ultimoAcceso"] = $ahora;
+     }
+  }
 
+    $arregloUsuario = $_SESSION['usuario'];
 
-        }else {
-            $_SESSION["ultimoAcceso"] = $ahora;
-        }
-    }
+    $arregloUsuario['nivel']= 'admin'
 
 ?>
 <!DOCTYPE html>
@@ -55,8 +51,7 @@
         include("../layout/nav.php")
     ?>
 
-    <main>     
-
+    <main>
         <section class="title">
             <i class="fas fa-user"></i>
             <h2>Usuario</h2>
@@ -67,10 +62,11 @@
                 <legend>Información</legend>
 
                 <?php
-                    $resultadoUsuario = $conexion->query("SELECT usuarios.*, usuarios_nivel.nombre AS nivel
-                                                            FROM usuarios
-                                                            INNER JOIN usuarios_nivel ON usuarios.usuarios_nivel = usuarios_nivel.id
-                                                            WHERE usuario LIKE '$user' ");
+                    $resultadoUsuario = $conexion->query("SELECT usuarios.*, 
+                                                                usuarios_nivel.nombre AS nivel
+                                                                FROM usuarios
+                                                                INNER JOIN usuarios_nivel ON usuarios.usuarios_nivel = usuarios_nivel.id
+                                                                WHERE usuario ='".$arregloUsuario['usuario']."' LIMIT 1");
 
                     while ($fila = $resultadoUsuario->fetch_assoc()) { ?>
 
@@ -79,7 +75,6 @@
                             <div>
                                 <?php echo $fila['usuario'] ?>
                             </div>
-                            <i class="fa-solid fa-pen"></i>
                         </section>
 
                         <section>
@@ -87,7 +82,6 @@
                             <div>
                                 <?php echo $fila['password'] ?>
                             </div>
-                            <i class="fa-solid fa-pen"></i>
                         </section>
 
                         <section>
@@ -95,11 +89,21 @@
                             <div>
                                 <?php echo $fila['nivel'] ?>
                             </div>
-                            <i class="fa-solid fa-pen"></i>
                         </section>
-                   <?php } ?>
+
+                        <section>
+                            <div>
+                                <a href="https://lucasconde.ddns.net/L-Red/links/editar_usuario.php?id=<?php echo $fila['id'] ?> ">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </div>
+                        </section>
+                   
 
             </fieldset>
+
+
+            <?php if($fila['nivel'] == 'Admin'){ ?>
 
             <fieldset>
                 <legend>Agregar</legend>
@@ -133,6 +137,8 @@
                     <input type="submit" name="submit" value="CARGAR">
                 </div>
             </fieldset>
+
+            <?php } } ?>
         </form>
     </main>
 </body>
