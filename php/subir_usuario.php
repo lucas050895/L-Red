@@ -9,7 +9,7 @@
     if(isset($_POST['submit'])){
         $sql = "INSERT INTO usuarios(
                                     usuario,
-                                    contraseña,
+                                    password,
                                     usuarios_nivel
                                     )
                             VALUES (
