@@ -95,7 +95,7 @@
 
         <ul class="nuevo">
           <li>     
-            <a href="usuario.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/usuario.php">
               <i class="fas fa-user"></i>
               <span><?php echo $convertirUsuario; ?></span>
             </a>
