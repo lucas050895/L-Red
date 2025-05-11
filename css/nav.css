@@ -49,14 +49,21 @@
   overflow: hidden;
   left: -270px;
   transition: all 0.3s ease;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 #sidebar::-webkit-scrollbar {
-    width: 8px;     /* Tamaño del scroll en vertical */
-    height: 8px;    /* Tamaño del scroll en horizontal */
-    display: none ;  /* Ocultar scroll */
+  width: 14px;
 }
 
+#sidebar::-webkit-scrollbar-track {
+  background: #333334;
+  border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: #828283;
+  border-radius: 3px;
+}
 
 #btn:checked ~ #sidebar{
   left: 0;
