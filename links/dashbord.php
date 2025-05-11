@@ -9,6 +9,10 @@
         header("Location: login.php");
         // exit();
     }else {
+
+      // CONVIRTIENDO TODO EL USUARIO A MAYUSCULA Y DESPUES A CAPITALICE
+      $convertirUsuario = ucwords(strtolower($_SESSION['usuario']));
+      
       //sino, calculamos el tiempo transcurrido
       $fechaGuardada = $_SESSION["ultimoAcceso"];
 
