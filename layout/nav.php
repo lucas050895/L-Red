@@ -97,7 +97,7 @@
           <li>     
             <a href="http://lucasconde.ddns.net/L-Red/links/usuario.php">
               <i class="fas fa-user"></i>
-              <span><?php echo $convertirUsuario; ?></span>
+              <span><?php echo $arregloUsuario['usuario']?></span>
             </a>
             
             <a href="http://lucasconde.ddns.net/L-Red/links/logout.php">
