@@ -4,12 +4,12 @@ include("../bd/conexion.php");
 
     $id = $_POST['id'];
 
-    $usuario = $_POST['usuario'];
+    $password = $_POST['password'];
     
     // $password = $_POST['password'];
 
     $conexion->query("UPDATE usuarios
-                        SET usuario = '$usuario'
+                        SET password = '$password'
                         WHERE id=$id");
                         
     session_start();
