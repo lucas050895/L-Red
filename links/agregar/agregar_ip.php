@@ -6,7 +6,7 @@
     // Verifica si el usuario está logueado.
     if (!isset($_SESSION['usuario'])) {
         // Si no está logueado, redirige a la página de inicio de sesión.
-        header("Location: login.php");
+        header("Location: ../login.php");
         // exit();
     }else {
       //sino, calculamos el tiempo transcurrido
@@ -16,10 +16,10 @@
       $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
   
       //comparamos el tiempo transcurrido
-       if($tiempo_transcurrido >= 60) {
+       if($tiempo_transcurrido >= 1200) {
        //si pasaron 10 minutos o más
         session_destroy(); // destruyo la sesión
-        header("Location: login.php"); //envío al usuario a la pag. de autenticación
+        header("Location: ../login.php"); //envío al usuario a la pag. de autenticación
         //sino, actualizo la fecha de la sesión
       }else {
       $_SESSION["ultimoAcceso"] = $ahora;
@@ -95,59 +95,29 @@
             <fieldset>
                 <legend>Cámara</legend>
                     <div>
+                        <label for="camara_marca">Marca <span>(*)</span></label>
+                        <input type="text" name="camara_marca" id="camara_marca" required>
+                    </div>
+                    <div>
                         <label for="camara_modelo">Modelo <span>(*)</span></label>
                         <input type="text" name="camara_modelo" id="camara_modelo" required>
                     </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>IP</legend>
                     <div>
-                        <label for="ip_01">IP N° 1 <span>(*)</span></label>
-                        <input type="text" name="ip_01" id="ip_01" required>
-                    </div>
-                    <div>
-                        <label for="ip_02">IP N° 2</label>
-                        <input type="text" name="ip_02" id="ip_02">
-                    </div>
-                    <div>
-                        <label for="ip_03">IP N° 3 </label>
-                        <input type="text" name="ip_03" id="ip_03">
-                    </div>
-                    <div>
-                        <label for="ip_04">IP N° 4 </label>
-                        <input type="text" name="ip_04" id="ip_04">
-                    </div>
-                    <div>
-                        <label for="ip_05">IP N° 5 </label>
-                        <input type="text" name="ip_05" id="ip_05">
+                        <label for="camara_nombre">Nombre </label>
+                        <input type="text" name="camara_nombre" id="camara_nombre">
                     </div>
             </fieldset>
 
             <fieldset>
-                <legend>Puertos</legend>
+                <legend>IP y Puerto</legend>
                     <div>
-                        <label for="puerto_01">Puerto N° 1 <span>(*)</span></label>
-                        <input type="number" name="puerto_01" id="puerto_01" min=0 required>
+                        <label for="ip">IP <span>(*)</span></label>
+                        <input type="text" name="ip" id="ip" required>
                     </div>
                     <div>
-                        <label for="puerto_02">Puerto N° 2</label>
-                        <input type="number" name="puerto_02" id="puerto_02" min=0>
+                        <label for="puertos">Puerto<span>(*)</span></label>
+                        <input type="number" name="puertos" id="puertos" min=0 required>
                     </div>
-                    <div>
-                        <label for="puerto_03">Puerto N° 3</label>
-                        <input type="number" name="puerto_03" id="puerto_03" min=0>
-                    </div>
-                    <div>
-                        <label for="puerto_04">Puerto N° 4</label>
-                        <input type="number" name="puerto_04" id="puerto_04" min=0>
-                    </div>
-                    <div>
-                        <label for="puerto_05">Puerto N° 5</label>
-                        <input type="number" name="puerto_05" id="puerto_05" min=0>
-                    </div>
-
-                    
             </fieldset>
 
             <fieldset>

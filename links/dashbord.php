@@ -16,7 +16,7 @@
       $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
   
       //comparamos el tiempo transcurrido
-       if($tiempo_transcurrido >= 60) {
+       if($tiempo_transcurrido >= 1200) {
        //si pasaron 10 minutos o más
         session_destroy(); // destruyo la sesión
         header("Location: login.php"); //envío al usuario a la pag. de autenticación
@@ -154,12 +154,14 @@
           </h2>
           <?php
             if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_ip";
+                $consultation = "SELECT *
+                                    FROM trabajos_ip
+                                    group by clientes_id";
                 $resultado = mysqli_query($conexion,$consultation);
         
                 if($resultado){
                     while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
+                        $id  = $row['id'];
         
                         ?>
                           <span id="count3">0</span>
@@ -180,7 +182,7 @@
                                   }
                                   }, step);
                                   }
-                                counter("count3", 0, <?php echo $cantidad ?>, 500);
+                                counter("count3", 0, <?php echo $id ?>, 500);
                                 });
                           </script>
                         <?php
@@ -243,19 +245,30 @@
         </h2>
         <?php
           if($conexion) {
-              $consultation = "SELECT SUM(count) AS cantidad
-                                FROM (SELECT  COUNT(*) as count
-                                    FROM trabajos_cctv UNION ALL
-                                  SELECT COUNT(*) as count 
-                                    FROM trabajos_ip UNION ALL
-                                  SELECT COUNT(*) AS count
-                                    FROM trabajos_red
-                                ) AS total";
+              $consultation = "SELECT COUNT(trabajos_cctv.clientes_id) AS CLIENTE_CCTV,
+                                      COUNT(trabajos_ip.clientes_id) AS CLIENTE_IP,
+                                      COUNT(trabajos_red.clientes_id) AS CLIENTE_RED,
+
+                                          (SELECT count(clientes_id) FROM trabajos_cctv
+                                            WHERE clientes_id) AS CCTV,
+
+                                          (SELECT trabajos_ip.clientes_id
+                                          WHERE trabajos_ip.clientes_id = clientes.id) AS IP,
+                                          
+                                          (SELECT count(clientes_id) FROM trabajos_red
+                                            WHERE clientes_id) AS RED
+                                              
+                                    FROM clientes
+                                    LEFT JOIN trabajos_red ON trabajos_red.clientes_id = clientes.id
+                                    LEFT JOIN trabajos_cctv ON trabajos_cctv.clientes_id = clientes.id
+                                    LEFT JOIN trabajos_ip ON trabajos_ip.clientes_id = clientes.id";
               $resultado = mysqli_query($conexion,$consultation);
       
               if($resultado){
                   while($row = $resultado->fetch_array()){
-                      $cantidad  = $row['cantidad'];
+                      $CCTV  = $row['CCTV'];
+                      $IP    = $row['IP'];
+                      $RED   = $row['RED'];
       
                       ?>
                         <span id="count5">0</span>
@@ -276,7 +289,7 @@
                                   }
                                 }, step);
                               }
-                              counter("count5", 0, <?php echo $cantidad ?>, 500);
+                              counter("count5", 0, <?php echo $CCTV + $IP + $RED ?>, 500);
                               });
                         </script>
                       <?php
