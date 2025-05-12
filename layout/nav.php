@@ -95,7 +95,7 @@
 
         <ul class="nuevo">
           <li>     
-            <a href="http://lucasconde.ddns.net/L-Red/links/usuario.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/usuario/usuario.php">
               <i class="fas fa-user"></i>
               <span><?php echo $arregloUsuario['usuario']?></span>
             </a>
