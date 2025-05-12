@@ -35,27 +35,20 @@
             <?php
                 if($conexion) {
                     $consultation = "SELECT clientes.id AS clientesID,
-                                            clientes.nombre AS clientesNOMBRE,
-                                            clientes.razon AS clientesRAZON,
-                                            
-                                            trabajos_cctv.id AS cctvID,
-                                            trabajos_cctv.dvr_marca AS cctvMARCA,
-                                            trabajos_cctv.dvr_modelo AS cctvMODELO,
-                                            trabajos_cctv.dvr_disco AS cctvDISCO,
-                                            trabajos_cctv.dvr_capacidad AS cctvCAPACIDAD,
-                                            trabajos_cctv.dvr_medida AS cctvMEDIDA,
-                                            
-                                            trabajos_ip.id AS ipID,
-                                            trabajos_ip.camara_modelo AS ipCAMARA,
-                                            COUNT(ip_01) + COUNT(ip_02) + COUNT(ip_03) + COUNT(ip_04) + COUNT(ip_05) AS ipCANTIDAD
-                                            
-                                    FROM clientes
-                                    LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
-                                    LEFT JOIN trabajos_ip ON clientes.id = trabajos_ip.clientes_id
-                                    -- PARA AGREGAR IF DE RED
-                                    LEFT JOIN trabajos_red ON clientes.id = trabajos_red.clientes_id
-                                    GROUP BY nombre
-                                    LIMIT 8";
+                                                clientes.nombre AS clientesNOMBRE,
+                                                clientes.razon AS clientesRAZON,
+                                                
+                                                trabajos_cctv.id AS cctvID,
+                                                trabajos_cctv.dvr_marca AS cctvMARCA,
+                                                trabajos_cctv.dvr_modelo AS cctvMODELO,
+                                                trabajos_cctv.dvr_disco AS cctvDISCO,
+                                                trabajos_cctv.dvr_capacidad AS cctvCAPACIDAD,
+                                                trabajos_cctv.dvr_medida AS cctvMEDIDA
+                                                
+                                        FROM clientes
+                                        LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
+                                        GROUP BY nombre
+                                        LIMIT 8";
 
                     $resultado = mysqli_query($conexion,$consultation);
             
@@ -71,11 +64,6 @@
                             $cctvDISCO          = $row['cctvDISCO'];
                             $cctvCAPACIDAD      = $row['cctvCAPACIDAD'];
                             $cctvMEDIDA         = $row['cctvMEDIDA'];
-
-                            $ipID               = $row['ipID'];
-                            $ipCAMARA           = $row['ipCAMARA'];
-                            $ipCANTIDAD         = $row['ipCANTIDAD'];
-
 
 
 
@@ -104,31 +92,6 @@
                                 </div>
                             <?php }
 
-
-                            if (is_string($ipID)){ ?>
-                                <div class="card">
-                                    <div>
-                                        <img src="assets/img/example.jpg" alt="<?php echo $NOMBRE?>">
-                                    </div>
-                                    <div>
-                                        <div class="name">
-                                            <?php 
-                                                if (is_string($clientesRAZON)){
-                                                    echo $clientesRAZON;
-                                                }else{
-                                                    echo $clientesNOMBRE;
-                                                }
-                                            ?>
-                                        </div>
-                                        <div class="text">
-                                            Se instalaron <?php echo $ipCANTIDAD ?> cámaras IP marca <?php echo $ipCAMARA?>
-                                            <?php ?>
-                                        </div>
-                                        
-                                        <a href="http://lucasconde.ddns.net/L-Red/links/trabajo.php?id=<?php echo $clientesID ?>">Ver</a>
-                                    </div>
-                                </div>
-                            <?php }
                         }
                     }
                 }
