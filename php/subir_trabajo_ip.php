@@ -3,19 +3,13 @@
 
     $clientes_id        =   $_POST['clientes_id'];
     
+    $camara_marca       =   $_POST['camara_marca'];
     $camara_modelo      =   $_POST['camara_modelo'];
+    $camara_nombre      =   $_POST['camara_nombre'];
 
-    $ip_01              =   $_POST['ip_01'];
-    $ip_02              =   $_POST['ip_02'];
-    $ip_03              =   $_POST['ip_03'];
-    $ip_04              =   $_POST['ip_04'];
-    $ip_05              =   $_POST['ip_05'];
+    $ip                 =   $_POST['ip'];
 
-    $puerto_01          =   $_POST['puerto_01'];
-    $puerto_02          =   $_POST['puerto_02'];
-    $puerto_03          =   $_POST['puerto_03'];
-    $puerto_04          =   $_POST['puerto_04'];
-    $puerto_05          =   $_POST['puerto_05'];
+    $puertos            =   $_POST['puertos'];
 
     $fichas_rj45        =   $_POST['fichas_rj45'];
     $fichas_plug        =   $_POST['fichas_plug'];
@@ -41,19 +35,9 @@
         $sql = "INSERT INTO trabajos_ip(
                                         clientes_id      ,
 
+                                        camara_marca     ,
                                         camara_modelo    ,
-
-                                        ip_01            ,
-                                        ip_02            ,
-                                        ip_03            ,
-                                        ip_04            ,
-                                        ip_05            ,
-                                        
-                                        puerto_01        ,
-                                        puerto_02        ,
-                                        puerto_03        ,
-                                        puerto_04        ,
-                                        puerto_05        ,
+                                        camara_nombre    ,
 
                                         fichas_rj45      ,
                                         fichas_plug      ,
@@ -78,22 +62,12 @@
                             VALUES (
                                         '{$clientes_id}'      ,
 
+                                        '{$camara_marca}'     ,
                                         '{$camara_modelo}'    ,
-
-                                        '{$ip_01}'            ,
-                                        '{$ip_02}'            ,
-                                        '{$ip_03}'            ,
-                                        '{$ip_04}'            ,
-                                        '{$ip_05}'            ,
-
-                                        '{$puerto_01}'        ,
-                                        '{$puerto_02}'        ,
-                                        '{$puerto_03}'        ,
-                                        '{$puerto_04}'        ,
-                                        '{$puerto_05}'        ,
+                                        '{$camara_nombre}'    ,
 
                                         '{$fichas_rj45}'      ,
-                                        '{$fichas_plug}'     ,
+                                        '{$fichas_plug}'      ,
 
                                         '{$cables_fuentes}'   ,
                                         '{$cables_utp}'       ,
@@ -111,6 +85,22 @@
                                         '{$acceso_host}',
 
                                         '{$observaciones}'
+                                    )";
+        mysqli_query($conexion, $sql);
+    }
+
+      if(isset($_POST['submit'])){
+        $sql = "INSERT INTO trabajos_ip_detalles(
+                                        clientes_id      ,
+                                        ip               ,
+                                        puertos          ,
+                                        camara_nombre    
+                                    )
+                            VALUES (
+                                        '{$clientes_id}' ,
+                                        '{$ip}'          ,
+                                        '{$puertos}'     ,
+                                        '{$camara_nombre}'
                                     )";
         mysqli_query($conexion, $sql);
     }
