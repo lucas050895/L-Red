@@ -38,3 +38,28 @@
     justify-content: center;
     padding: 2em ;
 }
+
+
+
+/*CAMARAS IP*/
+.bucle{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bucle > label{
+    width: 200px;
+    border-bottom: 1px solid var(--color-two);
+}
+.bucle > div > input{
+    width: 100px;
+    height: 30px;
+    text-align: center; 
+    background-color: #FFF;
+    border: 1px solid var(--color-three);
+}
+
+.bucle > div > input:nth-child(2){
+    width: 40px;
+}
