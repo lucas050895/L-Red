@@ -83,14 +83,27 @@
             <a href="http://lucasconde.ddns.net/L-Red/links/buscar/buscar_red.php">
               <i class='bx bxs-network-chart'></i>
               <span>Trabajos de Red</span>
+            </a>
           </div>
         </li>
 
-        <li>
-          <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador.php">
+        <li class="accordion">
+          <div class="accordion-heading">
             <i class='bx bxs-dollar-circle'></i>
             <span>Presupuestador</span>
-          </a>
+          </div>
+
+          <div class="accordion-body">
+            <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador.php">
+              <i class="fas fa-file-pdf"></i>
+              <span>Presupuesto</span>
+            </a>
+
+            <a href="#">
+              <i class="fas fa-edit"></i>
+              <span>Editar Precios</span>
+            </a>
+          </div>
         </li>
 
         <ul class="nuevo">
