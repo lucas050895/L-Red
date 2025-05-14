@@ -67,7 +67,14 @@
 
         <section class="title">
             <i class='bx bxs-user-detail'></i>
-            <h2>Cliente N° <?php echo $fila[0] . " <br> " . $fila[1] . " " . $fila[2]?> </h2>
+            <h2>Cliente N° <?php echo $fila[0] . "<br>" ?>
+
+                <?php if ($fila[3]) {
+                    echo $fila[3];
+                }else{
+                    echo $fila[1] . " " . $fila[2];
+                } ?>
+            </h2>
         </section>
 
         <form action="">
