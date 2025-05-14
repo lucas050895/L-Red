@@ -102,19 +102,19 @@
                     $sql = "SELECT * FROM clientes WHERE 1=1";
 
                     if (!empty($nombre)) {
-                        $sql .= " AND nombre LIKE '%$nombre%'";
+                        $sql .= " AND nombre LIKE '%$nombre%' ORDER BY razon ASC";
                     }
 
                     if (!empty($apellido)) {
-                        $sql .= " AND apellido LIKE '%$apellido%'";
+                        $sql .= " AND apellido LIKE '%$apellido%' ORDER BY razon ASC";
                     }
 
                     if (!empty($razon)) {
-                        $sql .= " AND razon LIKE '%$razon%'";
+                        $sql .= " AND razon LIKE '%$razon%' ORDER BY razon ASC";
                     }
 
                     if (!empty($celular)) {
-                        $sql .= " AND celular = $celular";
+                        $sql .= " AND celular = $celular ORDER BY razon ASC";
                     }
 
                     $resultado = $conexion->query($sql);
@@ -125,7 +125,11 @@
                             ?>
                                 <a href="http://lucasconde.ddns.net/L-Red/links/buscar/cliente.php?id=<?php echo $fila['id']; ?>" class="items">
                                     <?php
-                                        echo $fila['nombre'] . " " . $fila['apellido']
+                                        if (is_string($fila['razon'])){
+                                            echo $fila['razon'];
+                                        }else{
+                                            echo $fila['nombre'] . " " . $fila['apellido'];
+                                        }
                                     ?>
                                 </a>
                             <?php

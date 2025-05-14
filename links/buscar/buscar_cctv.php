@@ -62,18 +62,18 @@
                 <legend>Filtros</legend>
 
                 <div>
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre">
                 </div>
 
                 <div>
-                    <label for="dvr_marca">Marca de DVR</label>
-                    <input type="text" name="dvr_marca" id="dvr_marca" placeholder="Marca de DVR">
+                    <label for="razon">Razón Social:</label>
+                    <input type="text" name="razon" id="razon" placeholder="Razón Social">
                 </div>
 
                 <div>
-                    <label for="camaras_modelo">Cámaras Modelo</label>
-                    <input type="text" name="camaras_modelo" id="camaras_modelo" placeholder="Cámaras Modelo">
+                    <label for="dvr_marca">Marca de DVR:</label>
+                    <input type="text" name="dvr_marca" id="dvr_marca" placeholder="Marca de DVR">
                 </div>
             </fieldset>
 
@@ -87,30 +87,30 @@
                 // Verifica si el formulario fue enviado
                 if ($_SERVER['REQUEST_METHOD'] == 'GET' && 
                         isset($_GET['nombre']) || 
-                        isset($_GET['dvr_marca']) ||
-                        isset($_GET['camaras_modelo'])) {
+                        isset($_GET['razon']) || 
+                        isset($_GET['dvr_marca'])) {
 
                     // Recoger los filtros del formulario
                     $nombre     = $_GET['nombre']     ?? '';
+                    $razon       = $_GET['razon']       ?? '';
                     $dvr_marca       = $_GET['dvr_marca']       ?? '';
-                    $camaras_modelo  = $_GET['camaras_modelo']  ?? '';
 
                     // Construir la consulta SQL con filtros
                     $sql = "SELECT *
-                                FROM clientes, trabajos_cctv
-                                WHERE clientes.id = trabajos_cctv.clientes_id
+                                FROM clientes
+                                INNER JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
                                 AND 1 = 1";
 
                     if (!empty($nombre)) {
                         $sql .= " AND nombre LIKE '%$nombre%' ";
                     }
 
-                    if (!empty($dvr_marca)) {
-                        $sql .= " AND dvr_marca LIKE '%$dvr_marca%'";
+                    if (!empty($razon)) {
+                        $sql .= " AND razon LIKE '%$razon%' ";
                     }
 
-                    if (!empty($camaras_modelo)) {
-                        $sql .= " AND camaras_modelo LIKE '%$camaras_modelo%'";
+                    if (!empty($dvr_marca)) {
+                        $sql .= " AND dvr_marca LIKE '%$dvr_marca%'";
                     }
 
 
@@ -122,7 +122,11 @@
                             ?>
                                 <a href="http://lucasconde.ddns.net/L-Red/links/buscar/cctv.php?id=<?php echo $fila['clientes_id']; ?>" class="items">
                                     <?php
-                                        echo $fila['nombre'] . " " . $fila['apellido']
+                                        if (is_string($fila['razon'])){
+                                            echo $fila['razon'];
+                                        }else{
+                                            echo $fila['nombre'] . " " . $fila['apellido'];
+                                        }
                                     ?>
                                 </a>
                             <?php
