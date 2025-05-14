@@ -18,10 +18,12 @@ main > .container_items p{
 main > .container_items > .items{
     width: 150px;
     height: 70px;
+    padding: 5px;
     margin: .5em;
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     text-decoration: none;
     border-bottom: 2px solid var(--color-three);
     background-color: var(--color-two);
