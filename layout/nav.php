@@ -94,7 +94,7 @@
           </div>
 
           <div class="accordion-body">
-            <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador.php">
+            <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador/presupuestador.php">
               <i class="fas fa-file-pdf"></i>
               <span>Presupuesto</span>
             </a>
