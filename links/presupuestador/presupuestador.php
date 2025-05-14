@@ -60,6 +60,19 @@
         </section>
 
         <form method="POST">
+            <select name="clientes" id="clientes">
+                <option value="" selected disabled>Seleccionar Cliente</option>
+                <?php
+                    $resultadoClientes = $conexion->query("SELECT * FROM clientes ORDER BY nombre");
+                    while ($fila = $resultadoClientes->fetch_assoc()) {
+                        $selected = (isset($_POST['clientes']) && $_POST['clientes'] == $fila['id']) ? "selected" : "";
+                        echo "<option value='{$fila['id']}' $selected>";
+                        echo !empty($fila['razon']) ? $fila['razon'] : "{$fila['nombre']} {$fila['apellido']}";
+                        echo "</option>";
+                    }
+                ?>
+            </select>
+
             <table>
                 <!-- ENCABEZADO -->
                 <thead>
@@ -442,6 +455,47 @@
                         </td>
                     </tr>
 
+                    <!-- FILA DE MANO DE OBRA -->
+                    <tr>
+                        <td>
+                            <div>
+                                <label for="mo">Mano de Obra</label>
+                                <select name="mo" id="mo">
+                                    <option value="" selected disabled>Seleccionar M.O.</option>
+                                    <?php
+                                    $resultadoDVR = $conexion->query("SELECT * FROM presupuestador_mano");
+                                    while ($fila = $resultadoDVR->fetch_assoc()) {
+                                        $selected = (isset($_POST['m_o']) && $_POST['m_o'] == $fila['precio_venta']) ? "selected" : "";
+                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['m_o']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div>
+                                <input type="number" min="0" max="5" name="cantidad_mano" value="<?= isset($_POST['cantidad_mano']) ? $_POST['cantidad_mano'] : 1 ?>">
+                            </div>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    isset($_POST['producto_mano']) ?  "$" . number_format($_POST['producto_mano'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    $total_mano = isset($_POST['producto_mano']) && isset($_POST['cantidad_mano']) ? "$" . number_format($_POST['producto_mano'] * $_POST['cantidad_mano'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+                    </tr>
+
                 </tbody>
 
                 <!-- ENCABEZADO DEL TOTAL -->
@@ -481,10 +535,26 @@
 
             </table>
 
+
             <button type="submit">Calcular</button>
         </form>
 
         <form method="POST" action="generar_pdf.php" class="formulario">
+
+
+            <input type="hidden" name="cliente_id" value="<?= $_POST['clientes'] ?? '' ?>">
+            
+            <?php
+            if (isset($_POST['clientes'])) {
+                $idCliente = $_POST['clientes'];
+                $consultaCliente = $conexion->query("SELECT * FROM clientes WHERE id = $idCliente");
+                $datosCliente = $consultaCliente->fetch_assoc();
+            ?>
+                <input type="hidden" name="cliente_nombre" value="<?= $datosCliente['nombre'] ?>">
+                <input type="hidden" name="cliente_apellido" value="<?= $datosCliente['apellido'] ?>">
+                <input type="hidden" name="cliente_razon" value="<?= $datosCliente['razon'] ?>">
+            <?php } ?>
+
             <!-- DVR -->
             <input type="hidden" name="producto_dvr" value="<?= $_POST['producto_dvr'] ?? 0 ?>">
             <input type="hidden" name="cantidad_dvr" value="<?= $_POST['cantidad_dvr'] ?? 0 ?>">

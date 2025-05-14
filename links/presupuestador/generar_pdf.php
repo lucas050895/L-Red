@@ -1,48 +1,116 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
-require('fpdf/fpdf.php');
+
+
+require 'dompdf/vendor/autoload.php';
+
+$options = new Options();
+$options->set('defaultFont', 'Arial');
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isPhpEnabled', true);
+// $options = new Dompdf\Options();
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isRemoteEnabled', true); // Permite cargar imágenes remotas si es necesario
+
+$dompdf = new Dompdf($options);
+
+
+
+$dompdf = new Dompdf($options);
+
+
+// Capturar los datos del cliente
+// Capturar los datos del cliente enviados desde el formulario
+$cliente = [
+    "id" => $_POST['cliente_id'] ?? 'No definido',
+    "nombre" => $_POST['cliente_nombre'] ?? 'No definido',
+    "apellido" => $_POST['cliente_apellido'] ?? 'No definido',
+    "razon" => $_POST['cliente_razon'] ?? 'No definido'
+];
+
+
+
+$rutaImagen = '../../assets/img/example.jpg'; // Ajusta la ruta según tu estructura de archivos
+
+if (!file_exists($rutaImagen)) {
+    die("Error: La imagen no existe en la ruta especificada.");
+}
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function getNumericValue($value) {
         return is_numeric($value) ? (float)$value : 0;
     }
 
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(190, 10, 'Presupuesto', 1, 1, 'C');
+    $html = '<html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body{ 
+                            font-family: Arial, sans-serif;
+                        }
 
-    $pdf->Ln(10);
+                        table{
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
 
-    // Encabezados
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(70, 10, 'Producto', 1);
-    $pdf->Cell(30, 10, 'Cantidad', 1);
-    $pdf->Cell(40, 10, 'Precio', 1);
-    $pdf->Cell(50, 10, 'Subtotal', 1);
-    $pdf->Ln();
+                    </style>
+                </head>
+                <body>';
 
-    // Lista de productos con valores pasados desde el formulario
+
+    $html .= '<table class="datos">
+                <tr style="height: 40px;">
+                    <td >
+                        <b>Nombre: </b>' . $cliente['nombre'].  '
+                    </td>
+                    <td rowspan="4" style="text-align: right;">
+                        <img src="http://lucasconde.ddns.net/L-Red/assets/img/example.jpg" style="height: 120px; border: 1px solid black;"> 
+                    </td>
+                </tr>
+
+                <tr style="height: 40px;">
+                    <td>
+                        <b>Apellido: </b>' . $cliente['apellido'].'
+                    </td>
+                </tr>
+
+                <tr style="height: 40px;">
+                    <td>
+                        <b>Razón Social: </b>' . $cliente['razon'].'
+                    </td>
+                </tr>
+
+                <tr style="height: 40px;">
+                    <td>
+                        <b>Fecha: </b>' . date('d/m/y').'
+                    </td>
+                </tr>
+            </table>';
+
+    $html .= '<h2 style="text-align: center;">Presupuesto de instalación sistema DVR</h2>';
+    $html .= '<table>
+                    <tr style="background: rgb(254,214,107);">
+                        <th style="height: 40px;">Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                    </tr>';
+
     $items = [
-        ['DVR', getNumericValue($_POST['cantidad_dvr']), getNumericValue($_POST['producto_dvr']), getNumericValue($_POST['subtotal_dvr'])],
-
-        ['Cámaras', getNumericValue($_POST['cantidad_camara']), getNumericValue($_POST['producto_camara']), getNumericValue($_POST['subtotal_camara'])],
-
-        ['Cable UTP', getNumericValue($_POST['cantidad_utp']), getNumericValue($_POST['producto_utp']), getNumericValue($_POST['subtotal_utp'])],
-
-        ['Fuentes', getNumericValue($_POST['cantidad_fuentes']), getNumericValue($_POST['producto_fuentes']), getNumericValue($_POST['subtotal_fuentes'])],
-
-        ['Balun', getNumericValue($_POST['cantidad_balun']), getNumericValue($_POST['producto_balun']), getNumericValue($_POST['subtotal_balun'])],
-
-        ['Caja Estanca', getNumericValue($_POST['cantidad_caja']), getNumericValue($_POST['producto_caja']), getNumericValue($_POST['subtotal_caja'])],
-
-        ['Balunera', getNumericValue($_POST['cantidad_balunera']), getNumericValue($_POST['producto_balunera']), getNumericValue($_POST['subtotal_balunera'])],
-
-        ['Insumos', getNumericValue($_POST['cantidad_insumos']), getNumericValue($_POST['producto_insumos']), getNumericValue($_POST['subtotal_insumos'])],
-
-        ['Zapatilla eléctrica', getNumericValue($_POST['cantidad_zapatilla']), getNumericValue($_POST['producto_zapatilla']), getNumericValue($_POST['subtotal_zapatilla'])]
+        ['DVR', getNumericValue($_POST['cantidad_dvr']), getNumericValue($_POST['producto_dvr']), getNumericValue($_POST['subtotal_dvr'] * $_POST['cantidad_dvr'])],
+        ['Cámaras', getNumericValue($_POST['cantidad_camara']), getNumericValue($_POST['producto_camara']), getNumericValue($_POST['subtotal_camara'] * $_POST['cantidad_camara'])],
+        ['Cable UTP', getNumericValue($_POST['cantidad_utp']), getNumericValue($_POST['producto_utp']), getNumericValue($_POST['subtotal_utp'] * $_POST['cantidad_utp'])],
+        ['Fuentes', getNumericValue($_POST['cantidad_fuentes']), getNumericValue($_POST['producto_fuentes']), getNumericValue($_POST['subtotal_fuentes'] * $_POST['cantidad_fuentes'])],
+        ['Balun', getNumericValue($_POST['cantidad_balun']), getNumericValue($_POST['producto_balun']), getNumericValue($_POST['subtotal_balun'] * $_POST['cantidad_balun'])],
+        ['Caja Estanca', getNumericValue($_POST['cantidad_caja']), getNumericValue($_POST['producto_caja']), getNumericValue($_POST['subtotal_caja'] * $_POST['cantidad_caja'])],
+        ['Balunera', getNumericValue($_POST['cantidad_balunera']), getNumericValue($_POST['producto_balunera']), getNumericValue($_POST['subtotal_balunera'] * $_POST['cantidad_balunera'])],
+        ['Insumos', getNumericValue($_POST['cantidad_insumos']), getNumericValue($_POST['producto_insumos']), getNumericValue($_POST['subtotal_insumos'] * $_POST['cantidad_insumos'])],
+        ['Zapatilla eléctrica', getNumericValue($_POST['cantidad_zapatilla']), getNumericValue($_POST['producto_zapatilla']), getNumericValue($_POST['subtotal_zapatilla'] * $_POST['cantidad_zapatilla'])]
     ];
 
     foreach ($items as $item) {
@@ -50,29 +118,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $precioUnitario = getNumericValue($item[2]);
         $subtotal = getNumericValue($item[3]);
 
-        // Si el precio unitario es 0, mostrar "-"
         $precioFormateado = ($precioUnitario == 0) ? "-" : "$" . number_format($precioUnitario, 0, ',', '.');
-
-        // Si el subtotal es 0, mostrar "-"
         $subtotalFormateado = ($subtotal == 0) ? "-" : "$" . number_format($subtotal, 0, ',', '.');
-
-        // Si el precio y el subtotal son "-", entonces la cantidad también debe ser "-"
         $cantidadFormateada = ($precioFormateado == "-" && $subtotalFormateado == "-") ? "-" : $cantidad;
 
-        $pdf->Cell(70, 10, utf8_decode($item[0]), 1); // Nombre del producto
-        $pdf->Cell(30, 10, $cantidadFormateada, 1); // Cantidad con validación
-        $pdf->Cell(40, 10, $precioFormateado, 1); // Precio unitario con validación
-        $pdf->Cell(50, 10, $subtotalFormateado, 1); // Subtotal con validación
-        $pdf->Ln();
+        $html .= '<tr style="border-bottom: 1px solid black; text-align: center;">
+                    <td style="height: 30px; padding-left: 10px; text-align: left;">'.$item[0]
+                    .'</td>
+                    <td>'.$cantidadFormateada.'</td>
+                    <td>'.$precioFormateado.'</td>
+                    <td>'.$subtotalFormateado.'</td>
+                </tr>';
     }
 
     $totalGeneral = getNumericValue($_POST['total_general']);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(140, 10, 'Total General', 1);
-    $pdf->Cell(50, 10, '$' . number_format($totalGeneral, 0, ',', '.'), 1);
-    $pdf->Ln();
+    $html .= "<tr>
+                <th colspan='3'>Total General</th>
+                <th>$" . number_format($totalGeneral, 0, ',', '.') . "</th>
+            </tr>";
 
-    $pdf->Output();
+    $html .= '</table>
+
+        <p class="valido">PRESUPUESTO VALIDO POR 7 DIAS, UNA VEZ VENCIDO DICHO PLAZO SOLICITELO NUEVAMENTE.</p>
+
+        </body>
+    </html>';
+
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    
+    // Para visualizar cambiar 'attachment' a 'inline'
+    // $dompdf->stream("Presupuesto.pdf", ["inline" => true]);
+    $dompdf->stream("Presupuesto.pdf", ["Attachment" => false]);
+
 } else {
     echo "Error: No se recibieron datos.";
 }
