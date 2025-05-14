@@ -14,13 +14,8 @@ form > fieldset > section{
 
 }
 form > fieldset > section > h2{
-    width: 200px;
+    width: 140px;
     text-transform: uppercase;
-}
-
-form > fieldset > section > div{
-    width: 150px;
-    text-align: center;
 }
 form > fieldset > section > div:nth-child(3){
     text-align: right;
