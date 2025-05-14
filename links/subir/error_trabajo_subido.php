@@ -26,6 +26,7 @@
         $_SESSION["ultimoAcceso"] = $ahora;
         }
     }
+    $arregloUsuario = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
