@@ -24,4 +24,4 @@
     mysqli_close($conexion);
 
     // Redirigir a la página de exitoso
-    header("Location: ../links/usuario.php");
+    header("Location: ../../links/subir/usuario_subido.php");
