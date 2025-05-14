@@ -45,9 +45,9 @@
   position: fixed;
   background: #404040;
   height: 100%;
-  width: 270px;
+  width: 300px;
   overflow: hidden;
-  left: -270px;
+  left: -300px;
   transition: all 0.3s ease;
   overflow-y: scroll;
 }
