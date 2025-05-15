@@ -68,7 +68,7 @@
 
 
                             if (is_string($cctvID)){ ?>
-                                <div class="card">
+                                <div class="card ">
                                     <div>
                                         <img src="assets/img/example.jpg" alt="<?php echo $clientesNOMBRE?>">
                                     </div>
@@ -141,6 +141,20 @@
     <?php
         include("layout/footer.php");
     ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".card");
+            
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.5 + index * 1.2}s`;
+                card.classList.add("fade-in");
+            });
+        });
+
+
+        window.addEventListener('scroll', mostralScroll);
+    </script>
 
 </body>
 </html>
