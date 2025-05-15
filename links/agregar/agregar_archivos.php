@@ -68,7 +68,7 @@
                             if($conexion) {
                                 $consultation = "SELECT *
                                                     FROM clientes
-                                                    ORDER BY nombre";
+                                                    GROUP BY nombre ORDER BY id";
                                 $resultado = mysqli_query($conexion,$consultation);
                         
                                 if($resultado){
@@ -76,10 +76,20 @@
                                         $id       = $row['id'];
                                         $nombre   = $row['nombre'];
                                         $apellido = $row['apellido'];
+                                        $razon = $row['razon'];
                         
                                         ?>
                                             <option value="<?php echo $id ?>">
-                                                <?php echo $nombre . " " . $apellido?>
+                                                <?php 
+                                                
+                                                    if (is_string($razon)){
+                                                        echo $razon;
+                                                    }else{
+                                                        echo $nombre . " " . $apellido;
+                                                    }
+                                                
+                                                ?>
+                                                
                                             </option>
                                         <?php
                                     }

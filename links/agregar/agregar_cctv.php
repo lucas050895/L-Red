@@ -70,7 +70,7 @@
                             if($conexion) {
                                 $consultation = "SELECT *
                                                     FROM clientes
-                                                    ORDER BY nombre";
+                                                    GROUP BY nombre ORDER BY id";
                                 $resultado = mysqli_query($conexion,$consultation);
                         
                                 if($resultado){
@@ -78,10 +78,20 @@
                                         $id       = $row['id'];
                                         $nombre   = $row['nombre'];
                                         $apellido = $row['apellido'];
+                                        $razon = $row['razon'];
                         
                                         ?>
                                             <option value="<?php echo $id ?>">
-                                                <?php echo $nombre . " " . $apellido?>
+                                                <?php 
+                                                
+                                                    if (is_string($razon)){
+                                                        echo $razon;
+                                                    }else{
+                                                        echo $nombre . " " . $apellido;
+                                                    }
+                                                
+                                                ?>
+                                                
                                             </option>
                                         <?php
                                     }
@@ -151,8 +161,8 @@
                         <label for="fichas_balum">Balum <span>(*)</span></label>
                         <select name="fichas_balum" id="fichas_balum" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="presion"> Balum Presión</option>
-                            <option value="rj45">Balum RJ45</option>
+                            <option value="Presión">Balum Presión</option>
+                            <option value="RJ45">Balum RJ45</option>
                         </select>
                     </div>
                     <div>
@@ -171,42 +181,42 @@
                         <label for="cables_patch">Cable Patch <span>(*)</span></label>
                         <select name="cables_patch" id="cables_patch" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div>
                         <label for="cables_zapatilla">Zapatilla <span>(*)</span></label>
                         <select name="cables_zapatilla" id="cables_zapatilla" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="ninguna">Ninguna</option>
-                            <option value="4 tomas">4 Tomas</option>
-                            <option value="5 tomas">5 Tomas</option>
+                            <option value="Ninguna">Ninguna</option>
+                            <option value="4 Tomas">4 Tomas</option>
+                            <option value="5 Tomas">5 Tomas</option>
                         </select>
                     </div>
                     <div>
                         <label for="cables_fuente">Fuente <span>(*)</span></label>
                         <select name="cables_fuente" id="cables_fuente" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="individual">Individual</option>
-                            <option value="swicht">Swicht</option>
-                            <option value="ambos">Ambos</option>
+                            <option value="Individual">Individual</option>
+                            <option value="Swicht">Swicht</option>
+                            <option value="Ambas">Ambos</option>
                         </select>
                     </div>
                     <div>
                         <label for="cables_pulpito">Pulpito <span>(*)</span></label>
                         <select name="cables_pulpito" id="cables_pulpito" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div>
                         <label for="cables_hdmi">Cable HDMI <span>(*)</span></label>
                         <select name="cables_hdmi" id="cables_hdmi" required>
                             <option value="" selected disabled>Seleccionar Opción</option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
             </fieldset>
