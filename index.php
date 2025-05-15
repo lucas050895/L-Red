@@ -147,7 +147,7 @@
             const cards = document.querySelectorAll(".card");
             
             cards.forEach((card, index) => {
-                card.style.animationDelay = `${0.5 + index * 1.2}s`;
+                card.style.animationDelay = `${0.5 + index * 0.4}s`;
                 card.classList.add("fade-in");
             });
         });
