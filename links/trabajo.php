@@ -48,22 +48,10 @@
                                                         trabajos_cctv.dvr_medida AS cctvMEDIDA,
                                                         trabajos_cctv.camaras_cantidad AS cctvCANTIDAD,
                                                         trabajos_cctv.camaras_modelo AS cctvMODELO,
-                                                        trabajos_cctv.cables_utp AS cctvUTP,
-                                                        
-                                                        trabajos_ip.id AS ipID,
-                                                        count(trabajos_ip.ip_01) + 
-                                                        count(trabajos_ip.ip_02) +
-                                                        count(trabajos_ip.ip_03) +
-                                                        count(trabajos_ip.ip_04) +
-                                                        count(trabajos_ip.ip_05) AS COUNT,
-                                                        trabajos_ip.camara_modelo AS ipMODELO,
-                                                        
-                                                        trabajos_red.id AS redID,
-                                                        trabajos_red.observaciones AS redOBSERVACIONES 
+                                                        trabajos_cctv.cables_utp AS cctvUTP
+                            
                                                     FROM clientes
-                                                    LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
-                                                    LEFT JOIN trabajos_ip ON clientes.id = trabajos_ip.clientes_id
-                                                    LEFT JOIN trabajos_red ON clientes.id = trabajos_red.clientes_id
+                                                    INNER JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
                                                     WHERE clientes.id=" . $_GET['id'])or die($conexion -> error);
                 if(mysqli_num_rows($resultado) > 0){
                     $fila = mysqli_fetch_row($resultado);
@@ -139,82 +127,7 @@
 
             </section>
 
-            <?php }
-
-                if (is_string($fila[14])){?>
-                <h3>Se realizo:</h3>
-                <p>La instalación <?php echo $fila[15] ?> cámaras IP marca <?php echo $fila[16]?> en distintos periodos, ya que el trabajo fue se cubrian las necesidades del cliente.<br>
-                Se utilizaron 400 metros de cable UTP en total, y además se utilizaron un switch 24 puertos y otro de 8 puertos, para las dichas cámaras y ademas se realizo trabajo estructurado de red para computadoras de escritorio, servidor e impresoras.</p>
-            </fieldset>
-                    
-            <section>
-                <div class="scroll-arrow" id="scroll-left">
-                  <i class="fas fa-chevron-left"></i>
-                </div>
-
-                <ul id="imgList">
-                  <?php
-                    $resultado = $conexion->query("SELECT *
-                                                        FROM archivos_fotos
-                                                        WHERE clientes_id=" . $_GET['id'])or die($conexion->error);
-
-
-                    while($row = mysqli_fetch_array($resultado)){ ?>
-                        <li>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                        </li>
-                    <?php }
-                  ?>
-                </ul>
-
-                <div class="scroll-arrow" id="scroll-right" onclick="scrollRight()">
-                  <i class="fas fa-chevron-right"></i>
-                </div>
-
-            </section>
-            
-            <?php }
-
-            if (is_string($fila[17])){?>
-                <h3>Se realizo:</h3>
-                <p><?php echo $fila[18] ?></p>
-            </fieldset>
-
-            <section>
-                <div class="scroll-arrow" id="scroll-left">
-                  <i class="fas fa-chevron-left"></i>
-                </div>
-
-                <ul id="imgList">
-                  <?php
-                    $resultado = $conexion->query("SELECT *
-                                                        FROM archivos_fotos
-                                                        WHERE clientes_id=" . $_GET['id'])or die($conexion->error);
-
-
-                    while($row = mysqli_fetch_array($resultado)){ ?>
-                        <li>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                            <img src="../assets/img/<?php echo $row['nombre']?>"/>
-                        </li>
-                    <?php }
-                  ?>
-                </ul>
-
-                <div class="scroll-arrow" id="scroll-right" onclick="scrollRight()">
-                  <i class="fas fa-chevron-right"></i>
-                </div>
-
-            </section>
-
-            <?php }?>
+            <?php } ?>
             
         </section>
 
