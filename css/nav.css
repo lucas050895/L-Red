@@ -22,7 +22,7 @@
   position: fixed;
 }
 #btn:checked ~ .menu-btn{
-  left: 247px;
+  left: 270px;
 }
 .wrapper .menu-btn i{
   position: absolute;
