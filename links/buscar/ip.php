@@ -54,20 +54,21 @@
 
         <?php
             if(isset($_GET['id'])){
-                $resultado = $conexion -> query ("SELECT clientes.id,
-                                                            clientes.nombre,
-                                                            clientes.apellido,
-                                                            clientes.razon,
-                                                            
-                                                            trabajos_ip.*,
-                                                            
-                                                            trabajos_ip_detalles.ip,
-                                                            trabajos_ip_detalles.puertos,
-                                                            trabajos_ip_detalles.camara_nombre
-                                                    FROM clientes
-                                                    JOIN trabajos_ip ON trabajos_ip.clientes_id = clientes.id
-                                                    JOIN trabajos_ip_detalles ON trabajos_ip_detalles.clientes_id = trabajos_ip.clientes_id
-                                                    WHERE trabajos_ip.clientes_id=" . $_GET['id'] . " GROUP BY trabajos_ip_detalles.camara_nombre")or die($conexion -> error);
+                $resultado = $conexion -> query ("SELECT 
+                                                        clientes.id,
+                                                        clientes.nombre,
+                                                        clientes.apellido,
+                                                        clientes.razon,
+
+                                                        trabajos_ip.*,
+                                                        
+                                                        trabajos_ip_detalles.ip,
+                                                        trabajos_ip_detalles.puertos,
+                                                        trabajos_ip_detalles.camara_nombre
+                                                    FROM Clientes
+                                                    LEFT JOIN  Trabajos_ip ON Clientes.ID = Trabajos_ip.CLIENTES_ID
+                                                    LEFT JOIN Trabajos_ip_detalles ON Trabajos_ip.ID = Trabajos_ip_detalles.TRABAJOS_IP_ID
+                                                    WHERE trabajos_ip.clientes_id = " . $_GET['id'])or die($conexion -> error);
 
                 if(mysqli_num_rows($resultado) > 0){
                     $fila = mysqli_fetch_row($resultado);
@@ -101,22 +102,32 @@
             </fieldset>
 
             <fieldset>
-                <legend>Nombre, IP y Puertos</legend>
-                    <?php 
-                        if(!empty($fila[26])) {
-                            while ($row = $resultado->fetch_assoc()) {
-                                ?>
-                                    <div class="bucle">
-                                        <label><?php echo $row['camara_nombre']; ?></label>
-                                        <div>
-                                            <input type="text" value="<?php echo $row['ip']; ?>" disabled>
-                                            <input type="text" value="<?php echo $row['puertos']; ?>" disabled>
-                                        </div>
-                                    </div>
-                                <?php
-                            }
+                <legend>Nombre - IP - Puerto</legend>
+                <?php
+                    // Consulta SQL
+                    $sql = "SELECT *
+                                FROM Trabajos_ip_detalles
+                                INNER JOIN trabajos_ip ON trabajos_ip_detalles.trabajos_ip_id = Trabajos_ip.id
+                                WHERE trabajos_ip.clientes_id = " . $_GET['id'] . " ORDER BY Trabajos_ip_detalles.camara_nombre";
+                    $resultado = $conexion->query($sql);
+
+                    if ($resultado->num_rows > 0) {
+                        // Recuperar todos los registros
+                        $rows = $resultado->fetch_all(MYSQLI_ASSOC);
+
+                        foreach ($rows as $row) {
+                            ?>
+                            <div class="bucle">
+                                <label><?php echo $row['camara_nombre']; ?></label>
+                                <div>
+                                    <input type="text" value="<?php echo $row['ip']; ?>" disabled>
+                                    <input type="text" value="<?php echo $row['puertos']; ?>" disabled>
+                                </div>
+                            </div>
+                            <?php
                         }
-                    ?>
+                    }
+                ?>
             </fieldset>
 
             <fieldset>
@@ -148,7 +159,7 @@
                 <legend>CABLES</legend>
                 <?php 
                     if(!empty($fila[10])){
-                        $resultado = $conexion -> query ("SELECT SUM(cables_fuentes), SUM(cables_utp), SUM(cables_zapatilla)
+                        $resultado = $conexion -> query ("SELECT SUM(cables_fuentes), SUM(cables_utp), cables_zapatilla
                                                             FROM trabajos_ip
                                                             WHERE trabajos_ip.clientes_id=" . $_GET['id'])or die($conexion -> error);
 
