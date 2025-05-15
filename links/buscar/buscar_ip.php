@@ -107,7 +107,7 @@
                     if ($resultado->num_rows > 0) {
                         while ($fila = $resultado->fetch_assoc()) {
                             ?>
-                                <a href="http://lucasconde.ddns.net/L-Red/links/buscar/ip.php?id=<?php echo $fila['id']; ?>" class="items">
+                                <a href="http://lucasconde.ddns.net/L-Red/links/buscar/ip.php?id=<?php echo $fila['clientes_id']; ?>" class="items">
                                     <?php
                                         echo $fila['nombre'] . " " . $fila['apellido']
                                     ?>
