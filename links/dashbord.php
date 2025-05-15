@@ -153,9 +153,9 @@
             <i class='bx bxs-camera-home'></i>
           </h2>
           <?php
-            if($conexion) {
                 $consultation = "SELECT *
                                     FROM trabajos_ip
+                                    INNER JOIN clientes ON trabajos_ip.clientes_id = clientes.id
                                     group by clientes_id";
                 $resultado = mysqli_query($conexion,$consultation);
         
@@ -188,7 +188,7 @@
                         <?php
                     }
                 }
-            }
+            
           ?>
         </a>
       </section>
