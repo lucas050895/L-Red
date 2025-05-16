@@ -60,18 +60,21 @@
         </section>
 
         <form method="POST">
-            <select name="clientes" id="clientes">
-                <option value="" selected disabled>Seleccionar Cliente</option>
-                <?php
-                    $resultadoClientes = $conexion->query("SELECT * FROM clientes ORDER BY nombre");
-                    while ($fila = $resultadoClientes->fetch_assoc()) {
-                        $selected = (isset($_POST['clientes']) && $_POST['clientes'] == $fila['id']) ? "selected" : "";
-                        echo "<option value='{$fila['id']}' $selected>";
-                        echo !empty($fila['razon']) ? $fila['razon'] : "{$fila['nombre']} {$fila['apellido']}";
-                        echo "</option>";
-                    }
-                ?>
-            </select>
+            <div>
+                <label for="clientes">Cliente: </label>
+                <select name="clientes" id="clientes">
+                    <option value="" selected disabled>Seleccionar Cliente</option>
+                    <?php
+                        $resultadoClientes = $conexion->query("SELECT * FROM clientes ORDER BY nombre");
+                        while ($fila = $resultadoClientes->fetch_assoc()) {
+                            $selected = (isset($_POST['clientes']) && $_POST['clientes'] == $fila['id']) ? "selected" : "";
+                            echo "<option value='{$fila['id']}' $selected>";
+                            echo !empty($fila['razon']) ? $fila['razon'] : "{$fila['nombre']} {$fila['apellido']}";
+                            echo "</option>";
+                        }
+                    ?>
+                </select>
+            </div>
 
             <table>
                 <!-- ENCABEZADO -->
@@ -459,14 +462,14 @@
                     <tr>
                         <td>
                             <div>
-                                <label for="mo">Mano de Obra</label>
-                                <select name="mo" id="mo">
-                                    <option value="" selected disabled>Seleccionar M.O.</option>
+                                <label for="producto_mano">Mano de obra</label>
+                                <select name="producto_mano" id="producto_mano">
+                                    <option value="" selected disabled>Seleccionar M O</option>
                                     <?php
-                                    $resultadoDVR = $conexion->query("SELECT * FROM presupuestador_mano");
-                                    while ($fila = $resultadoDVR->fetch_assoc()) {
-                                        $selected = (isset($_POST['m_o']) && $_POST['m_o'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['m_o']}</option>";
+                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_mano");
+                                    while ($fila = $resultadoCamara->fetch_assoc()) {
+                                        $selected = (isset($_POST['producto_mano']) && $_POST['producto_mano'] == $fila['precio_venta']) ? "selected" : "";
+                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
                                     }
                                     ?>
                                 </select>
@@ -475,7 +478,7 @@
 
                         <td>
                             <div>
-                                <input type="number" min="0" max="5" name="cantidad_mano" value="<?= isset($_POST['cantidad_mano']) ? $_POST['cantidad_mano'] : 1 ?>">
+                                <input type="number" min="0" max="305" name="cantidad_mano" value="<?= isset($_POST['cantidad_mano']) ? $_POST['cantidad_mano'] : 1 ?>">
                             </div>
                         </td>
 
@@ -490,7 +493,7 @@
                         <td>
                             <span>
                                 <?=
-                                    $total_mano = isset($_POST['producto_mano']) && isset($_POST['cantidad_mano']) ? "$" . number_format($_POST['producto_mano'] * $_POST['cantidad_mano'], 0, ',', '.') : ''
+                                    $total_zapatilla = isset($_POST['producto_mano']) && isset($_POST['cantidad_mano']) ? "$" . number_format($_POST['producto_mano'] * $_POST['cantidad_mano'], 0, ',', '.') : ''
                                 ?>
                             </span>
                         </td>
@@ -524,6 +527,7 @@
                                     $totalGeneral += calcularSubtotal('producto_balunera', 'cantidad_balunera');
                                     $totalGeneral += calcularSubtotal('producto_insumos', 'cantidad_insumos');
                                     $totalGeneral += calcularSubtotal('producto_zapatilla', 'cantidad_zapatilla');
+                                    $totalGeneral += calcularSubtotal('producto_mano', 'cantidad_mano');
 
                                     // Mostramos el total formateado en la tabla
                                     echo "$" . number_format($totalGeneral, 0, ',', '.');
@@ -539,7 +543,7 @@
             <button type="submit">Calcular</button>
         </form>
 
-        <form method="POST" action="generar_pdf.php" class="formulario">
+        <form method="POST" action="presupuesto.php" class="formulario">
 
 
             <input type="hidden" name="cliente_id" value="<?= $_POST['clientes'] ?? '' ?>">
@@ -599,6 +603,12 @@
             <input type="hidden" name="producto_zapatilla" value="<?= $_POST['producto_zapatilla'] ?? 0 ?>">
             <input type="hidden" name="cantidad_zapatilla" value="<?= $_POST['cantidad_zapatilla'] ?? 0 ?>">
             <input type="hidden" name="subtotal_zapatilla" value="<?= $_POST['producto_zapatilla'] ?? 0 ?>">
+
+
+            <!-- Zapatilla eléctrica -->
+            <input type="hidden" name="producto_mano" value="<?= $_POST['producto_mano'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_mano" value="<?= $_POST['cantidad_mano'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_mano" value="<?= $_POST['producto_mano'] ?? 0 ?>">
 
             <input type="hidden" name="total_general" value="<?= $totalGeneral ?? 0 ?>">
             
