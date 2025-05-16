@@ -145,15 +145,22 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll(".card");
-            
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${0.5 + index * 0.4}s`;
-                card.classList.add("fade-in");
-            });
+
+            function mostrarScroll() {
+                cards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight + 2000 && rect.bottom > 0) {
+                        card.style.animationDelay = `${0.5 + index * 0.4}s`;
+                        card.classList.add("fade-in");
+                        // card.style.classList.add('hover');
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", mostrarScroll);
+
+            mostrarScroll();
         });
-
-
-        window.addEventListener('scroll', mostralScroll);
     </script>
 
 </body>

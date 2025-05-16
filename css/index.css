@@ -113,7 +113,7 @@ body{
     transform: translateX(-50px);
     animation: fadeInMove 0.5s forwards;
 }
-.card:hover{
+.hover{
     transform: scale(1.1);
 }
 /*ANIMACION*/
