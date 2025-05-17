@@ -99,10 +99,14 @@
               <span>Presupuesto</span>
             </a>
 
-            <a href="#">
-              <i class="fas fa-edit"></i>
-              <span>Editar Precios</span>
-            </a>
+            <?php if($arregloUsuario['usuario'] == 'Lucas' || $arregloUsuario['usuario'] == 'Leo'){?>
+
+              <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador/editar_precio.php">
+                <i class="fas fa-edit"></i>
+                <span>Editar Precios</span>
+              </a>
+              
+            <?php } ?>
           </div>
         </li>
 
