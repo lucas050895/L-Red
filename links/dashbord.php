@@ -62,42 +62,36 @@
             Clientes
             <i class='bx bxs-user-detail'></i>
           </h2>
+
           <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) AS cantidad FROM clientes";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count1">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count1", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
+              $consultation = "SELECT COUNT(id) AS total_clientes FROM clientes";
+              $resultado = mysqli_query($conexion, $consultation);
+              
+              $row = $resultado->fetch_array();
+              $total_clientes = $row['total_clientes'];
           ?>
+
+          <span id="count1">0</span>
+
+          <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                  function counter(id, start, end, duration) {
+                      let obj = document.getElementById(id),
+                          current = start,
+                          range = end - start,
+                          increment = end > start ? 1 : -1,
+                          step = Math.abs(Math.floor(duration / range)),
+                          timer = setInterval(() => {
+                              current += increment;
+                              obj.textContent = current;
+                              if (current == end) {
+                                  clearInterval(timer);
+                              }
+                          }, step);
+                  }
+                  counter("count1", 0, <?php echo $total_clientes; ?>, 500);
+              });
+          </script>
         </a>
       </section>
 
@@ -107,42 +101,36 @@
             Cámaras CCTV
             <i class='bx bxs-cctv'></i>
           </h2>
+
           <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_cctv";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count2">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count2", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
+              $consultation = "SELECT COUNT(clientes_id) AS total_clientes FROM trabajos_cctv";
+              $resultado = mysqli_query($conexion, $consultation);
+              
+              $row = $resultado->fetch_array();
+              $total_clientes = $row['total_clientes'];
           ?>
+
+          <span id="count2">0</span>
+
+          <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                  function counter(id, start, end, duration) {
+                      let obj = document.getElementById(id),
+                          current = start,
+                          range = end - start,
+                          increment = end > start ? 1 : -1,
+                          step = Math.abs(Math.floor(duration / range)),
+                          timer = setInterval(() => {
+                              current += increment;
+                              obj.textContent = current;
+                              if (current == end) {
+                                  clearInterval(timer);
+                              }
+                          }, step);
+                  }
+                  counter("count2", 0, <?php echo $total_clientes; ?>, 500);
+              });
+          </script>
         </a>
       </section>
 
@@ -152,44 +140,37 @@
             Cámaras IP
             <i class='bx bxs-camera-home'></i>
           </h2>
+
           <?php
-                $consultation = "SELECT *
-                                    FROM trabajos_ip
-                                    INNER JOIN clientes ON trabajos_ip.clientes_id = clientes.id
-                                    group by clientes_id";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $id  = $row['id'];
-        
-                        ?>
-                          <span id="count3">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                step = Math.abs(Math.floor(duration / range)),
-                                timer = setInterval(() => {
-                                  current += increment;
-                                  obj.textContent = current;
-                                  if (current == end) {
-                                  clearInterval(timer);
-                                  }
-                                  }, step);
-                                  }
-                                counter("count3", 0, <?php echo $id ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            
+              $consultation = "SELECT COUNT(DISTINCT clientes_id) AS total_clientes FROM trabajos_ip";
+              $resultado = mysqli_query($conexion, $consultation);
+              
+              $row = $resultado->fetch_array();
+              $total_clientes = $row['total_clientes'];
           ?>
+
+          <span id="count3">0</span>
+
+          <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                  function counter(id, start, end, duration) {
+                      let obj = document.getElementById(id),
+                          current = start,
+                          range = end - start,
+                          increment = end > start ? 1 : -1,
+                          step = Math.abs(Math.floor(duration / range)),
+                          timer = setInterval(() => {
+                              current += increment;
+                              obj.textContent = current;
+                              if (current == end) {
+                                  clearInterval(timer);
+                              }
+                          }, step);
+                  }
+                  counter("count3", 0, <?php echo $total_clientes; ?>, 500);
+              });
+          </script>
+
         </a>
       </section>
 
@@ -199,42 +180,36 @@
             Trabajos de Red
             <i class='bx bxs-network-chart'></i>
           </h2>
+
           <?php
-            if($conexion) {
-                $consultation = "SELECT COUNT(*) as cantidad FROM trabajos_red";
-                $resultado = mysqli_query($conexion,$consultation);
-        
-                if($resultado){
-                    while($row = $resultado->fetch_array()){
-                        $cantidad  = $row['cantidad'];
-        
-                        ?>
-                          <span id="count4">0</span>
-                          
-                          <script>
-                              document.addEventListener("DOMContentLoaded", () => {
-                                function counter(id, start, end, duration) {
-                                  let obj = document.getElementById(id),
-                                  current = start,
-                                  range = end - start,
-                                  increment = end > start ? 1 : -1,
-                                  step = Math.abs(Math.floor(duration / range)),
-                                  timer = setInterval(() => {
-                                    current += increment;
-                                    obj.textContent = current;
-                                    if (current == end) {
-                                    clearInterval(timer);
-                                    }
-                                  }, step);
-                                }
-                                counter("count4", 0, <?php echo $cantidad ?>, 500);
-                                });
-                          </script>
-                        <?php
-                    }
-                }
-            }
+              $consultation = "SELECT COUNT(DISTINCT clientes_id) AS total_clientes FROM trabajos_red";
+              $resultado = mysqli_query($conexion, $consultation);
+              
+              $row = $resultado->fetch_array();
+              $total_clientes = $row['total_clientes'];
           ?>
+
+          <span id="count4">0</span>
+
+          <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                  function counter(id, start, end, duration) {
+                      let obj = document.getElementById(id),
+                          current = start,
+                          range = end - start,
+                          increment = end > start ? 1 : -1,
+                          step = Math.abs(Math.floor(duration / range)),
+                          timer = setInterval(() => {
+                              current += increment;
+                              obj.textContent = current;
+                              if (current == end) {
+                                  clearInterval(timer);
+                              }
+                          }, step);
+                  }
+                  counter("count4", 0, <?php echo $total_clientes; ?>, 500);
+              });
+          </script>
         </a>
       </section>
 
@@ -243,60 +218,40 @@
           Total de trabajos
           <i class='bx bx-line-chart'></i>
         </h2>
+
         <?php
-          if($conexion) {
-              $consultation = "SELECT COUNT(trabajos_cctv.clientes_id) AS CLIENTE_CCTV,
-                                      COUNT(trabajos_ip.clientes_id) AS CLIENTE_IP,
-                                      COUNT(trabajos_red.clientes_id) AS CLIENTE_RED,
-
-                                          (SELECT count(clientes_id) FROM trabajos_cctv
-                                            WHERE clientes_id) AS CCTV,
-
-                                          (SELECT trabajos_ip.clientes_id
-                                          WHERE trabajos_ip.clientes_id = clientes.id) AS IP,
-                                          
-                                          (SELECT count(clientes_id) FROM trabajos_red
-                                            WHERE clientes_id) AS RED
-                                              
-                                    FROM clientes
-                                    LEFT JOIN trabajos_red ON trabajos_red.clientes_id = clientes.id
-                                    LEFT JOIN trabajos_cctv ON trabajos_cctv.clientes_id = clientes.id
-                                    LEFT JOIN trabajos_ip ON trabajos_ip.clientes_id = clientes.id";
-              $resultado = mysqli_query($conexion,$consultation);
-      
-              if($resultado){
-                  while($row = $resultado->fetch_array()){
-                      $CCTV  = $row['CCTV'];
-                      $IP    = $row['IP'];
-                      $RED   = $row['RED'];
-      
-                      ?>
-                        <span id="count5">0</span>
-                        
-                        <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-                              function counter(id, start, end, duration) {
-                                let obj = document.getElementById(id),
-                                current = start,
-                                range = end - start,
-                                increment = end > start ? 1 : -1,
-                                step = Math.abs(Math.floor(duration / range)),
-                                timer = setInterval(() => {
-                                  current += increment;
-                                  obj.textContent = current;
-                                  if (current == end) {
-                                  clearInterval(timer);
-                                  }
-                                }, step);
-                              }
-                              counter("count5", 0, <?php echo $CCTV + $IP + $RED ?>, 500);
-                              });
-                        </script>
-                      <?php
-                  }
-              }
-          }
+            $consultation = "SELECT 
+                            (SELECT COUNT(DISTINCT trabajos_cctv.clientes_id) FROM trabajos_cctv) +
+                            (SELECT COUNT(DISTINCT trabajos_ip.clientes_id) FROM trabajos_ip) +
+                            (SELECT COUNT(DISTINCT trabajos_red.clientes_id) FROM trabajos_red) AS total_clientes";
+                            
+            $resultado = mysqli_query($conexion, $consultation);
+            
+            $row = $resultado->fetch_array();
+            $total_clientes = $row['total_clientes'];
         ?>
+
+        <span id="count5">0</span>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                function counter(id, start, end, duration) {
+                    let obj = document.getElementById(id),
+                        current = start,
+                        range = end - start,
+                        increment = end > start ? 1 : -1,
+                        step = Math.abs(Math.floor(duration / range)),
+                        timer = setInterval(() => {
+                            current += increment;
+                            obj.textContent = current;
+                            if (current == end) {
+                                clearInterval(timer);
+                            }
+                        }, step);
+                }
+                counter("count5", 0, <?php echo $total_clientes; ?>, 500);
+            });
+        </script>
       </section>
     </div>
   </main>
