@@ -75,7 +75,7 @@
         <div class="container_items">
             <?php
                 // Verifica si el formulario fue enviado
-                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['nombre']) ) {
+                if ($_SERVER['REQUEST_METHOD'] == 'GET' && (!empty($_GET['nombre'])) ) {
 
                     // Recoger los filtros del formulario
                     $nombre       = $_GET['nombre']    ?? '';

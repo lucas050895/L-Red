@@ -60,8 +60,13 @@
             <fieldset>
                 <legend>Filtros</legend>
                 <div>
-                    <label for="clientes_id">Nombre </label>
-                    <input type="text" id="clientes_id" name="clientes_id" placeholder="Nombre">
+                    <label for="nombre">Nombre </label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                </div>
+
+                <div>
+                    <label for="razon">Razón Social </label>
+                    <input type="text" id="razon" name="razon" placeholder="Razón Social">
                 </div>
 
                 <div>
@@ -79,27 +84,39 @@
             <?php
                 // Verifica si el formulario fue enviado
                 if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
-                        isset($_GET['nombre']) ||
-                        isset($_GET['acceso_host'])) {
+                        (!empty ($_GET['nombre'])) ||
+                        (!empty ($_GET['razon'])) || 
+                        (!empty ($_GET['acceso_host']))
+                    ) {
 
                     // Recoger los filtros del formulario
-                    $nombre       = $_GET['nombre']       ?? '';
-                    $acceso_host  = $_GET['acceso_host']  ?? '';
+                    $nombre         = $_GET['nombre']       ?? '';
+                    $razon          = $_GET['razon']       ?? '';
+                    $acceso_host    = $_GET['acceso_host']  ?? '';
 
                     // Construir la consulta SQL con filtros
-                    $sql = "SELECT *
-                                FROM clientes, trabajos_ip
-                                WHERE clientes.id = trabajos_ip.clientes_id
-                                AND 1 = 1
-                                GROUP BY clientes_id";
+                    $sql = "SELECT clientes.id,
+                                    clientes.nombre,
+                                    clientes.apellido,
+                                    trabajos_ip.clientes_id AS clientes_id
+                                FROM clientes
+                                INNER JOIN trabajos_ip ON clientes.id = trabajos_ip.clientes_id
+                                WHERE 1 = 1";
+
 
                     if (!empty($nombre)) {
-                        $sql .= "AND nombre LIKE '%$nombre%'";
+                        $sql .= " AND nombre LIKE '%$nombre%' ";
                     }
 
-                    // if (!empty($acceso_host)) {
-                    //     $sql .= "acceso_host LIKE '%$acceso_host%'";
-                    // }
+                    if (!empty($razon)) {
+                        $sql .= " AND razon LIKE '%$razon%' ";
+                    }
+
+                    if (!empty($acceso_host)) {
+                        $sql .= " AND acceso_host LIKE '%$acceso_host%' ";
+                    }
+
+                    $sql .= " GROUP BY clientes.id";
 
                     $resultado = $conexion->query($sql);
 

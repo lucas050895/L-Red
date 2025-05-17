@@ -86,9 +86,10 @@
             <?php
                 // Verifica si el formulario fue enviado
                 if ($_SERVER['REQUEST_METHOD'] == 'GET' && 
-                        isset($_GET['nombre']) || 
-                        isset($_GET['razon']) || 
-                        isset($_GET['dvr_marca'])) {
+                        (!empty($_GET['nombre'])) || 
+                        (!empty($_GET['razon']) )|| 
+                        (!empty($_GET['dvr_marca']))
+                    ) {
 
                     // Recoger los filtros del formulario
                     $nombre     = $_GET['nombre']     ?? '';
@@ -96,10 +97,15 @@
                     $dvr_marca       = $_GET['dvr_marca']       ?? '';
 
                     // Construir la consulta SQL con filtros
-                    $sql = "SELECT *
+                    $sql = "SELECT clientes.id,
+                                    clientes.nombre,
+                                    clientes.apellido,
+                                    clientes.razon,
+                                    trabajos_cctv.clientes_id AS clientes_id
                                 FROM clientes
                                 INNER JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
-                                AND 1 = 1";
+                                WHERE 1 = 1";
+
 
                     if (!empty($nombre)) {
                         $sql .= " AND nombre LIKE '%$nombre%' ";
@@ -110,8 +116,10 @@
                     }
 
                     if (!empty($dvr_marca)) {
-                        $sql .= " AND dvr_marca LIKE '%$dvr_marca%'";
+                        $sql .= " AND dvr_marca LIKE '%$dvr_marca%' ";
                     }
+
+                    $sql .= " GROUP BY clientes.id";
 
 
                     $resultado = $conexion->query($sql);
