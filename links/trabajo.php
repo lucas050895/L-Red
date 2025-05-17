@@ -90,7 +90,7 @@
                 <?php if (is_string($fila[5])) {?>
 
                 <h3>Se realizo:</h3>
-                <p>La instalacion de un DVR marca <?php echo $fila[6]?> modelo <?php echo $fila[7]?>, con un disco <?php echo $fila[8]?> de <?php echo $fila[9].$fila[10]?>,
+                <p>La instalación de un DVR marca <?php echo $fila[6]?> modelo <?php echo $fila[7]?>, con un disco <?php echo $fila[8]?> de <?php echo $fila[9].$fila[10]?>,
                 con <?php echo $fila[11]?> cámaras modelo <?php echo $fila[12]?>.<br>
                 Con sus respectivas cajas estancas y sus fichas balun. Para ésta instalación se utilizo <?php echo $fila[13]?> metros de CABLE UTP.</p>
 
