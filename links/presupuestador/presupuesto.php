@@ -70,8 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             position:absolute;
                             bottom: 0;
                             font-style: italic;
-                            text-align: center;
-                            }
+                            font-size: 12px;
+                        }
                     </style>
                 </head>
                 <body>';
@@ -118,13 +118,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $items = [
         ['DVR', getNumericValue($_POST['cantidad_dvr']), getNumericValue($_POST['producto_dvr']), getNumericValue($_POST['subtotal_dvr'] * $_POST['cantidad_dvr'])],
         ['Cámaras', getNumericValue($_POST['cantidad_camara']), getNumericValue($_POST['producto_camara']), getNumericValue($_POST['subtotal_camara'] * $_POST['cantidad_camara'])],
-        ['Cable UTP', getNumericValue($_POST['cantidad_utp']), getNumericValue($_POST['producto_utp']), getNumericValue($_POST['subtotal_utp'] * $_POST['cantidad_utp'])],
-        ['Fuentes', getNumericValue($_POST['cantidad_fuentes']), getNumericValue($_POST['producto_fuentes']), getNumericValue($_POST['subtotal_fuentes'] * $_POST['cantidad_fuentes'])],
-        ['Balun', getNumericValue($_POST['cantidad_balun']), getNumericValue($_POST['producto_balun']), getNumericValue($_POST['subtotal_balun'] * $_POST['cantidad_balun'])],
+        ['Fichas Balun', getNumericValue($_POST['cantidad_balun']), getNumericValue($_POST['producto_balun']), getNumericValue($_POST['subtotal_balun'] * $_POST['cantidad_balun'])],
+        ['Fuente', getNumericValue($_POST['cantidad_fuente']), getNumericValue($_POST['producto_fuente']), getNumericValue($_POST['subtotal_fuente'] * $_POST['cantidad_fuente'])],
         ['Caja Estanca', getNumericValue($_POST['cantidad_caja']), getNumericValue($_POST['producto_caja']), getNumericValue($_POST['subtotal_caja'] * $_POST['cantidad_caja'])],
         ['Balunera', getNumericValue($_POST['cantidad_balunera']), getNumericValue($_POST['producto_balunera']), getNumericValue($_POST['subtotal_balunera'] * $_POST['cantidad_balunera'])],
         ['Insumos', getNumericValue($_POST['cantidad_insumos']), getNumericValue($_POST['producto_insumos']), getNumericValue($_POST['subtotal_insumos'] * $_POST['cantidad_insumos'])],
-        ['Zapatilla eléctrica', getNumericValue($_POST['cantidad_zapatilla']), getNumericValue($_POST['producto_zapatilla']), getNumericValue($_POST['subtotal_zapatilla'] * $_POST['cantidad_zapatilla'])],
+        ['Cable UTP', getNumericValue($_POST['cantidad_utp']), getNumericValue($_POST['producto_utp']), getNumericValue($_POST['subtotal_utp'] * $_POST['cantidad_utp'])],
+        ['Cable electrico', getNumericValue($_POST['cantidad_electrico']), getNumericValue($_POST['producto_electrico']), getNumericValue($_POST['subtotal_electrico'] * $_POST['cantidad_electrico'])],
+        ['Rack Gabinete', getNumericValue($_POST['cantidad_rack']), getNumericValue($_POST['producto_rack']), getNumericValue($_POST['subtotal_rack'] * $_POST['cantidad_rack'])],
         ['Mano de Obra', getNumericValue($_POST['cantidad_mano']), getNumericValue($_POST['producto_mano']), getNumericValue($_POST['subtotal_mano'] * $_POST['cantidad_mano'])]
     ];
 

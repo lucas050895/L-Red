@@ -94,13 +94,19 @@
                             <div>
                                 <label for="producto_dvr">Dvr</label>
                                 <select name="producto_dvr" id="producto_dvr">
-                                    <option value="" selected disabled>Seleccionar dvr</option>
+                                    <option value="" selected disabled>Seleccionar DVR</option>
                                     <?php
-                                    $resultadoDVR = $conexion->query("SELECT * FROM presupuestador_dvr");
-                                    while ($fila = $resultadoDVR->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_dvr']) && $_POST['producto_dvr'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoDVR = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'dvr' ");
+
+                                        while ($fila = $resultadoDVR->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_dvr']) && $_POST['producto_dvr'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -138,11 +144,17 @@
                                 <select name="producto_camara" id="producto_camara">
                                     <option value="" selected disabled>Seleccionar cámaras</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_camaras");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_camara']) && $_POST['producto_camara'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoCAMARA = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'camara' ");
+
+                                        while ($fila = $resultadoCAMARA->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_camara']) && $_POST['producto_camara'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -171,88 +183,6 @@
                         </td>
                     </tr>
 
-                    <!-- FILA DE CABLE UTP -->
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="producto_utp">Cable utp</label>
-                                <select name="producto_utp" id="producto_utp">
-                                    <option value="" selected disabled>Seleccionar cable utp</option>
-                                    <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_utp");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_utp']) && $_POST['producto_utp'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div>
-                                <input type="number" min="0" max="305" name="cantidad_utp" value="<?= isset($_POST['cantidad_utp']) ? $_POST['cantidad_utp'] : 1 ?>">
-                            </div>
-                        </td>
-
-                        <td>
-                            <span>
-                                <?=
-                                    isset($_POST['producto_utp']) ?  "$" . number_format($_POST['producto_utp'], 0, ',', '.') : ''
-                                ?>
-                            </span>
-                        </td>
-
-                        <td>
-                            <span>
-                                <?=
-                                    $total_utp = isset($_POST['producto_utp']) && isset($_POST['cantidad_utp']) ? "$" . number_format($_POST['producto_utp'] * $_POST['cantidad_utp'], 0, ',', '.') : ''
-                                ?>
-                            </span>
-                        </td>
-                    </tr>
-
-                    <!-- FILA DE FUENTES -->
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="producto_fuentes">Fuentes</label>
-                                <select name="producto_fuentes" id="producto_fuentes">
-                                    <option value="" selected disabled>Seleccionar fuentes</option>
-                                    <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_fuentes");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_fuentes']) && $_POST['producto_fuentes'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div>
-                                <input type="number" min="0" max="305" name="cantidad_fuentes" value="<?= isset($_POST['cantidad_fuentes']) ? $_POST['cantidad_fuentes'] : 1 ?>">
-                            </div>
-                        </td>
-
-                        <td>
-                            <span>
-                                <?=
-                                    isset($_POST['producto_fuentes']) ?  "$" . number_format($_POST['producto_fuentes'], 0, ',', '.') : ''
-                                ?>
-                            </span>
-                        </td>
-
-                        <td>
-                            <span>
-                                <?=
-                                    $total_fuente = isset($_POST['producto_fuentes']) && isset($_POST['cantidad_fuentes']) ? "$" . number_format($_POST['producto_fuentes'] * $_POST['cantidad_fuentes'], 0, ',', '.') : ''
-                                ?>
-                            </span>
-                        </td>
-                    </tr>
-
                     <!-- FILA DE BALUN -->
                     <tr>
                         <td>
@@ -261,11 +191,17 @@
                                 <select name="producto_balun" id="producto_balun">
                                     <option value="" selected disabled>Seleccionar balun</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_balun");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_balun']) && $_POST['producto_balun'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoBALUN = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'fichas balun' ");
+
+                                        while ($fila = $resultadoBALUN->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_balun']) && $_POST['producto_balun'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -294,6 +230,53 @@
                         </td>
                     </tr>
 
+                    <!-- FILA DE FUENTES -->
+                    <tr>
+                        <td>
+                            <div>
+                                <label for="producto_fuente">Fuentes</label>
+                                <select name="producto_fuente" id="producto_fuente">
+                                    <option value="" selected disabled>Seleccionar fuentes</option>
+                                    <?php
+                                        $resultadoFUENTE = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'fuente' ");
+
+                                        while ($fila = $resultadoFUENTE->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_fuente']) && $_POST['producto_fuente'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div>
+                                <input type="number" min="0" max="305" name="cantidad_fuente" value="<?= isset($_POST['cantidad_fuente']) ? $_POST['cantidad_fuente'] : 1 ?>">
+                            </div>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    isset($_POST['producto_fuente']) ?  "$" . number_format($_POST['producto_fuente'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    $total_fuente = isset($_POST['producto_fuente']) && isset($_POST['cantidad_fuente']) ? "$" . number_format($_POST['producto_fuente'] * $_POST['cantidad_fuente'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+                    </tr>
+
                     <!-- FILA DE CAJA ESTANCA -->
                     <tr>
                         <td>
@@ -302,11 +285,17 @@
                                 <select name="producto_caja" id="producto_caja">
                                     <option value="" selected disabled>Seleccionar caja estanca</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_caja");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_caja']) && $_POST['producto_caja'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoCAJA = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'caja estanca' ");
+
+                                        while ($fila = $resultadoCAJA->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_caja']) && $_POST['producto_caja'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -343,11 +332,17 @@
                                 <select name="producto_balunera" id="producto_balunera">
                                     <option value="" selected disabled>Seleccionar balunera</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_balunera");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_balunera']) && $_POST['producto_balunera'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoBALUNERA = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'balunera' ");
+
+                                        while ($fila = $resultadoBALUNERA->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_balunera']) && $_POST['producto_balunera'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -384,11 +379,17 @@
                                 <select name="producto_insumos" id="producto_insumos">
                                     <option value="" selected disabled>Seleccionar insumos</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_insumos");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_insumos']) && $_POST['producto_insumos'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoINSUMOS = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'insumos' ");
+
+                                        while ($fila = $resultadoINSUMOS->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_insumos']) && $_POST['producto_insumos'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -417,19 +418,25 @@
                         </td>
                     </tr>
 
-                    <!-- FILA DE ZAPATILLA ELECTRICA -->
+                    <!-- FILA DE CABLE UTP -->
                     <tr>
                         <td>
                             <div>
-                                <label for="producto_zapatilla">Zapatilla eléctrica</label>
-                                <select name="producto_zapatilla" id="producto_zapatilla">
-                                    <option value="" selected disabled>Seleccionar zapatilla eléctrica</option>
+                                <label for="producto_utp">Cable utp</label>
+                                <select name="producto_utp" id="producto_utp">
+                                    <option value="" selected disabled>Seleccionar cable utp</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_zapatilla");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_zapatilla']) && $_POST['producto_zapatilla'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoUTP = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'cable utp' ");
+
+                                        while ($fila = $resultadoUTP->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_utp']) && $_POST['producto_utp'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -437,14 +444,14 @@
 
                         <td>
                             <div>
-                                <input type="number" min="0" max="305" name="cantidad_zapatilla" value="<?= isset($_POST['cantidad_zapatilla']) ? $_POST['cantidad_zapatilla'] : 1 ?>">
+                                <input type="number" min="0" max="305" name="cantidad_utp" value="<?= isset($_POST['cantidad_utp']) ? $_POST['cantidad_utp'] : 1 ?>">
                             </div>
                         </td>
 
                         <td>
                             <span>
                                 <?=
-                                    isset($_POST['producto_zapatilla']) ?  "$" . number_format($_POST['producto_zapatilla'], 0, ',', '.') : ''
+                                    isset($_POST['producto_utp']) ?  "$" . number_format($_POST['producto_utp'], 0, ',', '.') : ''
                                 ?>
                             </span>
                         </td>
@@ -452,7 +459,101 @@
                         <td>
                             <span>
                                 <?=
-                                    $total_zapatilla = isset($_POST['producto_zapatilla']) && isset($_POST['cantidad_zapatilla']) ? "$" . number_format($_POST['producto_zapatilla'] * $_POST['cantidad_zapatilla'], 0, ',', '.') : ''
+                                    $total_utp = isset($_POST['producto_utp']) && isset($_POST['cantidad_utp']) ? "$" . number_format($_POST['producto_utp'] * $_POST['cantidad_utp'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <!-- FILA DE CABLE ELECTRICO -->
+                    <tr>
+                        <td>
+                            <div>
+                                <label for="producto_electrico">Cable eléctrico</label>
+                                <select name="producto_electrico" id="producto_electrico">
+                                    <option value="" selected disabled>Seleccionar cable eléctrico</option>
+                                    <?php
+                                        $resultadoELECTRICO = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'cable electrico' ");
+
+                                        while ($fila = $resultadoELECTRICO->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_electrico']) && $_POST['producto_electrico'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div>
+                                <input type="number" min="0" max="305" name="cantidad_electrico" value="<?= isset($_POST['cantidad_electrico']) ? $_POST['cantidad_electrico'] : 1 ?>">
+                            </div>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    isset($_POST['producto_electrico']) ?  "$" . number_format($_POST['producto_electrico'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    $total_electrico = isset($_POST['producto_electrico']) && isset($_POST['cantidad_electrico']) ? "$" . number_format($_POST['producto_electrico'] * $_POST['cantidad_electrico'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <!-- FILA DE RACK GABINETE -->
+                    <tr>
+                        <td>
+                            <div>
+                                <label for="producto_rack">Rack gabinete</label>
+                                <select name="producto_rack" id="producto_rack">
+                                    <option value="" selected disabled>Seleccionar Rack</option>
+                                    <?php
+                                        $resultadoRACK = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'rack gabinete' ");
+
+                                        while ($fila = $resultadoRACK->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_rack']) && $_POST['producto_rack'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div>
+                                <input type="number" min="0" max="305" name="cantidad_rack" value="<?= isset($_POST['cantidad_rack']) ? $_POST['cantidad_rack'] : 1 ?>">
+                            </div>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    isset($_POST['producto_rack']) ?  "$" . number_format($_POST['producto_rack'], 0, ',', '.') : ''
+                                ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <?=
+                                    $total_electrico = isset($_POST['producto_rack']) && isset($_POST['cantidad_rack']) ? "$" . number_format($_POST['producto_rack'] * $_POST['cantidad_rack'], 0, ',', '.') : ''
                                 ?>
                             </span>
                         </td>
@@ -466,11 +567,18 @@
                                 <select name="producto_mano" id="producto_mano">
                                     <option value="" selected disabled>Seleccionar M O</option>
                                     <?php
-                                    $resultadoCamara = $conexion->query("SELECT * FROM presupuestador_mano");
-                                    while ($fila = $resultadoCamara->fetch_assoc()) {
-                                        $selected = (isset($_POST['producto_mano']) && $_POST['producto_mano'] == $fila['precio_venta']) ? "selected" : "";
-                                        echo "<option value='{$fila['precio_venta']}' $selected>{$fila['nombre']}</option>";
-                                    }
+                                        $resultadoMANO = $conexion->query("SELECT presupuestador_productos.precio,
+                                                                                presupuestador_productos.nombre,
+                                                                                presupuestador_productos.modelo
+                                                                            FROM presupuestador_productos
+                                                                            INNER JOIN presupuestador_categoria  ON presupuestador_productos.categoria_id = presupuestador_categoria.id
+                                                                            WHERE presupuestador_categoria.nombre = 'mano de obra' ");
+
+                                        while ($fila = $resultadoMANO->fetch_assoc()) {
+                                            $selected = (isset($_POST['producto_mano']) && $_POST['producto_mano'] == $fila['precio']) ? "selected" : "";
+                                            echo "<option value='{$fila['precio']}' $selected>{$fila['modelo']}</option>";
+                                        }
+                                    ?>
                                     ?>
                                 </select>
                             </div>
@@ -493,7 +601,7 @@
                         <td>
                             <span>
                                 <?=
-                                    $total_zapatilla = isset($_POST['producto_mano']) && isset($_POST['cantidad_mano']) ? "$" . number_format($_POST['producto_mano'] * $_POST['cantidad_mano'], 0, ',', '.') : ''
+                                    $total_electrico = isset($_POST['producto_mano']) && isset($_POST['cantidad_mano']) ? "$" . number_format($_POST['producto_mano'] * $_POST['cantidad_mano'], 0, ',', '.') : ''
                                 ?>
                             </span>
                         </td>
@@ -520,13 +628,14 @@
                                     // Sumamos todos los productos
                                     $totalGeneral += calcularSubtotal('producto_dvr', 'cantidad_dvr');
                                     $totalGeneral += calcularSubtotal('producto_camara', 'cantidad_camara');
-                                    $totalGeneral += calcularSubtotal('producto_utp', 'cantidad_utp');
-                                    $totalGeneral += calcularSubtotal('producto_fuentes', 'cantidad_fuentes');
                                     $totalGeneral += calcularSubtotal('producto_balun', 'cantidad_balun');
+                                    $totalGeneral += calcularSubtotal('producto_fuente', 'cantidad_fuente');
                                     $totalGeneral += calcularSubtotal('producto_caja', 'cantidad_caja');
                                     $totalGeneral += calcularSubtotal('producto_balunera', 'cantidad_balunera');
                                     $totalGeneral += calcularSubtotal('producto_insumos', 'cantidad_insumos');
-                                    $totalGeneral += calcularSubtotal('producto_zapatilla', 'cantidad_zapatilla');
+                                    $totalGeneral += calcularSubtotal('producto_utp', 'cantidad_utp');
+                                    $totalGeneral += calcularSubtotal('producto_electrico', 'cantidad_electrico');
+                                    $totalGeneral += calcularSubtotal('producto_rack', 'cantidad_rack');
                                     $totalGeneral += calcularSubtotal('producto_mano', 'cantidad_mano');
 
                                     // Mostramos el total formateado en la tabla
@@ -564,48 +673,62 @@
             <input type="hidden" name="cantidad_dvr" value="<?= $_POST['cantidad_dvr'] ?? 0 ?>">
             <input type="hidden" name="subtotal_dvr" value="<?= $_POST['producto_dvr'] ?? 0 ?>">
 
-            <!-- Cámaras -->
+
+            <!-- CAMARA -->
             <input type="hidden" name="producto_camara" value="<?= $_POST['producto_camara'] ?? 0 ?>">
             <input type="hidden" name="cantidad_camara" value="<?= $_POST['cantidad_camara'] ?? 0 ?>">
             <input type="hidden" name="subtotal_camara" value="<?= $_POST['producto_camara'] ?? 0 ?>">
+
+
+            <!-- BALUN -->
+            <input type="hidden" name="producto_balun" value="<?= $_POST['producto_balun'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_balun" value="<?= $_POST['cantidad_balun'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_balun" value="<?= $_POST['producto_balun']  ?? 0 ?>">
+
+
+            <!-- FUENTE -->
+            <input type="hidden" name="producto_fuente" value="<?= $_POST['producto_fuente'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_fuente" value="<?= $_POST['cantidad_fuente'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_fuente" value="<?= $_POST['producto_fuente'] ?? 0 ?>">
+
+
+            <!-- CAJA ESTANCA -->
+            <input type="hidden" name="producto_caja" value="<?= $_POST['producto_caja'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_caja" value="<?= $_POST['cantidad_caja'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_caja" value="<?= $_POST['producto_caja']  ?? 0 ?>">
+
+
+            <!-- BALUNERA -->
+            <input type="hidden" name="producto_balunera" value="<?= $_POST['producto_balunera'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_balunera" value="<?= $_POST['cantidad_balunera'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_balunera" value="<?= $_POST['producto_balunera'] ?? 0 ?>">
+
+
+            <!-- INSUMOS -->
+            <input type="hidden" name="producto_insumos" value="<?= $_POST['producto_insumos'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_insumos" value="<?= $_POST['cantidad_insumos'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_insumos" value="<?= $_POST['producto_insumos'] ?? 0 ?>">
+
 
             <!-- Cable UTP -->
             <input type="hidden" name="producto_utp" value="<?= $_POST['producto_utp'] ?? 0 ?>">
             <input type="hidden" name="cantidad_utp" value="<?= $_POST['cantidad_utp'] ?? 0 ?>">
             <input type="hidden" name="subtotal_utp" value="<?= $_POST['producto_utp']  ?? 0 ?>">
 
-            <!-- Fuentes -->
-            <input type="hidden" name="producto_fuentes" value="<?= $_POST['producto_fuentes'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_fuentes" value="<?= $_POST['cantidad_fuentes'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_fuentes" value="<?= $_POST['producto_fuentes'] ?? 0 ?>">
 
-            <!-- Balun -->
-            <input type="hidden" name="producto_balun" value="<?= $_POST['producto_balun'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_balun" value="<?= $_POST['cantidad_balun'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_balun" value="<?= $_POST['producto_balun']  ?? 0 ?>">
-
-            <!-- Caja estanca -->
-            <input type="hidden" name="producto_caja" value="<?= $_POST['producto_caja'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_caja" value="<?= $_POST['cantidad_caja'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_caja" value="<?= $_POST['producto_caja']  ?? 0 ?>">
-
-            <!-- Balunera -->
-            <input type="hidden" name="producto_balunera" value="<?= $_POST['producto_balunera'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_balunera" value="<?= $_POST['cantidad_balunera'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_balunera" value="<?= $_POST['producto_balunera'] ?? 0 ?>">
-
-            <!-- Insumos -->
-            <input type="hidden" name="producto_insumos" value="<?= $_POST['producto_insumos'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_insumos" value="<?= $_POST['cantidad_insumos'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_insumos" value="<?= $_POST['producto_insumos'] ?? 0 ?>">
-
-            <!-- Zapatilla eléctrica -->
-            <input type="hidden" name="producto_zapatilla" value="<?= $_POST['producto_zapatilla'] ?? 0 ?>">
-            <input type="hidden" name="cantidad_zapatilla" value="<?= $_POST['cantidad_zapatilla'] ?? 0 ?>">
-            <input type="hidden" name="subtotal_zapatilla" value="<?= $_POST['producto_zapatilla'] ?? 0 ?>">
+            <!-- CABLE ELECTRICO -->
+            <input type="hidden" name="producto_electrico" value="<?= $_POST['producto_electrico'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_electrico" value="<?= $_POST['cantidad_electrico'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_electrico" value="<?= $_POST['producto_electrico'] ?? 0 ?>">
 
 
-            <!-- Zapatilla eléctrica -->
+            <!-- RACK GABINETE -->
+            <input type="hidden" name="producto_rack" value="<?= $_POST['producto_rack'] ?? 0 ?>">
+            <input type="hidden" name="cantidad_rack" value="<?= $_POST['cantidad_rack'] ?? 0 ?>">
+            <input type="hidden" name="subtotal_rack" value="<?= $_POST['producto_rack'] ?? 0 ?>">
+
+
+            <!-- MANO DE OBRA -->
             <input type="hidden" name="producto_mano" value="<?= $_POST['producto_mano'] ?? 0 ?>">
             <input type="hidden" name="cantidad_mano" value="<?= $_POST['cantidad_mano'] ?? 0 ?>">
             <input type="hidden" name="subtotal_mano" value="<?= $_POST['producto_mano'] ?? 0 ?>">
