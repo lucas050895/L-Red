@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2025 a las 00:46:07
+-- Tiempo de generación: 18-05-2025 a las 00:46:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -82,207 +82,79 @@ CREATE TABLE `clientes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `presupuestador_balun`
+-- Estructura de tabla para la tabla `presupuestador_categoria`
 --
 
-CREATE TABLE `presupuestador_balun` (
+CREATE TABLE `presupuestador_categoria` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
+  `nombre` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `presupuestador_balun`
+-- Volcado de datos para la tabla `presupuestador_categoria`
 --
 
-INSERT INTO `presupuestador_balun` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'RJ45', 0, 0, 6500),
-(2, 'Presion', 0, 0, 5000);
+INSERT INTO `presupuestador_categoria` (`id`, `nombre`) VALUES
+(1, 'dvr'),
+(2, 'camara'),
+(3, 'fichas balun'),
+(4, 'fuente'),
+(5, 'caja estanca'),
+(6, 'balunera'),
+(7, 'insumos'),
+(8, 'cable utp'),
+(9, 'cable electrico'),
+(10, 'rack gabinete'),
+(11, 'mano de obra');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `presupuestador_balunera`
+-- Estructura de tabla para la tabla `presupuestador_productos`
 --
 
-CREATE TABLE `presupuestador_balunera` (
+CREATE TABLE `presupuestador_productos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
+  `categoria_id` int(11) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `modelo` varchar(200) NOT NULL,
+  `precio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `presupuestador_balunera`
+-- Volcado de datos para la tabla `presupuestador_productos`
 --
 
-INSERT INTO `presupuestador_balunera` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'Balunera', 0, 0, 35000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_caja`
---
-
-CREATE TABLE `presupuestador_caja` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_caja`
---
-
-INSERT INTO `presupuestador_caja` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'Caja 9CM', 0, 0, 1500),
-(2, 'Caja 11CM', 0, 0, 1500);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_camaras`
---
-
-CREATE TABLE `presupuestador_camaras` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL,
-  `dvr_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_camaras`
---
-
-INSERT INTO `presupuestador_camaras` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`, `dvr_id`) VALUES
-(1, 'DS-2CE16D0T-EXIF', 0, 0, 35500, 1),
-(2, 'DS-2CE10DF3T-F', 0, 0, 52500, 1),
-(3, 'HAC-B1A21P-0360B', 0, 0, 28000, 3),
-(4, 'HAC-B1A21P', 0, 0, 35000, 3);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_dvr`
---
-
-CREATE TABLE `presupuestador_dvr` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `modelo` varchar(100) NOT NULL,
-  `precio_compra` int(10) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_dvr`
---
-
-INSERT INTO `presupuestador_dvr` (`id`, `nombre`, `modelo`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'Hikvision 4CH', 'DS-7204HGHI-F1', 0, 0, 110000),
-(2, 'Hikvision 8CH', 'DS-7208HGHI-M1', 0, 0, 170000),
-(3, 'Hikvision 16CH', 'DS-7216HGHI-M1', 0, 0, 290000),
-(4, 'Dahua 4CH', 'XVR1B04-I', 0, 0, 90000),
-(5, 'Dahua 8CH', 'XVR1B08-I', 0, 0, 115000),
-(6, 'Dahua 16CH', 'Xvr1b16h', 0, 0, 320000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_fuentes`
---
-
-CREATE TABLE `presupuestador_fuentes` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_fuentes`
---
-
-INSERT INTO `presupuestador_fuentes` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'Fuente Individual', 0, 0, 8000),
-(2, 'Fuente Swicht', 0, 0, 13000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_insumos`
---
-
-CREATE TABLE `presupuestador_insumos` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_insumos`
---
-
-INSERT INTO `presupuestador_insumos` (`id`, `nombre`, `precio_venta`) VALUES
-(1, 'Insumos Varios', 15000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_utp`
---
-
-CREATE TABLE `presupuestador_utp` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_utp`
---
-
-INSERT INTO `presupuestador_utp` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'CAT 5', 0, 0, 800),
-(2, 'CAT 5E', 0, 0, 950),
-(3, 'CAT 6', 0, 0, 1200),
-(4, 'CAT 6E', 0, 0, 1500);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `presupuestador_zapatilla`
---
-
-CREATE TABLE `presupuestador_zapatilla` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `precio_compra` int(11) NOT NULL,
-  `porcentaje` int(11) NOT NULL,
-  `precio_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `presupuestador_zapatilla`
---
-
-INSERT INTO `presupuestador_zapatilla` (`id`, `nombre`, `precio_compra`, `porcentaje`, `precio_venta`) VALUES
-(1, 'Ninguna', 0, 0, 0),
-(2, 'Zapatilla 5 Tomas', 0, 0, 12000),
-(3, 'Zapatilla 4 Tomas', 0, 0, 10000);
+INSERT INTO `presupuestador_productos` (`id`, `categoria_id`, `nombre`, `modelo`, `precio`) VALUES
+(1, 1, 'Dvr Hikvision 4CH', 'DS-7204HGHI-F1', 120000),
+(2, 1, 'Dvr Hikvision 8CH', 'DS-7208HGHI-M1', 170000),
+(3, 1, 'Dvr Hikvision 16CH', 'DS-7216HGHI-M1', 290000),
+(4, 1, 'Dvr Dahua 4CH', 'XVR1B04-I', 90000),
+(5, 1, 'Dvr Dahua 8CH', 'XVR1B08-I', 115000),
+(6, 1, 'Dvr Dahua 16CH', 'Xvr1b16h', 320000),
+(7, 2, 'Camara Hikvision', 'DS-2CE16D0T-EXIF', 35500),
+(8, 2, 'Camara Hikvision', 'DS-2CE10DF3T-F', 52500),
+(9, 2, 'Camara Dahua', 'HAC-B1A21P-0360B', 28000),
+(10, 2, 'Camara Dahua', 'HAC-B1A21P', 35000),
+(11, 3, 'Fichas Balun', 'RJ45', 6500),
+(12, 3, 'Fichas Balun', 'Presion', 5000),
+(13, 4, 'Fuente 12V 2A', 'Individual', 8000),
+(14, 4, 'Fuente 12V 5A', 'Swicht', 13000),
+(15, 5, 'Caja estanca', '90x90x55mm', 1500),
+(16, 5, 'Caja estanca', '115x115x50mm', 1500),
+(17, 6, 'Balunera', 'Plastica ', 35000),
+(18, 7, 'Insumos ', 'Varios', 15000),
+(19, 8, 'Cable UTP', 'CAT 5', 800),
+(20, 8, 'Cable UTP', 'CAT 5e', 950),
+(21, 8, 'Cable UTP', 'CAT 6', 1200),
+(22, 8, 'Cable UTP', 'CAT 6e', 1500),
+(23, 9, 'Zapatilla', '4 Tomas', 10000),
+(24, 9, 'Zapatilla', '5 Tomas', 12000),
+(25, 10, 'Rack', 'Plastico', 40000),
+(26, 10, 'Rack', 'Metalico', 80000),
+(27, 11, 'Mano de Obra', '1', 200000),
+(28, 11, 'Mano de Obra', '2', 250000),
+(29, 11, 'Mano de Obra', '3', 300000);
 
 -- --------------------------------------------------------
 
@@ -315,7 +187,7 @@ CREATE TABLE `trabajos_cctv` (
   `insumos_tor8` int(5) DEFAULT NULL,
   `insumos_gra8` int(5) DEFAULT NULL,
   `insumos_prec` int(5) DEFAULT NULL,
-  `acceso_usuario` varchar(20) DEFAULT NULL,
+  `acceso_usuario` varchar(50) DEFAULT NULL,
   `acceso_contraseña` varchar(20) DEFAULT NULL,
   `observaciones` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -329,22 +201,14 @@ CREATE TABLE `trabajos_cctv` (
 CREATE TABLE `trabajos_ip` (
   `id` int(11) NOT NULL,
   `clientes_id` int(11) DEFAULT NULL,
+  `camara_marca` varchar(100) NOT NULL,
   `camara_modelo` varchar(20) DEFAULT NULL,
-  `ip_01` varchar(20) DEFAULT NULL,
-  `ip_02` varchar(20) DEFAULT NULL,
-  `ip_03` varchar(20) DEFAULT NULL,
-  `ip_04` varchar(20) DEFAULT NULL,
-  `ip_05` varchar(20) DEFAULT NULL,
-  `puerto_01` int(5) DEFAULT NULL,
-  `puerto_02` int(5) DEFAULT NULL,
-  `puerto_03` int(5) DEFAULT NULL,
-  `puerto_04` int(5) DEFAULT NULL,
-  `puerto_05` int(5) DEFAULT NULL,
+  `camara_nombre` varchar(200) NOT NULL,
   `fichas_rj45` int(5) DEFAULT NULL,
   `fichas_plug` int(5) DEFAULT NULL,
   `cables_fuentes` varchar(5) DEFAULT NULL,
   `cables_utp` int(5) DEFAULT NULL,
-  `cables_zapatilla` varchar(5) DEFAULT NULL,
+  `cables_zapatilla` varchar(20) DEFAULT NULL,
   `insumos_tar6` int(5) DEFAULT NULL,
   `insumos_tor6` int(5) DEFAULT NULL,
   `insumos_tar8` int(5) DEFAULT NULL,
@@ -355,6 +219,20 @@ CREATE TABLE `trabajos_ip` (
   `acceso_contraseña` varchar(20) DEFAULT NULL,
   `acceso_host` varchar(50) DEFAULT NULL,
   `observaciones` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajos_ip_detalles`
+--
+
+CREATE TABLE `trabajos_ip_detalles` (
+  `id` int(11) NOT NULL,
+  `trabajos_ip_id` int(11) DEFAULT NULL,
+  `ip` varchar(20) DEFAULT NULL,
+  `puertos` int(5) DEFAULT NULL,
+  `camara_nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -401,7 +279,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `usuario`, `password`, `usuarios_nivel`) VALUES
 (1, 'Lucas', '1234', 1),
-(2, 'Leo', '1234', 1);
+(2, 'Leo', '1234', 1),
+(3, 'Mili', '0987', 2);
 
 -- --------------------------------------------------------
 
@@ -454,59 +333,17 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `presupuestador_balun`
+-- Indices de la tabla `presupuestador_categoria`
 --
-ALTER TABLE `presupuestador_balun`
+ALTER TABLE `presupuestador_categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `presupuestador_balunera`
+-- Indices de la tabla `presupuestador_productos`
 --
-ALTER TABLE `presupuestador_balunera`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_caja`
---
-ALTER TABLE `presupuestador_caja`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_camaras`
---
-ALTER TABLE `presupuestador_camaras`
+ALTER TABLE `presupuestador_productos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_dvr` (`dvr_id`);
-
---
--- Indices de la tabla `presupuestador_dvr`
---
-ALTER TABLE `presupuestador_dvr`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_fuentes`
---
-ALTER TABLE `presupuestador_fuentes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_insumos`
---
-ALTER TABLE `presupuestador_insumos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_utp`
---
-ALTER TABLE `presupuestador_utp`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `presupuestador_zapatilla`
---
-ALTER TABLE `presupuestador_zapatilla`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `categoria_id` (`categoria_id`);
 
 --
 -- Indices de la tabla `trabajos_cctv`
@@ -521,6 +358,13 @@ ALTER TABLE `trabajos_cctv`
 ALTER TABLE `trabajos_ip`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cliente_id` (`clientes_id`);
+
+--
+-- Indices de la tabla `trabajos_ip_detalles`
+--
+ALTER TABLE `trabajos_ip_detalles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `trabajos_ip_detalles_ibfk_1` (`trabajos_ip_id`);
 
 --
 -- Indices de la tabla `trabajos_red`
@@ -571,58 +415,16 @@ ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `presupuestador_balun`
+-- AUTO_INCREMENT de la tabla `presupuestador_categoria`
 --
-ALTER TABLE `presupuestador_balun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `presupuestador_categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `presupuestador_balunera`
+-- AUTO_INCREMENT de la tabla `presupuestador_productos`
 --
-ALTER TABLE `presupuestador_balunera`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_caja`
---
-ALTER TABLE `presupuestador_caja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_camaras`
---
-ALTER TABLE `presupuestador_camaras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_dvr`
---
-ALTER TABLE `presupuestador_dvr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_fuentes`
---
-ALTER TABLE `presupuestador_fuentes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_insumos`
---
-ALTER TABLE `presupuestador_insumos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_utp`
---
-ALTER TABLE `presupuestador_utp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `presupuestador_zapatilla`
---
-ALTER TABLE `presupuestador_zapatilla`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `presupuestador_productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajos_cctv`
@@ -637,6 +439,12 @@ ALTER TABLE `trabajos_ip`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `trabajos_ip_detalles`
+--
+ALTER TABLE `trabajos_ip_detalles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `trabajos_red`
 --
 ALTER TABLE `trabajos_red`
@@ -646,7 +454,7 @@ ALTER TABLE `trabajos_red`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_nivel`
@@ -677,10 +485,10 @@ ALTER TABLE `archivos_pdf`
   ADD CONSTRAINT `archivos_pdf_ibfk_1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `presupuestador_camaras`
+-- Filtros para la tabla `presupuestador_productos`
 --
-ALTER TABLE `presupuestador_camaras`
-  ADD CONSTRAINT `presupuestador_camaras_ibfk_1` FOREIGN KEY (`dvr_id`) REFERENCES `presupuestador_dvr` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `presupuestador_productos`
+  ADD CONSTRAINT `presupuestador_productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `presupuestador_categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `trabajos_cctv`
@@ -693,6 +501,12 @@ ALTER TABLE `trabajos_cctv`
 --
 ALTER TABLE `trabajos_ip`
   ADD CONSTRAINT `trabajos_ip_ibfk_1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `trabajos_ip_detalles`
+--
+ALTER TABLE `trabajos_ip_detalles`
+  ADD CONSTRAINT `trabajos_ip_detalles_ibfk_1` FOREIGN KEY (`trabajos_ip_id`) REFERENCES `trabajos_ip` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `trabajos_red`
