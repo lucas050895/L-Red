@@ -9,6 +9,15 @@
         header("Location: ../login.php");
         // exit();
     }else {
+        // SE REDIRECCIONA SI SE INGRESA UN ID QUE NO EXISTE
+        $resultado = $conexion -> query ("SELECT * FROM trabajos_cctv WHERE clientes_id=" . $_GET['id'])or die($conexion -> error);
+        if(mysqli_num_rows($resultado) > 0){
+            $fila = mysqli_fetch_row($resultado);
+        }else{
+            header("Location: http://lucasconde.ddns.net/L-Red/links/buscar/buscar_cctv.php");
+        }
+
+
       //sino, calculamos el tiempo transcurrido
       $fechaGuardada = $_SESSION["ultimoAcceso"];
 
