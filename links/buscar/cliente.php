@@ -180,8 +180,7 @@
                             if ($resultado->num_rows > 0) {
                                 while ($fila = $resultado->fetch_assoc()) {
                                     ?>
-                                        <iframe src="../<?php echo $fila['ruta'] . $fila['nombre']; ?>" type="application/x-google-chrome-pdf" max-width="500px" max-height="400px">
-                                        </iframe>
+                                        <a href="../<?php echo $fila['ruta'] . $fila['nombre']; ?>" type="application/pdf">Abrir PDF - <?php echo $fila['nombre'] ?></a>
                                     <?php
                                 }
                             }

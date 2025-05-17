@@ -63,3 +63,11 @@
 .bucle > div > input:nth-child(2){
     width: 40px;
 }
+
+/* ARCHIVOS */
+#container_doc a{
+    padding: 10px;
+    background-color: var(--color-three);
+    color: var(--color-two);
+    font-weight: 600;
+}
