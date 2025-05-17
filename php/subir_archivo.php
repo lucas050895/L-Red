@@ -55,7 +55,7 @@
                 
                     // Insertar información del archivo en la base de datos
                     $sql = "INSERT INTO archivos_fotos (clientes_id, nombre, ruta)
-                                    VALUES ('{$clientes_id}', '{$nuevoNombreFile}.{$clientes_id}.jpg', '{$dirImg}')";
+                                    VALUES ('{$clientes_id}', '{$nuevoNombreFile}_{$clientes_id}.jpg', '{$dirImg}')";
                     mysqli_query($conexion, $sql);
                     
                 }
