@@ -35,20 +35,24 @@
             <?php
                 if($conexion) {
                     $consultation = "SELECT clientes.id AS clientesID,
-                                                clientes.nombre AS clientesNOMBRE,
-                                                clientes.razon AS clientesRAZON,
-                                                
-                                                trabajos_cctv.id AS cctvID,
-                                                trabajos_cctv.dvr_marca AS cctvMARCA,
-                                                trabajos_cctv.dvr_modelo AS cctvMODELO,
-                                                trabajos_cctv.dvr_disco AS cctvDISCO,
-                                                trabajos_cctv.dvr_capacidad AS cctvCAPACIDAD,
-                                                trabajos_cctv.dvr_medida AS cctvMEDIDA
-                                                
-                                        FROM clientes
-                                        LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
-                                        GROUP BY nombre
-                                        LIMIT 8";
+                                            clientes.nombre AS clientesNOMBRE,
+                                            clientes.razon AS clientesRAZON,
+                                            
+                                            trabajos_cctv.id AS cctvID,
+                                            trabajos_cctv.dvr_marca AS cctvMARCA,
+                                            trabajos_cctv.dvr_modelo AS cctvMODELO,
+                                            trabajos_cctv.dvr_disco AS cctvDISCO,
+                                            trabajos_cctv.dvr_capacidad AS cctvCAPACIDAD,
+                                            trabajos_cctv.dvr_medida AS cctvMEDIDA,
+                                            
+                                            archivos_fotos.clientes_id AS archivosCLIENTE,
+                                            archivos_fotos.nombre AS archivosNOMBRE
+                                            
+                                    FROM clientes
+                                    LEFT JOIN trabajos_cctv ON clientes.id = trabajos_cctv.clientes_id
+                                    LEFT JOIN archivos_fotos ON clientes.id = archivos_fotos.clientes_id
+                                    GROUP BY clientes.nombre
+                                    LIMIT 8";
 
                     $resultado = mysqli_query($conexion,$consultation);
             
@@ -65,12 +69,14 @@
                             $cctvCAPACIDAD      = $row['cctvCAPACIDAD'];
                             $cctvMEDIDA         = $row['cctvMEDIDA'];
 
+                            $archivosCLIENTE    = $row['archivosCLIENTE'];
+                            $archivosNOMBRE     = $row['archivosNOMBRE'];
 
 
                             if (is_string($cctvID)){ ?>
                                 <div class="card ">
                                     <div>
-                                        <img src="assets/img/example.jpg" alt="<?php echo $clientesNOMBRE?>">
+                                        <img src="files/<?php echo $archivosCLIENTE ?>/img/<?php echo $archivosNOMBRE ?>" alt="<?php echo $clientesNOMBRE?>">
                                     </div>
                                     <div>
                                         <div class="name">
