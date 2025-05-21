@@ -2,6 +2,8 @@
     include('../bd/conexion.php');
 
     $clientes_id        =   $_POST['clientes_id'];
+
+    $fecha_trabajo     =   $_POST['fecha_trabajo'];
     
     $dvr_marca          =   $_POST['dvr_marca'];
     $dvr_modelo         =   $_POST['dvr_modelo'];
@@ -39,6 +41,8 @@
         $sql = "INSERT INTO trabajos_cctv(
                                         clientes_id      ,
 
+                                        fecha_trabajo    ,
+
                                         dvr_marca        ,
                                         dvr_modelo       ,
                                         dvr_disco        , 
@@ -73,6 +77,8 @@
                                     )
                             VALUES (
                                         '{$clientes_id}'      ,
+
+                                        '{$fecha_trabajo}'    ,
 
                                         '{$dvr_marca}'        ,
                                         '{$dvr_modelo}'       ,

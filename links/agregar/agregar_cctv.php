@@ -67,38 +67,42 @@
                     <select name="clientes_id" id="clientes_id" required>
                         <option value="" selected disabled>Seleccionar Opción</option>
                         <?php
-                            if($conexion) {
-                                $consultation = "SELECT *
-                                                    FROM clientes
-                                                    GROUP BY nombre ORDER BY id";
-                                $resultado = mysqli_query($conexion,$consultation);
-                        
-                                if($resultado){
-                                    while($row = $resultado->fetch_array()){
-                                        $id       = $row['id'];
-                                        $nombre   = $row['nombre'];
-                                        $apellido = $row['apellido'];
-                                        $razon = $row['razon'];
-                        
+                            $consultation = "SELECT *
+                                                FROM clientes
+                                                GROUP BY nombre ORDER BY id";
+                            $resultado = mysqli_query($conexion,$consultation);
+                    
+                            while($row = $resultado->fetch_array()){
+                                $id       = $row['id'];
+                                $nombre   = $row['nombre'];
+                                $apellido = $row['apellido'];
+                                $razon = $row['razon'];
+                
+                                ?>
+                                    <option value="<?php echo $id ?>">
+                                        <?php 
+                                        
+                                            if (is_string($razon)){
+                                                echo $razon;
+                                            }else{
+                                                echo $nombre . " " . $apellido;
+                                            }
+                                        
                                         ?>
-                                            <option value="<?php echo $id ?>">
-                                                <?php 
-                                                
-                                                    if (is_string($razon)){
-                                                        echo $razon;
-                                                    }else{
-                                                        echo $nombre . " " . $apellido;
-                                                    }
-                                                
-                                                ?>
-                                                
-                                            </option>
-                                        <?php
-                                    }
-                                }
+                                        
+                                    </option>
+                                <?php
                             }
                         ?>
                     </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Fecha de trabajo</legend>
+                <div>
+                    <label for="fecha_trabajo">Fecha <span>(*)</span></label>
+                    <input type="date" name="fecha_trabajo" id="fecha_trabajo" required>
                 </div>
             </fieldset>
 

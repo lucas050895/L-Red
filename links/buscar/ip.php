@@ -104,11 +104,11 @@
                 <legend>Cámara</legend>
                     <div>
                         <label for="camara_marca">Marca</label>
-                        <input type="text" id="camara_marca" value="<?php echo $fila[6] ?>" disabled>
+                        <input type="text" id="camara_marca" value="<?php echo $fila[7] ?>" disabled>
                     </div>
                     <div>
                         <label for="camara_modelo">Modelo</label>
-                        <input type="text" id="camara_modelo" value="<?php echo $fila[7] ?>" disabled>
+                        <input type="text" id="camara_modelo" value="<?php echo $fila[8] ?>" disabled>
                     </div>
             </fieldset>
 
@@ -144,7 +144,7 @@
             <fieldset>
                 <legend>FICHAS</legend>
                 <?php 
-                    if(!empty($fila[9])){
+                    if(!empty($fila[10])){
                         $resultado = $conexion -> query ("SELECT SUM(fichas_rj45) AS FICHASRJ45, SUM(fichas_plug) AS FICHASPLUG
                                                             FROM trabajos_ip
                                                             WHERE trabajos_ip.clientes_id=" . $_GET['id'])or die($conexion -> error);
@@ -169,7 +169,7 @@
             <fieldset>
                 <legend>CABLES</legend>
                 <?php 
-                    if(!empty($fila[10])){
+                    if(!empty($fila[11])){
                         $resultado = $conexion -> query ("SELECT SUM(cables_fuentes), SUM(cables_utp), cables_zapatilla
                                                             FROM trabajos_ip
                                                             WHERE trabajos_ip.clientes_id=" . $_GET['id'])or die($conexion -> error);
@@ -198,7 +198,7 @@
             <fieldset>
                 <legend>INSUMOS</legend>
                 <?php 
-                    if(!empty($fila[9])){
+                    if(!empty($fila[10])){
                         $resultado = $conexion -> query ("SELECT SUM(insumos_tar6),
                                                                     SUM(insumos_tor6),
                                                                     SUM(insumos_tar8),
@@ -245,49 +245,48 @@
                 <legend>ACCESO</legend>
                     <div>
                         <label>Usuario</label>
-                        <input type="text" value="<?php echo $fila[20] ?>" disabled>
-                    </div>
-                    <div>
-                        <label>Contraseña</label>
                         <input type="text" value="<?php echo $fila[21] ?>" disabled>
                     </div>
                     <div>
-                        <label>Hots</label>
+                        <label>Contraseña</label>
                         <input type="text" value="<?php echo $fila[22] ?>" disabled>
+                    </div>
+                    <div>
+                        <label>Hots</label>
+                        <input type="text" value="<?php echo $fila[23] ?>" disabled>
                     </div>
             </fieldset>
 
             <fieldset>
                 <legend>Observaciones</legend>
                 <div>
-                    <textarea type="text" disabled><?php echo $fila[23] ?></textarea>
+                    <textarea type="text" disabled><?php echo $fila[24] ?></textarea>
                 </div>
             </fieldset>
         </form>
-        </form>
 
         <?php
-            if(is_dir('../../files/'.$fila[0].'/pdf/')){
-                ?>
-                    <div id="container_doc">
-                        <?php
-                            $sql = "SELECT * FROM archivos_pdf WHERE clientes_id = ".$fila[0];
-                            $resultado = $conexion->query($sql);
-                            // Mostrar resultados
-                            if ($resultado->num_rows > 0) {
-                                while ($fila = $resultado->fetch_assoc()) {
-                                    ?>
-                                        <iframe src="../<?php echo $fila['ruta'] . $fila['nombre']; ?>" type="application/x-google-chrome-pdf" max-width="500px" max-height="400px">
-                                        </iframe>
-                                    <?php
-                                }
-                            }
-                        ?>  
-                    </div>
-                <?php
+            if (is_dir('../../files/' . $fila[0] . '/' . $fila[6] . '/pdf/')) {
+                echo '<div id="container_doc">';
+
+                // Consulta segura de la base de datos
+                $sql = "SELECT * FROM archivos_pdf WHERE clientes_id = " . intval($fila[0]);
+                $resultado = $conexion->query($sql);
+
+                // Verificar si hay resultados
+                if ($resultado && $resultado->num_rows > 0) {
+                    while ($fila_archivo = $resultado->fetch_assoc()) {
+                        // Construcción segura del `src`
+                        echo '<iframe src="../../files/' . htmlspecialchars($fila[0]) . '/' . htmlspecialchars($fila[6]) . '/pdf/' . htmlspecialchars($fila_archivo['nombre']) . '" 
+                                type="application/pdf" 
+                                width="500px" 
+                                height="400px">
+                            </iframe>';
+                    }
+                }
+
+                echo '</div>';
             }
-        
-        
         } ?>
     
     </main>

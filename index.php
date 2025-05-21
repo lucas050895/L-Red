@@ -39,6 +39,7 @@
                                             clientes.razon AS clientesRAZON,
                                             
                                             trabajos_cctv.id AS cctvID,
+                                            trabajos_cctv.fecha_trabajo AS cctvFECHA,
                                             trabajos_cctv.dvr_marca AS cctvMARCA,
                                             trabajos_cctv.dvr_modelo AS cctvMODELO,
                                             trabajos_cctv.dvr_disco AS cctvDISCO,
@@ -63,6 +64,7 @@
                             $clientesRAZON      = $row['clientesRAZON'];
 
                             $cctvID             = $row['cctvID'];
+                            $cctvFECHA          = $row['cctvFECHA'];
                             $cctvMARCA          = $row['cctvMARCA'];
                             $cctvMODELO         = $row['cctvMODELO'];
                             $cctvDISCO          = $row['cctvDISCO'];
@@ -76,7 +78,7 @@
                             if (is_string($cctvID)){ ?>
                                 <div class="card ">
                                     <div>
-                                        <img src="files/<?php echo $archivosCLIENTE ?>/img/<?php echo $archivosNOMBRE ?>" alt="<?php echo $clientesNOMBRE?>">
+                                        <img src="files/<?php echo $archivosCLIENTE ?>/<?php echo $cctvFECHA ?>/img/<?php echo $archivosNOMBRE ?>" alt="<?php echo $clientesNOMBRE?>">
                                     </div>
                                     <div>
                                         <div class="name">

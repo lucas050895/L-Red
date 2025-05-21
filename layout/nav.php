@@ -101,9 +101,19 @@
 
             <?php if($arregloUsuario['usuario'] == 'Lucas' || $arregloUsuario['usuario'] == 'Leo'){?>
 
-              <a href="http://lucasconde.ddns.net/L-Red/links/presupuestador/editar_precio.php">
+              <a href="#">
+                <i class="fas fa-list"></i>
+                <span>Categoria</span>
+              </a>
+
+              <a href="#">
+                <i class="fas fa-th"></i>
+                <span>Producto</span>
+              </a>
+
+              <a href="#">
                 <i class="fas fa-edit"></i>
-                <span>Editar Precios</span>
+                <span>Editar</span>
               </a>
               
             <?php } ?>

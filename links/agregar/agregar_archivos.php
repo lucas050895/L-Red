@@ -27,6 +27,12 @@
   }
 
     $arregloUsuario = $_SESSION['usuario'];
+
+    // Obtener clientes
+    $resultado = mysqli_query($conexion, "SELECT id, nombre, apellido, razon
+                                                FROM clientes");
+                                                
+    $clientes = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -47,73 +53,70 @@
     ?>
 </head>
 <body>
-    <?php
-        include("../../layout/nav.php")
-    ?>
-
     <main>
         <section class="title">
             <i class='bx bxs-cloud-upload'></i>
             <h2>Subir Arhivos</h2>
         </section>
-        
+
         <form action="../../php/subir_archivo.php" method="POST" enctype="multipart/form-data">
             <fieldset>
-                <legend>CLIENTE</legend>
+                <legend>Cliente</legend>
                 <div>
-                    <label for="clientes_id">Cliente <span>(*)</span></label>
-                    <select name="clientes_id" id="clientes_id" required>
+                    <label for="cliente">Nombre o Razón Social:</label>
+                    <select name="clientes_id" id="cliente" required>
                         <option value="" selected disabled>Seleccionar Opción</option>
-                        <?php
-                            if($conexion) {
-                                $consultation = "SELECT *
-                                                    FROM clientes
-                                                    GROUP BY nombre ORDER BY id";
-                                $resultado = mysqli_query($conexion,$consultation);
-                        
-                                if($resultado){
-                                    while($row = $resultado->fetch_array()){
-                                        $id       = $row['id'];
-                                        $nombre   = $row['nombre'];
-                                        $apellido = $row['apellido'];
-                                        $razon = $row['razon'];
-                        
-                                        ?>
-                                            <option value="<?php echo $id ?>">
-                                                <?php 
-                                                
-                                                    if (is_string($razon)){
-                                                        echo $razon;
-                                                    }else{
-                                                        echo $nombre . " " . $apellido;
-                                                    }
-                                                
-                                                ?>
-                                                
-                                            </option>
-                                        <?php
+                        <?php foreach ($clientes as $cliente): ?>
+                            <option value="<?= $cliente['id']; ?>">
+                                <?php
+                                    if (is_string($cliente['razon'])){
+                                        echo $cliente['razon'];
+                                    }else{
+                                        echo $cliente['nombre'] . " " . $cliente['apellido'];
                                     }
-                                }
-                            }
-                        ?>
+                                ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </fieldset>
-            
+
+            <fieldset>
+                <legend>Trabajo</legend>
+                <div>
+                    <label for="tipo_trabajo">Tipo de Trabajo:</label>
+                    <select name="tipo_trabajo" id="tipo_trabajo" required>
+                        <option value="" selected disabled>Seleccionar Opción</option>
+                        <option value="cctv">CCTV</option>
+                        <option value="red">Red</option>
+                        <option value="ip">IP</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="fecha_trabajo">Fecha de Trabajo:</label>
+                    <select name="fecha_trabajo" id="fecha_trabajo" required>
+                        <!-- Se llenará dinámicamente con JavaScript -->
+                    </select>
+                </div>
+            </fieldset>
+
             <fieldset>
                 <legend>Archivos</legend>
-                    <div>
-                        <label for="pdf">Documentos PDF</label>
-                        <input type="file" id="pdf" name="pdf[]" multiple accept=".pdf">
-                    </div>
-                    <div>
-                        <label for="excel">Documentos Excel</label>
-                        <input type="file" id="excel" name="excel[]" multiple accept=".xlsx">
-                    </div>
-                    <div>
-                        <label for="foto_after">Trabajo Finalizado</label>
-                        <input type="file" id="foto_after" name="foto_after[]" multiple accept="image/*">
-                    </div>
+                <div>
+                    <label for="foto">Subir Foto:</label>
+                    <input type="file" name="foto_after[]" id="foto" accept="image/*" multiple>
+                </div>
+                
+                <div>
+                    <label for="excel">Subir Excel:</label>
+                    <input type="file" id="excel" name="excel[]" multiple accept=".xlsx">
+                </div>
+
+                <div>
+                    <label for="pdf">Subir PDF:</label>
+                    <input type="file" id="pdf" name="pdf[]" multiple accept=".pdf">
+                </div>
             </fieldset>
 
             <div class="container_button">
@@ -122,7 +125,32 @@
         </form>
     </main>
 
+    <script>
+        document.getElementById('tipo_trabajo').addEventListener('change', function() {
+            var tipo = this.value;
+            var cliente_id = document.getElementById('cliente').value;
+            var trabajosSelect = document.getElementById('fecha_trabajo');
+            trabajosSelect.innerHTML = ''; // Limpiar opciones
+
+            if (cliente_id) {
+                fetch('obtener_trabajos.php?tipo=' + tipo + '&cliente_id=' + cliente_id)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(trabajo => {
+                            var fecha = new Date(trabajo.fecha_trabajo + "T00:00:00"); // Forzar hora fija para evitar cambios por zona horaria
+                            var fechaFormateada = fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+                            var option = document.createElement('option');
+                            option.value = trabajo.id;
+                            option.textContent = fechaFormateada; // Mostrar la fecha correctamente
+                            trabajosSelect.appendChild(option);
+                        });
+                    });
+            }
+        });
+    </script>
 
     <script src="../../js/main.js"></script>
+
 </body>
 </html>

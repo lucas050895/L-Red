@@ -95,13 +95,13 @@
                 <legend>Equipo</legend>
                     <div>
                         <label>Tipo de Equipo</label>
-                        <input type="text" value="<?php echo $fila[6] ?>" disabled>
+                        <input type="text" value="<?php echo $fila[7] ?>" disabled>
                     </div>
                     <div>
                         <label>Modelo</label>
                         <?php
-                            if(!is_string($fila[7])){?>
-                                <input type="text" value="<?php echo $fila[7] ?>" disabled>
+                            if(!is_string($fila[8])){?>
+                                <input type="text" value="<?php echo $fila[8] ?>" disabled>
                             <?php }else{?>
                                 <input type="text" value="-" disabled>
                             <?php }
@@ -113,11 +113,11 @@
                 <legend>CABLES</legend>
                     <div>
                         <label>Metros UTP</label>
-                        <input type="number" value="<?php echo $fila[8] ?>" disabled>
+                        <input type="number" value="<?php echo $fila[9] ?>" disabled>
                     </div>
                     <div>
                         <label>Metros PAR</label>
-                        <input type="number" value="<?php echo $fila[9] ?>" disabled>
+                        <input type="number" value="<?php echo $fila[10] ?>" disabled>
                     </div>
             </fieldset>
 
@@ -125,11 +125,11 @@
                 <legend>FICHAS</legend>
                     <div>
                         <label for="fichas_rj45">Fichas RJ45</label>
-                        <input type="number" value="<?php echo $fila[10] ?>" disabled>
+                        <input type="number" value="<?php echo $fila[11] ?>" disabled>
                     </div>
                     <div>
                         <label>Fichas Empalme</label>
-                        <input type="number" value="<?php echo $fila[11] ?>" disabled>
+                        <input type="number" value="<?php echo $fila[12] ?>" disabled>
                     </div>
             </fieldset>
 
@@ -138,8 +138,8 @@
                     <div>
                         <label>Tipo de Rack</label>
                         <?php
-                            if(!is_string($fila[12])){?>
-                                <input type="text" value="<?php echo $fila[12] ?>" disabled>
+                            if(!is_string($fila[13])){?>
+                                <input type="text" value="<?php echo $fila[13] ?>" disabled>
                             <?php }else{?>
                                 <input type="text" value="-" disabled>
                             <?php }
@@ -151,60 +151,61 @@
                 <legend>INSUMOS</legend>
                     <div>
                         <label>Tarugos 6mm</label>
-                        <input type="number" value="<?php echo $fila[13] ?>" disabled>
-                    </div>
-                    <div>
-                        <label>Tornillos 6mm</label>
                         <input type="number" value="<?php echo $fila[14] ?>" disabled>
                     </div>
                     <div>
-                        <label>Tarugos 8mm</label>
+                        <label>Tornillos 6mm</label>
                         <input type="number" value="<?php echo $fila[15] ?>" disabled>
                     </div>
                     <div>
-                        <label>Tornillos 8mm</label>
+                        <label>Tarugos 8mm</label>
                         <input type="number" value="<?php echo $fila[16] ?>" disabled>
                     </div>
                     <div>
-                        <label>Grampas 8mm</label>
+                        <label>Tornillos 8mm</label>
                         <input type="number" value="<?php echo $fila[17] ?>" disabled>
                     </div>
                     <div>
-                        <label>Precintos</label>
+                        <label>Grampas 8mm</label>
                         <input type="number" value="<?php echo $fila[18] ?>" disabled>
+                    </div>
+                    <div>
+                        <label>Precintos</label>
+                        <input type="number" value="<?php echo $fila[19] ?>" disabled>
                     </div>
             </fieldset>
 
             <fieldset>
                 <legend>Observaciones</legend>
                 <div>
-                    <textarea type="text" disabled><?php echo $fila[19] ?></textarea>
+                    <textarea type="text" disabled><?php echo $fila[20] ?></textarea>
                 </div>
             </fieldset>
 
         </form>
 
         <?php
-            if(is_dir('../../files/'.$fila[0].'/pdf/')){
-                ?>
-                    <div id="container_doc">
-                        <?php
-                            $sql = "SELECT * FROM archivos_pdf WHERE clientes_id = ".$fila[0];
-                            $resultado = $conexion->query($sql);
-                            // Mostrar resultados
-                            if ($resultado->num_rows > 0) {
-                                while ($fila = $resultado->fetch_assoc()) {
-                                    ?>
-                                        <iframe src="../<?php echo $fila['ruta'] . $fila['nombre']; ?>" type="application/x-google-chrome-pdf" max-width="500px" max-height="400px">
-                                        </iframe>
-                                    <?php
-                                }
-                            }
-                        ?>  
-                    </div>
-                <?php
+            if (is_dir('../../files/' . $fila[0] . '/' . $fila[6] . '/pdf/')) {
+                echo '<div id="container_doc">';
+
+                // Consulta segura de la base de datos
+                $sql = "SELECT * FROM archivos_pdf WHERE clientes_id = " . intval($fila[0]);
+                $resultado = $conexion->query($sql);
+
+                // Verificar si hay resultados
+                if ($resultado && $resultado->num_rows > 0) {
+                    while ($fila_archivo = $resultado->fetch_assoc()) {
+                        // Construcción segura del `src`
+                        echo '<iframe src="../../files/' . htmlspecialchars($fila[0]) . '/' . htmlspecialchars($fila[6]) . '/pdf/' . htmlspecialchars($fila_archivo['nombre']) . '" 
+                                type="application/pdf" 
+                                width="500px" 
+                                height="400px">
+                            </iframe>';
+                    }
+                }
+
+                echo '</div>';
             }
-        
         
         } ?>
     
